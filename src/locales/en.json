@@ -44,7 +44,7 @@
     },
     "slogan": {
       "title": "COSTRICT",
-      "subTitle": "The Ultimate Choice for Serious Enterprise Programming",
+      "subTitle": "An enterprise-grade AI agent built for serious development",
       "enterpriseButton": "Enterprise Private Deployment",
       "personalButton": "Free for Personal Use",
       "ossButton": "Open Source & Free",
@@ -141,7 +141,7 @@
   "download": {
     "title": "Costrict",
     "desc": "Costrict is an open source and practical AI programmer that implements functions such as code completion, intelligent Q&A, code review, code optimization, single test writing, and comment generation based on the open source big model.",
-    "vscodeTitle": "Install Costrict Code in Visual Studio Code, requiring the latest version or version 1.84.0 or above",
+    "vscodeTitle": "Install Costrict Code in Visual Studio Code, requiring the latest version or version 1.86.0 or above",
     "installSteps": "The installation steps are as follows:",
     "step1": "Step 1",
     "step2": "Step 2",

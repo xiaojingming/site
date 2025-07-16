@@ -46,7 +46,7 @@
     },
     "slogan": {
       "title": "COSTRICT",
-      "subTitle": "企业严肃编程的最佳选择",
+      "subTitle": "企业严肃开发的AI智能体",
       "enterpriseButton": "企业私有化部署",
       "personalButton": "个人免费使用",
       "ossButton": "开源免费",
@@ -143,7 +143,7 @@
   "download": {
     "title": "欢迎使用Costrict",
     "desc": "Costrict是一款开源、实用的研发编程工具，基于代码大模型，实现代码补全、智能问答、代码审查、代码优化、单测编写、注释生成等功能。",
-    "vscodeTitle": "在 Visual Studio Code 中安装Costrict，要求版本为最新 或者 1.84.0 及以上版本",
+    "vscodeTitle": "在 Visual Studio Code 中安装Costrict，要求版本为最新 或者 1.86.0 及以上版本",
     "installSteps": "安装步骤如下：",
     "step1": "步骤1",
     "step2": "步骤2",

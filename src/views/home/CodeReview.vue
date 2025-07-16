@@ -14,7 +14,7 @@
         Your browser does not support the video tag.
       </video>
     </div>
-    <div class="flex gap-6 flex-wrap mt-6">
+    <div class="flex gap-6 flex-wrap mt-6 z-100">
       <ItemCard v-for="item in featureList" :key="item.title" :img="item.img" :title="item.title"
         :content="item.content" :renderTitle="item.renderTitle" :height="cardHeight" />
     </div>
