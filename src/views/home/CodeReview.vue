@@ -70,15 +70,6 @@ const featureList = computed(() => [
             'span',
             t('home.codeReview.feature02Title'),
           ),
-          h(
-            'div',
-            { class: 'status-badge' },
-            h(
-              'span',
-              { class: 'status-badge__text' },
-              t('home.codeReview.pendingRelease'),
-            )
-          )
         ]
       )),
   },
@@ -100,26 +91,6 @@ const video = computed(() => isZh.value ? CodeReviewZhVideo : CodeReviewEnVideo)
 <style lang="less" scoped>
 .gradient-border {
   border: 1px solid #d8e7ff;
-}
-
-:deep(.status-badge) {
-  border-radius: 10px;
-  background-color: rgba(255, 255, 255, 0.1);
-  display: flex;
-  margin-left: 8px;
-  padding: 3px 8px;
-  align-items: center;
-  justify-content: center;
-}
-
-:deep(.status-badge__text) {
-  font-size: 12px;
-  line-height: 12px;
-  background: linear-gradient(99deg, #00FFB7 1%, #FFFFFF 68%, #C5DBFF 101%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  white-space: nowrap;
 }
 
 .code-review__item {

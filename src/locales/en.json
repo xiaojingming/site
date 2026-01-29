@@ -24,14 +24,13 @@
     "codeReview": {
       "subTitle": "Code review can perform full repository indexing, as well as company-level coding knowledge base RAG. It supports users in conducting code checks on functions, selected code lines, code files, and entire project files. In identifying and confirming issues, it adopts the strategy of \"specialized checks by a multi-expert model\" + \"cross-confirmation by multiple models.\"",
       "feature01Title": "Full Code Repository Index",
-      "feature02Title": "RAG-Powered Enterprise Code Knowledge",
-      "feature03Title": "Multi-Expert Model Special Inspection",
-      "feature04Title": "Multi-Model Cross-Verification",
+      "feature02Title": "Open Architecture and Ecosystem Integration",
+      "feature03Title": "Intelligent Agent-Driven Scanning",
+      "feature04Title": "Flexible Coverage Across Multiple Scenarios",
       "feature01Content": "Through deep indexing and semantic analysis of entire codebases, we construct interconnected knowledge graphs. This enables comprehensive reviews with zero blind spots, guarantees no vulnerabilities are missed, and ultimately fortifies your enterprise code security defenses",
-      "feature02Content": "Integrate enterprise coding knowledge base, relying on large model and Retrieval-Augmented Generation (RAG) technology to accurately review each line of code, making Code Review perfectly fit the enterprise business scenario",
-      "feature03Content": "Simulation architects, security experts, test engineers, and other roles can fully discover general issues, memory issues, security vulnerabilities, performance bottlenecks, and other specialized problems in the code. Let every line of code undergo a \"multi-expert joint consultation\" to discover as many potential risks as possible",
-      "feature04Content": "An original multi-model cross-validation engine, which automatically initiates multi-model cross-analysis verification for each code issue, ensuring that every problem is subject to \"triple expert consultation,\" reducing the false alarm rate and truly achieving \"Finding the problem is solving it\"",
-      "pendingRelease": "Coming Soon"
+      "feature02Content": "Users can customize scanning agents, strategies, and rules based on their tech stack and internal standards, supporting diverse code quality requirements",
+      "feature03Content": "By coordinating detection and validation agents, the system automatically identifies and verifies code issues, covering key risks such as logic errors, security vulnerabilities, static issues, and memory problems—helping teams and developers ensure code quality and runtime stability",
+      "feature04Content": "The system supports instant scanning of code snippets, single files, and change sets, and integrates deeply with enterprise GitLab to automate quality checks for merge requests, fitting both individual development and team workflows" 
     },
     "strictMode": {
       "subTitle": "Strict Mode standardizes the process of AI-generated code, making it more aligned with enterprise development scenarios. It systematically breaks down a single requirement into steps such as：Requirements Analysis, Architecture Design, Task Planning and Test Generation etc. acting as a standardized procedure for AI to ensure high-quality and highly controllable output.",
