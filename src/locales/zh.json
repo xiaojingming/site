@@ -111,7 +111,13 @@
     "jetbrainsStep1Content2": "2. 点击导航-插件，点击设置图标，下拉菜单中单击从本地安装插件，选择下载的 zip 文件后安装",
     "manualPluginDownload": "手动获取插件",
     "manualPluginDownload2": "插件下载速度慢？切换至更快的下载源",
-    "jetbrainsSupportIdes": "支持的 JetBrains 系列 IDEs："
+    "jetbrainsSupportIdes": "支持的 JetBrains 系列 IDEs：",
+    "cliTitle": "CLI",
+    "cliStep1Title": "使用 npm 全局安装",
+    "cliStep1Content": "在终端中运行以下命令安装 CoStrict CLI 工具：",
+    "copyCommand": "复制命令",
+    "copySuccess": "复制成功！",
+    "copyFailed": "复制失败，请手动复制"
   },
   "operation": {
     "activityTitle": "活动",

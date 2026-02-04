@@ -15,7 +15,7 @@
           </div>
         </div>
         <div class="download-content">
-          <div class="content-header flex flex-wrap">
+          <div v-if="activeTab !== 'cli'" class="content-header flex flex-wrap">
             <img class="download-icon" :src="headerIcon" alt="CoStrict Download" />
             <span class="text-white mr-4">{{ headerTitle }}</span>
             <div class="flex cursor-pointer" @click="download">
@@ -77,7 +77,7 @@
 
 <script setup lang="ts">
 import { computed, ref, h } from 'vue'
-import { NTimeline, NTimelineItem } from 'naive-ui'
+import { NTimeline, NTimelineItem, useMessage } from 'naive-ui'
 import { useI18n } from 'vue-i18n'
 import type { VNode } from 'vue'
 import vscodeImg from '@/assets/download/vscode.webp'
@@ -87,9 +87,14 @@ import jetbrainsDisableImg from '@/assets/download/jetbrains_disable.webp'
 import jetbrainsContent from '@/assets/download/jetbrains_download.webp'
 import vscodeIcon from '@/assets/download/vscode_icon.webp'
 import jetbrainsIcon from '@/assets/download/jetbrains_icon.webp'
+import cliImg from '@/assets/download/cli.webp'
+import cliDisableImg from '@/assets/download/cli_disable.webp'
+import cliIcon from '@/assets/download/cli_icon.webp'
 import ZhDownloadStep1 from '@/assets/download/zh/download_step1.webp'
 import ZhDownloadStep2 from '@/assets/download/zh/download_step2.webp'
 import EnDownloadStep1 from '@/assets/download/en/download_step1.webp'
+import ZhCliInstall from '@/assets/download/zh/cli_install.webp'
+import EnCliInstall from '@/assets/download/en/cli_install.webp'
 import EnDownloadStep2 from '@/assets/download/en/download_step2.webp'
 
 interface StepItem {
@@ -107,11 +112,17 @@ const activeTab = ref('vscode')
 const isZh = computed(() => locale.value === 'zh')
 
 const headerTitle = computed(() => {
-  return activeTab.value === 'vscode' ? t('download.vscodeTitle') : t('download.jetbrainsTitle')
+  if (activeTab.value === 'vscode') return t('download.vscodeTitle')
+  if (activeTab.value === 'jetbrains') return t('download.jetbrainsTitle')
+  if (activeTab.value === 'cli') return t('download.cliTitle')
+  return ''
 })
 
 const headerIcon = computed(() => {
-  return activeTab.value === 'vscode' ? vscodeIcon : jetbrainsIcon
+  if (activeTab.value === 'vscode') return vscodeIcon
+  if (activeTab.value === 'jetbrains') return jetbrainsIcon
+  if (activeTab.value === 'cli') return cliIcon
+  return vscodeIcon
 })
 
 const tabList = computed(() => {
@@ -124,8 +135,38 @@ const tabList = computed(() => {
       key: 'jetbrains',
       imgUrl: activeTab.value === 'jetbrains' ? jetbrainsImg : jetbrainsDisableImg,
     },
+    {
+      key: 'cli',
+      imgUrl: activeTab.value === 'cli' ? cliImg : cliDisableImg,
+    },
   ]
 })
+
+const message = useMessage()
+const cliCommand = 'npm install -g @costrict/cs'
+
+const copyToClipboard = async () => {
+  try {
+    await navigator.clipboard.writeText(cliCommand)
+    message.success(t('download.copySuccess'))
+    return
+  } catch (err) {
+    // 降级方案：使用传统复制方法
+    const textArea = document.createElement('textarea')
+    textArea.value = cliCommand
+    textArea.style.position = 'fixed'
+    textArea.style.opacity = '0'
+    document.body.appendChild(textArea)
+    textArea.select()
+    try {
+      document.execCommand('copy')
+      message.success(t('download.copySuccess'))
+    } catch (e) {
+      message.error(t('download.copyFailed'))
+    }
+    document.body.removeChild(textArea)
+  }
+}
 
 const stepList = computed<StepItem[]>(() => {
   if (activeTab.value === 'vscode') {
@@ -209,6 +250,44 @@ const stepList = computed<StepItem[]>(() => {
             h('p', { class: 'content-text' }, t('download.jetbrainsStep1Content2')),
           ]),
       },
+    ]
+  }
+  if (activeTab.value === 'cli') {
+    return [
+      {
+        imgUrl: isZh.value ? ZhCliInstall : EnCliInstall,
+        title: t('download.cliStep1Title'),
+        render: () =>
+          h('div', { class: 'cli-content' }, [
+            h('p', { class: 'content-text mb-4' }, t('download.cliStep1Content')),
+            h('div', { class: 'cli-code-wrapper' }, [
+              h('div', { class: 'cli-code-block' }, [
+                h('span', { class: 'cli-prompt' }, '$ '),
+                h('span', { class: 'cli-command-text' }, cliCommand),
+                h('button', {
+                  class: 'cli-copy-icon',
+                  onClick: copyToClipboard,
+                  'aria-label': t('download.copyCommand')
+                }, [
+                  h('svg', {
+                    xmlns: 'http://www.w3.org/2000/svg',
+                    width: '20',
+                    height: '20',
+                    viewBox: '0 0 24 24',
+                    fill: 'none',
+                    stroke: 'currentColor',
+                    'stroke-width': '2',
+                    'stroke-linecap': 'round',
+                    'stroke-linejoin': 'round'
+                  }, [
+                    h('rect', { x: '9', y: '9', width: '13', height: '13', rx: '2', ry: '2' }),
+                    h('path', { d: 'M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1' })
+                  ])
+                ])
+              ])
+            ])
+          ])
+      }
     ]
   }
   return []
@@ -491,6 +570,80 @@ const downloadJetbrainsPlugin2 = () => {
   .download-link {
     @media (max-width: 1024px) {
       margin-left: 0;
+    }
+  }
+}
+
+.cli-content {
+  width: 100%;
+
+  .content-text {
+    color: #a8a8a8;
+    font-size: 14px;
+    line-height: 1.6;
+  }
+}
+
+:deep(.cli-code-wrapper) {
+  margin-top: 16px;
+
+  .cli-code-block {
+    position: relative;
+    background: #1a1a1a;
+    border: 1px solid #333;
+    border-radius: 8px;
+    padding: 14px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+    font-size: 14px;
+    transition: all 0.3s ease;
+
+    .cli-prompt {
+      color: #888;
+      margin-right: 8px;
+    }
+
+    .cli-command-text {
+      color: #e8e8e8;
+      flex: 1;
+    }
+
+    .cli-copy-icon {
+      background: transparent;
+      border: none;
+      color: #888;
+      cursor: pointer;
+      padding: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s ease;
+      margin-left: 20px;
+      flex-shrink: 0;
+
+      &:hover {
+        color: #fff;
+      }
+
+      svg {
+        width: 20px;
+        height: 20px;
+      }
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .cli-code-wrapper {
+    .cli-code-block {
+      flex-wrap: wrap;
+
+      .cli-copy-icon {
+        margin-left: 0;
+        margin-top: 8px;
+      }
     }
   }
 }

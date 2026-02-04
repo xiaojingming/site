@@ -111,7 +111,13 @@
     "jetbrainsStep1Content2": "2. Click Navigation - Plugins, click the settings icon, click Install Plugin from Local in the dropdown menu, and select the downloaded zip file to install",
     "manualPluginDownload": "Manual download",
     "manualPluginDownload2": "Plugin download speed slow? Switch to a faster download source",
-    "jetbrainsSupportIdes": "supports the following JetBrains series IDEs:"
+    "jetbrainsSupportIdes": "supports the following JetBrains series IDEs:",
+    "cliTitle": "CLI",
+    "cliStep1Title": "Install via npm globally",
+    "cliStep1Content": "Run the following command in your terminal to install CoStrict CLI:",
+    "copyCommand": "Copy Command",
+    "copySuccess": "Copied successfully!",
+    "copyFailed": "Copy failed, please copy manually"
   },
   "operation": {
     "activityTitle": "ActivityTitle",
