@@ -356,6 +356,7 @@ const downloadJetbrainsPlugin2 = () => {
     .tab-list {
       display: flex;
       align-items: center;
+      flex-wrap: wrap;
 
       .tab-item {
         margin-right: 12px;
