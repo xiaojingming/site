@@ -34,8 +34,9 @@ const menuOptions = computed<MenuOption[]>(() => [
   { label: t('menu.home'), key: 'home' },
   { label: t('menu.download'), key: 'download' },
   ...(isEn.value ? [] : [{ label: t('menu.pricing'), key: 'pricing' }]),
-  { label: t('menu.installGuide'), key: 'install' },
+  // { label: t('menu.installGuide'), key: 'install' },
   { label: t('menu.docs'), key: 'docs' },
+  ...(isEn.value ? [] : [{ label: t('menu.blog'), key: 'blog' }]),
   { label: t('menu.operation'), key: 'operation' },
 ])
 

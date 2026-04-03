@@ -90,8 +90,14 @@
       "desc": "Welcome to join us and make AI more efficient!"
     },
     "contactUs": "Contact Us",
-    "officialAccount": "Scan to follow official account",
-    "joinGroup": "Scan to join communication group"
+    "emailContact": "Email",
+    "emailDesc": "For any questions or collaboration, feel free to send us an email",
+    "officialAccount": "Follow on WeChat",
+    "officialAccountDesc": "Get the latest articles and product updates",
+    "officialAccountLabel": "Official Account",
+    "joinGroup": "Join Community",
+    "joinGroupDesc": "Connect with developers and share AI coding experiences",
+    "joinGroupLabel": "Community Group"
   },
   "download": {
     "title": "CoStrict",

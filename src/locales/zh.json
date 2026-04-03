@@ -9,7 +9,8 @@
     "installGuide": "私有化部署",
     "operation": "运营活动",
     "download": "下载安装",
-    "pricing": "价格"
+    "pricing": "价格",
+    "blog": "博客"
   },
   "home": {
     "slogan": {
@@ -90,8 +91,14 @@
       "desc": "欢迎加入我们，让AI更高效！"
     },
     "contactUs": "联系我们",
-    "officialAccount": "扫码关注公众号",
-    "joinGroup": "扫码加入交流群"
+    "emailContact": "邮箱联系",
+    "emailDesc": "如有任何问题或合作意向，欢迎发送邮件",
+    "officialAccount": "关注微信公众号",
+    "officialAccountDesc": "获取最新技术文章和产品动态",
+    "officialAccountLabel": "公众号",
+    "joinGroup": "加入交流群",
+    "joinGroupDesc": "与开发者们一起交流 AI 编程经验",
+    "joinGroupLabel": "交流群"
   },
   "download": {
     "title": "欢迎使用 CoStrict",
@@ -241,5 +248,20 @@
     "firstRechargeDiscount": "首次充值优惠",
     "learnMore": "了解更多套餐详情可查看",
     "billingDescription": "套餐&计费说明"
+  },
+  "blog": {
+    "sidebarTitle": "栏目分类",
+    "categories": {
+      "all": "最新文章",
+      "tech": "技术进展",
+      "case": "实践案例",
+      "deep": "深度解析",
+      "oss": "开源社区"
+    },
+    "readMore": "阅读全文",
+    "noArticles": "暂无该栏目的文章，敬请期待",
+    "pagination": {
+      "total": "第 {start}-{end} 篇，共 {total} 篇"
+    }
   }
 }

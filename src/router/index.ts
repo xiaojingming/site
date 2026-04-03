@@ -8,6 +8,8 @@ const downloadRoute = createPrefetchableRoute(() => import('@/views/download/ind
 const pricingRoute = createPrefetchableRoute(() => import('@/views/pricing/PricingPage.vue'))
 const operationRoute = createPrefetchableRoute(() => import('@/views/operation/OperationPage.vue'))
 const resourceRoute = createPrefetchableRoute(() => import('@/views/resourceCalculator/index.vue'))
+const blogRoute = createPrefetchableRoute(() => import('@/views/blog/index.vue'))
+const blogDetailRoute = createPrefetchableRoute(() => import('@/views/blog/BlogDetail.vue'))
 
 // 静态路由配置 - 不再动态增删
 export const routes = [
@@ -37,6 +39,22 @@ export const routes = [
     component: pricingRoute.load,
     meta: {
       // 标记此路由仅在中文环境显示
+      localeVisible: ['zh'],
+    },
+  },
+  {
+    path: '/blog',
+    name: 'blog',
+    component: blogRoute.load,
+    meta: {
+      localeVisible: ['zh'],
+    },
+  },
+  {
+    path: '/blog/:id',
+    name: 'blogDetail',
+    component: blogDetailRoute.load,
+    meta: {
       localeVisible: ['zh'],
     },
   },
@@ -75,7 +93,7 @@ if (typeof window !== 'undefined') {
       operationRoute.prefetch,
       // 仅在中文环境预加载价格页面和博客页面
       ...(currentLocale === 'zh'
-        ? [pricingRoute.prefetch]
+        ? [pricingRoute.prefetch, blogRoute.prefetch, blogDetailRoute.prefetch]
         : []),
     ]
 
