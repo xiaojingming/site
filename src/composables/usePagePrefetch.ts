@@ -52,6 +52,7 @@ const ROUTE_ASSETS: Record<string, Record<Locale, string[]>> = {
   '/resource': { zh: [], en: [] },
 }
 
+// 客户端专用单例，所有写入路径均有 import.meta.client 守卫，SSR 环境不会写入
 const prefetchedAssets = new Set<string>()
 
 const scheduleIdle = (cb: () => void) => {
@@ -66,22 +67,22 @@ export function usePagePrefetch() {
   const prefetchAllRoutes = () => {
     if (!import.meta.client) return
     scheduleIdle(() => {
-      // @ts-expect-error nuxt page module not resolvable by TS
-      import('../pages/download/index.vue').catch(() => {})
-      // @ts-expect-error nuxt page module not resolvable by TS
-      import('../pages/pricing/index.vue').catch(() => {})
-      // @ts-expect-error nuxt page module not resolvable by TS
-      import('../pages/blog/index.vue').catch(() => {})
-      // @ts-expect-error nuxt page module not resolvable by TS
-      import('../pages/operation/index.vue').catch(() => {})
-      // @ts-expect-error nuxt page module not resolvable by TS
-      import('../pages/resource/index.vue').catch(() => {})
+      /* @vite-ignore */
+      import('@/pages/download/index.vue').catch(() => {})
+      /* @vite-ignore */
+      import('@/pages/pricing/index.vue').catch(() => {})
+      /* @vite-ignore */
+      import('@/pages/blog/index.vue').catch(() => {})
+      /* @vite-ignore */
+      import('@/pages/operation/index.vue').catch(() => {})
+      /* @vite-ignore */
+      import('@/pages/resource/index.vue').catch(() => {})
     })
   }
 
-  const prefetchRouteAssets = (route: string | undefined, locale: string) => {
+  const prefetchRouteAssets = (route: string | undefined, locale: Locale) => {
     if (!import.meta.client || !route) return
-    const assets = ROUTE_ASSETS[route]?.[locale as Locale]
+    const assets = ROUTE_ASSETS[route]?.[locale]
     if (!assets || assets.length === 0) return
     assets.forEach((url) => {
       if (prefetchedAssets.has(url)) return
