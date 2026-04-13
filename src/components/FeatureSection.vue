@@ -9,12 +9,11 @@
     </div>
     <div class="w-full rounded-[20px] mt-10 gradient-border">
       <video
+        ref="videoRef"
         class="rounded-[20px] w-full"
-        :src="video"
         preload="none"
         loop
         muted
-        autoplay
         playsinline
         style="object-fit: cover"
         :poster="poster"
@@ -36,9 +35,8 @@
 </template>
 
 <script setup lang="ts">
-import { computed } from 'vue'
-import { useI18n } from 'vue-i18n'
-import ItemCard from '@/views/home/ItemCard.vue'
+import { computed, ref, onMounted, onBeforeUnmount } from 'vue'
+import ItemCard from '@/pages/home/ItemCard.vue'
 
 interface FeatureItem {
   title: string
@@ -65,6 +63,49 @@ const { locale } = useI18n()
 
 const isZh = computed(() => locale.value === 'zh')
 const marginTopClass = computed(() => props.marginTop)
+
+const videoRef = ref<HTMLVideoElement | null>(null)
+let observer: IntersectionObserver | null = null
+
+const setupObserver = () => {
+  if (!videoRef.value) return
+
+  observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        const video = videoRef.value
+        if (!video) return
+        if (entry.isIntersecting) {
+          if (!video.src) {
+            video.src = props.video
+            video.load()
+          }
+          video.play().catch(() => {})
+        } else {
+          video.pause()
+        }
+      })
+    },
+    { threshold: 0.1 },
+  )
+
+  observer.observe(videoRef.value)
+}
+
+onMounted(() => {
+  setupObserver()
+})
+
+onBeforeUnmount(() => {
+  observer?.disconnect()
+  observer = null
+  const video = videoRef.value
+  if (video) {
+    video.pause()
+    video.src = ''
+    video.load()
+  }
+})
 </script>
 
 <style lang="less" scoped>
