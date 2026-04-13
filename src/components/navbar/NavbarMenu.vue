@@ -1,74 +1,65 @@
 <template>
   <div class="navbar-menu">
-    <a
-      v-for="item in menuOptions"
-      :key="item.key"
-      class="menu-item"
-      :class="{ 'menu-active': isActive(item.key) }"
-      :href="getHref(item.key)"
-      :target="getTarget(item.key)"
-      @click="handleClick(item.key, $event)"
-    >
-      {{ item.label }}
-    </a>
+    <template v-for="item in menuOptions" :key="item.key">
+      <a
+        v-if="item.external"
+        class="menu-item"
+        :href="item.href"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        {{ item.label }}
+      </a>
+      <NuxtLink
+        v-else
+        class="menu-item"
+        :class="{ 'menu-active': isActive(item.key) }"
+        :to="item.href"
+      >
+        {{ item.label }}
+      </NuxtLink>
+    </template>
   </div>
 </template>
 
 <script setup lang="ts">
 import { computed } from 'vue'
-import { useI18n } from 'vue-i18n'
-import { useRouter } from 'vue-router'
 
 interface MenuOption {
   label: string
   key: string
+  href: string
+  external?: boolean
 }
 
 const { t, locale } = useI18n()
-const router = useRouter()
+const route = useRoute()
 
 const isEn = computed(() => locale.value === 'en')
-const currentRouteName = computed(() => router.currentRoute.value.name)
+const currentRouteName = computed(() => route.name)
 
 const menuOptions = computed<MenuOption[]>(() => [
-  { label: t('menu.home'), key: 'home' },
-  { label: t('menu.download'), key: 'download' },
-  ...(isEn.value ? [] : [{ label: t('menu.pricing'), key: 'pricing' }]),
-  // { label: t('menu.installGuide'), key: 'install' },
-  { label: t('menu.docs'), key: 'docs' },
-  ...(isEn.value ? [] : [{ label: t('menu.blog'), key: 'blog' }]),
-  { label: t('menu.operation'), key: 'operation' },
+  { label: t('menu.home'), key: 'home', href: '/' },
+  { label: t('menu.download'), key: 'download', href: '/download' },
+  ...(isEn.value ? [] : [{ label: t('menu.pricing'), key: 'pricing', href: '/pricing' }]),
+  {
+    label: t('menu.docs'),
+    key: 'docs',
+    href: `https://docs.costrict.ai${isEn.value ? '/en' : ''}`,
+    external: true,
+  },
+  ...(isEn.value ? [] : [{ label: t('menu.blog'), key: 'blog', href: '/blog' }]),
+  { label: t('menu.operation'), key: 'operation', href: '/operation' },
 ])
 
 const isActive = (key: string) => {
   if (key === 'blog') {
-    return currentRouteName.value === 'blog' || currentRouteName.value === 'blogDetail'
+    return currentRouteName.value === 'blog' || currentRouteName.value === 'blog-id'
+  }
+  if (key === 'home') {
+    return currentRouteName.value === 'index'
   }
   return currentRouteName.value === key
-}
-
-const getHref = (key: string) => {
-  if (key === 'docs') {
-    return `https://docs.costrict.ai${isEn.value ? '/en' : ''}`
-  } else if (key === 'install') {
-    return `https://docs.costrict.ai${isEn.value ? '/en' : ''}/deployment/introduction/`
-  }
-  return '#'
-}
-
-const getTarget = (key: string) => {
-  if (key === 'docs' || key === 'install') {
-    return '_blank'
-  }
-  return undefined
-}
-
-const handleClick = (key: string, event: MouseEvent) => {
-  if (key === 'docs' || key === 'install') {
-    return
-  }
-  event.preventDefault()
-  router.push({ name: key })
 }
 </script>
 
