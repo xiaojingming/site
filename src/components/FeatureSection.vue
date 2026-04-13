@@ -36,6 +36,7 @@
 
 <script setup lang="ts">
 import { computed, ref, onMounted, onBeforeUnmount } from 'vue'
+import { useI18n } from 'vue-i18n'
 import ItemCard from '@/pages/home/ItemCard.vue'
 
 interface FeatureItem {
@@ -68,7 +69,7 @@ const videoRef = ref<HTMLVideoElement | null>(null)
 let observer: IntersectionObserver | null = null
 
 const setupObserver = () => {
-  if (!videoRef.value) return
+  if (typeof window === 'undefined' || !videoRef.value) return
 
   observer = new IntersectionObserver(
     (entries) => {
@@ -76,11 +77,15 @@ const setupObserver = () => {
         const video = videoRef.value
         if (!video) return
         if (entry.isIntersecting) {
-          if (!video.src) {
+          if (video.src !== props.video) {
             video.src = props.video
             video.load()
           }
-          video.play().catch(() => {})
+          video.play().catch((err) => {
+            if (err.name !== 'AbortError') {
+              console.warn('[FeatureSection] video.play() failed:', err)
+            }
+          })
         } else {
           video.pause()
         }
