@@ -9,8 +9,10 @@
         <EnterpriseDeployment />
         <LanguageSupport />
       </div>
+      <!-- FooterCopyright 为全宽设计，不受 responsive-container 宽度约束 -->
       <FooterCopyright />
       <template #fallback>
+        <!-- 占位高度防止 CLS，约等于所有首屏以下区块的总高度估算值，可根据实际内容调整 -->
         <div style="min-height: 3500px"></div>
       </template>
     </ClientOnly>
@@ -99,33 +101,6 @@ useHead({
 
   @media (max-width: 375px) {
     height: 268px;
-  }
-}
-
-.competition-icon:hover {
-  transform: translateX(-15px);
-}
-
-.competition-icon {
-  transition: all ease-in 0.3s;
-}
-
-/* 在移动设备上禁用动画 */
-@media (max-width: 768px) {
-  .competition-icon:hover {
-    transform: none !important;
-  }
-
-  .competition-icon:active {
-    transform: none !important;
-  }
-
-  .competition-icon {
-    transition: none !important;
-    cursor: pointer;
-    width: 140px;
-    top: 88px;
-    right: 0;
   }
 }
 
