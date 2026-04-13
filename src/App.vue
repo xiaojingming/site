@@ -1,17 +1,22 @@
 <script setup lang="ts">
-import { NMessageProvider } from 'naive-ui'
-import navbar from './components/NavBar.vue'
-import { useRouterPrefetch } from '@/hooks/useRouterPrefetch'
+import { onMounted } from 'vue'
+import { NConfigProvider, NMessageProvider } from 'naive-ui'
+import { usePagePrefetch } from '@/composables/usePagePrefetch'
 
-// 启用路由悬停预加载
-useRouterPrefetch()
+const { prefetchAllRoutes } = usePagePrefetch()
+
+onMounted(() => {
+  prefetchAllRoutes()
+})
 </script>
 
 <template>
-  <navbar />
-  <n-message-provider>
-    <main>
-      <router-view />
-    </main>
-  </n-message-provider>
+  <NConfigProvider>
+    <NavBar />
+    <n-message-provider>
+      <main>
+        <NuxtPage />
+      </main>
+    </n-message-provider>
+  </NConfigProvider>
 </template>
