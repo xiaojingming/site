@@ -29,3 +29,5 @@ coverage
 
 *.tsbuildinfo
 .opencode
+.nuxt
+.output

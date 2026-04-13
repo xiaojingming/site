@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { computed } from 'vue'
-import { useHead } from '@unhead/vue'
 
 defineOptions({ name: 'StructuredData' })
 
@@ -26,3 +25,7 @@ useHead({
   ],
 })
 </script>
+
+<template>
+  <span style="display: none"></span>
+</template>

@@ -5,6 +5,7 @@ const LANGUAGE_STORAGE_KEY = 'costrict_language'
 
 // 获取用户语言偏好
 export const getStoredLanguage = (): string | null => {
+  if (!import.meta.client) return null
   try {
     return localStorage.getItem(LANGUAGE_STORAGE_KEY)
   } catch (error) {
@@ -15,6 +16,7 @@ export const getStoredLanguage = (): string | null => {
 
 // 设置用户语言偏好
 export const setStoredLanguage = (language: string): void => {
+  if (!import.meta.client) return
   try {
     localStorage.setItem(LANGUAGE_STORAGE_KEY, language)
   } catch (error) {
@@ -24,17 +26,19 @@ export const setStoredLanguage = (language: string): void => {
 
 // 获取浏览器默认语言
 export const getBrowserLanguage = (): string => {
+  if (!import.meta.client) return 'zh'
   // 获取浏览器语言
-  const navLanguage = navigator.language || (navigator as unknown as { userLanguage: string }).userLanguage || 'zh'
-  
+  const navLanguage =
+    navigator.language || (navigator as unknown as { userLanguage: string }).userLanguage || 'zh'
+
   // 处理语言代码，例如 "zh-CN" -> "zh"
   const shortLang = navLanguage.split('-')[0]
-  
+
   // 只支持 'zh' 和 'en'，其他情况默认返回 'zh'
   if (shortLang === 'en') {
     return 'en'
   }
-  
+
   return 'zh'
 }
 
@@ -45,12 +49,12 @@ export const initializeLanguage = (): string => {
   if (storedLang && ['zh', 'en'].includes(storedLang)) {
     return storedLang
   }
-  
+
   // 2. 如果本地存储没有，则使用浏览器默认语言
   const browserLang = getBrowserLanguage()
-  
+
   // 3. 保存到本地存储
   setStoredLanguage(browserLang)
-  
+
   return browserLang
 }

@@ -4,27 +4,27 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "vite --host",
-    "build": "run-p type-check \"build-only {@}\" --",
-    "preview": "vite preview",
-    "build-only": "vite build",
-    "type-check": "vue-tsc --build",
+    "dev": "nuxt dev --port 9001",
+    "build": "nuxt build",
+    "preview": "nuxt preview",
+    "type-check": "nuxt typecheck",
+    "generate": "nuxt generate",
     "lint": "eslint . --fix",
-    "format": "prettier --write src/",
-    "test": "echo 'Testing framework not yet configured. Please run: pnpm add -D vitest @vue/test-utils happy-dom'",
-    "test:unit": "echo 'Testing framework not yet configured.'"
+    "format": "prettier --write src/"
   },
   "dependencies": {
-    "@unhead/vue": "^2.1.12",
+    "@css-render/vue3-ssr": "^0.15.14",
+    "@nuxtjs/i18n": "^9.5.3",
+    "naive-ui": "^2.41.0",
+    "nuxt": "^3.17.1",
     "tailwindcss": "^4.1.10",
-    "vue": "^3.5.13",
-    "vue-router": "^4.5.0"
+    "vfonts": "^0.0.3",
+    "vue": "^3.5.13"
   },
   "devDependencies": {
     "@tailwindcss/vite": "^4.1.10",
     "@tsconfig/node22": "^22.0.1",
     "@types/node": "^22.14.0",
-    "@vitejs/plugin-vue": "^6.0.3",
     "@vue/eslint-config-prettier": "^10.2.0",
     "@vue/eslint-config-typescript": "^14.5.0",
     "@vue/test-utils": "^2.4.6",
@@ -33,15 +33,9 @@
     "eslint-plugin-vue": "~10.0.0",
     "happy-dom": "^20.7.0",
     "less": "^4.3.0",
-    "naive-ui": "^2.41.0",
     "npm-run-all2": "^7.0.2",
     "prettier": "3.5.3",
     "typescript": "~5.8.0",
-    "vite": "^7.3.0",
-    "vite-plugin-compression": "^0.5.1",
-    "vite-plugin-vue-devtools": "^7.7.2",
-    "vitest": "^4.0.18",
-    "vue-i18n": "11.2.2",
     "vue-tsc": "^2.2.8"
   }
 }

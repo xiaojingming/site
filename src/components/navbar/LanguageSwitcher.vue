@@ -30,8 +30,6 @@
 
 <script setup lang="ts">
 import { computed } from 'vue'
-import { useI18n } from 'vue-i18n'
-import { useRouter } from 'vue-router'
 import { NPopover } from 'naive-ui'
 import { setStoredLanguage } from '@/utils/language'
 
@@ -45,8 +43,8 @@ const emit = defineEmits<{
   (e: 'update:isOpen', value: boolean): void
 }>()
 
-const { locale } = useI18n()
-const router = useRouter()
+const { locale, setLocale } = useI18n()
+const route = useRoute()
 
 const languageOptions = [
   { label: '中文', key: 'zh' },
@@ -59,11 +57,11 @@ const currentLangLabel = computed(() => {
   )
 })
 
-const handleSelect = (key: string) => {
-  locale.value = key
+const handleSelect = async (key: string) => {
+  await setLocale(key as 'zh' | 'en')
   setStoredLanguage(key)
-  if (key === 'en' && router.currentRoute.value.name === 'pricing') {
-    router.push({ name: 'home' })
+  if (key === 'en' && route.name === 'pricing') {
+    navigateTo('/')
   }
   emit('update:isOpen', false)
 }

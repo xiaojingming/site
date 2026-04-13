@@ -4,7 +4,10 @@
       <div class="text-4xl font-semibold leading-normal text-center text-white mb-2 page-title">
         {{ title }}
       </div>
-      <div v-if="subtitle" class="text-base font-normal leading-6 text-center text-white/70 page-subtitle">
+      <div
+        v-if="subtitle"
+        class="text-base font-normal leading-6 text-center text-white/70 page-subtitle"
+      >
         {{ subtitle }}
       </div>
     </div>
@@ -12,7 +15,7 @@
 </template>
 
 <script setup lang="ts">
-import { useAnimation } from '@/hooks/use_animation'
+import { useAnimation } from '@/composables/use_animation'
 
 interface Props {
   title: string

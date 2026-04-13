@@ -34,9 +34,8 @@
 
 <script lang="ts" setup>
 import { ref, computed } from 'vue'
-import { useRouter } from 'vue-router'
-import { useResponsive } from '@/hooks/useResponsive'
-import { useMobileMenu } from '@/hooks/useMobileMenu'
+import { useResponsive } from '@/composables/useResponsive'
+import { useMobileMenu } from '@/composables/useMobileMenu'
 import NavbarLogo from './navbar/NavbarLogo.vue'
 import NavbarMenu from './navbar/NavbarMenu.vue'
 import LanguageSwitcher from './navbar/LanguageSwitcher.vue'
@@ -47,17 +46,15 @@ defineOptions({
   name: 'NavbarComponent',
 })
 
-const router = useRouter()
+const route = useRoute()
 const { isMobile } = useResponsive()
 const { isMenuOpen, isLangMenuOpen, toggleMenu, closeMenu, toggleLangMenu } = useMobileMenu()
 
 const isPopoverOpen = ref(false)
 
-const notHomePage = computed(() => router.currentRoute.value.name !== 'home')
-const isPricingPage = computed(() => router.currentRoute.value.name === 'pricing')
-const isBlogPage = computed(() =>
-  ['blog', 'blogDetail'].includes(router.currentRoute.value.name as string),
-)
+const notHomePage = computed(() => route.name !== 'index')
+const isPricingPage = computed(() => route.name === 'pricing')
+const isBlogPage = computed(() => ['blog', 'blog-id'].includes(route.name as string))
 </script>
 
 <style lang="less" scoped>

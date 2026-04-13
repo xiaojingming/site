@@ -6,14 +6,10 @@
 </template>
 
 <script setup lang="ts">
-import { useI18n } from 'vue-i18n'
-import { useRouter } from 'vue-router'
-
 const { t } = useI18n()
-const router = useRouter()
 
 const toHome = () => {
-  router.push({ name: 'home' })
+  navigateTo('/')
 }
 </script>
 

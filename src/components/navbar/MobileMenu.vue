@@ -59,8 +59,6 @@
 
 <script setup lang="ts">
 import { computed } from 'vue'
-import { useI18n } from 'vue-i18n'
-import { useRouter } from 'vue-router'
 import { setStoredLanguage } from '@/utils/language'
 import GithubStars from './GithubStars.vue'
 
@@ -83,11 +81,11 @@ const emit = defineEmits<{
   (e: 'toggleLangMenu'): void
 }>()
 
-const { t, locale } = useI18n()
-const router = useRouter()
+const { t, locale, setLocale } = useI18n()
+const route = useRoute()
 
 const isEn = computed(() => locale.value === 'en')
-const currentRouteName = computed(() => router.currentRoute.value.name)
+const currentRouteName = computed(() => route.name)
 
 const languageOptions = [
   { label: '中文', key: 'zh' },
@@ -112,9 +110,21 @@ const menuOptions = computed<MenuOption[]>(() => [
 
 const isActive = (key: string) => {
   if (key === 'blog') {
-    return currentRouteName.value === 'blog' || currentRouteName.value === 'blogDetail'
+    return currentRouteName.value === 'blog' || currentRouteName.value === 'blog-id'
+  }
+  if (key === 'home') {
+    return currentRouteName.value === 'index'
   }
   return currentRouteName.value === key
+}
+
+const routeMap: Record<string, string> = {
+  home: '/',
+  download: '/download',
+  pricing: '/pricing',
+  blog: '/blog',
+  operation: '/operation',
+  resource: '/resource',
 }
 
 const handleMenuClick = (key: string) => {
@@ -127,16 +137,16 @@ const handleMenuClick = (key: string) => {
     const url = `https://docs.costrict.ai${isEn.value ? '/en' : ''}/deployment/introduction/`
     window.open(url)
   } else {
-    router.push({ name: key })
+    navigateTo(routeMap[key] || '/')
   }
   emit('closeMenu')
 }
 
-const handleLangSelect = (key: string) => {
-  locale.value = key
+const handleLangSelect = async (key: string) => {
+  await setLocale(key as 'zh' | 'en')
   setStoredLanguage(key)
-  if (key === 'en' && router.currentRoute.value.name === 'pricing') {
-    router.push({ name: 'home' })
+  if (key === 'en' && route.name === 'pricing') {
+    navigateTo('/')
   }
   emit('toggleLangMenu')
 }

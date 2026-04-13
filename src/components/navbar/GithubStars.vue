@@ -19,7 +19,7 @@
 </template>
 
 <script setup lang="ts">
-import { useGithubStars } from '@/hooks/useGithubStars'
+import { useGithubStars } from '@/composables/useGithubStars'
 
 const { githubStars, formattedStarCount } = useGithubStars()
 
