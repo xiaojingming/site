@@ -15,7 +15,8 @@
         v-else
         class="menu-item"
         :class="{ 'menu-active': isActive(item.key) }"
-        :to="item.to"
+        :to="item.to!"
+        @mouseenter="prefetchRouteAssets(item.to, locale)"
       >
         {{ item.label }}
       </NuxtLink>
@@ -27,6 +28,7 @@
 import { computed } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { useRoute } from 'vue-router'
+import { usePagePrefetch } from '@/composables/usePagePrefetch'
 
 interface MenuOption {
   label: string
@@ -38,6 +40,7 @@ interface MenuOption {
 
 const { t, locale } = useI18n()
 const route = useRoute()
+const { prefetchRouteAssets } = usePagePrefetch()
 
 const isEn = computed(() => locale.value === 'en')
 const currentRouteName = computed(() => route.name)
