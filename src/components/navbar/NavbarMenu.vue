@@ -1,6 +1,7 @@
 <template>
   <div class="navbar-menu">
     <template v-for="item in menuOptions" :key="item.key">
+      <!-- 外部链接不需要 active 状态 -->
       <a
         v-if="item.external"
         class="menu-item"
@@ -14,7 +15,7 @@
         v-else
         class="menu-item"
         :class="{ 'menu-active': isActive(item.key) }"
-        :to="item.href"
+        :to="item.to"
       >
         {{ item.label }}
       </NuxtLink>
@@ -28,7 +29,8 @@ import { computed } from 'vue'
 interface MenuOption {
   label: string
   key: string
-  href: string
+  to?: string
+  href?: string
   external?: boolean
 }
 
@@ -39,17 +41,17 @@ const isEn = computed(() => locale.value === 'en')
 const currentRouteName = computed(() => route.name)
 
 const menuOptions = computed<MenuOption[]>(() => [
-  { label: t('menu.home'), key: 'home', href: '/' },
-  { label: t('menu.download'), key: 'download', href: '/download' },
-  ...(isEn.value ? [] : [{ label: t('menu.pricing'), key: 'pricing', href: '/pricing' }]),
+  { label: t('menu.home'), key: 'home', to: '/' },
+  { label: t('menu.download'), key: 'download', to: '/download' },
+  ...(isEn.value ? [] : [{ label: t('menu.pricing'), key: 'pricing', to: '/pricing' }]),
   {
     label: t('menu.docs'),
     key: 'docs',
     href: `https://docs.costrict.ai${isEn.value ? '/en' : ''}`,
     external: true,
   },
-  ...(isEn.value ? [] : [{ label: t('menu.blog'), key: 'blog', href: '/blog' }]),
-  { label: t('menu.operation'), key: 'operation', href: '/operation' },
+  ...(isEn.value ? [] : [{ label: t('menu.blog'), key: 'blog', to: '/blog' }]),
+  { label: t('menu.operation'), key: 'operation', to: '/operation' },
 ])
 
 const isActive = (key: string) => {
