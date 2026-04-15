@@ -8,7 +8,7 @@
     </div>
     <div class="item-card__img">
       <slot name="img">
-        <img :src="img" alt="card img" />
+        <NuxtImg :src="img" alt="card img" loading="lazy" />
       </slot>
     </div>
   </div>

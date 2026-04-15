@@ -51,7 +51,12 @@ const handleInstallMethodChange = (method: InstallMethod) => {
   <div class="download-content">
     <!-- Header Section -->
     <div v-if="activeTab !== 'cli'" class="content-header flex flex-wrap">
-      <img class="download-icon w-6 h-6 mr-1" :src="headerIcon" alt="CoStrict Download" />
+      <NuxtImg
+        class="download-icon w-6 h-6 mr-1"
+        :src="headerIcon"
+        alt="CoStrict Download"
+        loading="lazy"
+      />
       <span class="text-white mr-4">{{ headerTitle }}</span>
       <div class="flex cursor-pointer" @click="handleDownload">
         <span style="color: #4083e8">{{ t('download.manualPluginDownload') }}</span>

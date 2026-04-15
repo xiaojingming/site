@@ -191,11 +191,12 @@ onUnmounted(() => window.removeEventListener('keydown', onKeydown))
               @click="goToArticle(related.id)"
             >
               <div class="related-cover" :class="related.cover">
-                <img
+                <NuxtImg
                   v-if="coverImageMap[related.cover]"
                   :src="coverImageMap[related.cover]"
                   :alt="related.title"
                   class="related-cover-img"
+                  loading="lazy"
                 />
               </div>
               <div class="related-info">
@@ -218,11 +219,12 @@ onUnmounted(() => window.removeEventListener('keydown', onKeydown))
             @click="goToArticle(related.id)"
           >
             <div class="related-cover" :class="related.cover">
-              <img
+              <NuxtImg
                 v-if="coverImageMap[related.cover]"
                 :src="coverImageMap[related.cover]"
                 :alt="related.title"
                 class="related-cover-img"
+                loading="lazy"
               />
             </div>
             <div class="related-info">

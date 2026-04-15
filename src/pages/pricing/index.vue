@@ -1,29 +1,39 @@
 <template>
   <div class="pricing-page pt-39.5 pb-23 relative">
-    <img
-      src="../../assets/price/bg_1.png"
-      alt="background"
+    <NuxtImg
+      src="/price/bg_1.png"
+      alt=""
+      aria-hidden="true"
       class="absolute left-[-10px] top-85 w-55 h-58 priceing-page__bg"
+      loading="lazy"
     />
-    <img
-      src="../../assets/price/bg_2.png"
-      alt="background"
+    <NuxtImg
+      src="/price/bg_2.png"
+      alt=""
+      aria-hidden="true"
       class="absolute left-124 top-104 w-55 pricing-page__bg"
+      loading="lazy"
     />
-    <img
-      src="../../assets/price/bg_3.png"
-      alt="background"
+    <NuxtImg
+      src="/price/bg_3.png"
+      alt=""
+      aria-hidden="true"
       class="absolute left-155 top-81 w-28.5 pricing-page__bg"
+      loading="lazy"
     />
-    <img
-      src="../../assets/price/bg_4.png"
-      alt="background"
+    <NuxtImg
+      src="/price/bg_4.png"
+      alt=""
+      aria-hidden="true"
       class="absolute left-233.5 top-104 w-55 pricing-page__bg"
+      loading="lazy"
     />
-    <img
-      src="../../assets/price/bg_5.png"
-      alt="background"
+    <NuxtImg
+      src="/price/bg_5.png"
+      alt=""
+      aria-hidden="true"
       class="absolute left-265 top-81 w-28.5 pricing-page__bg"
+      loading="lazy"
     />
     <div class="pricing-page__title text-3xl text-center">{{ t('pricing.title') }}</div>
     <div class="pricing-page__subTitle text-center mt-7.5 opacity-70 text-base">
@@ -40,7 +50,7 @@
           class="content-version__item min-88 px-5 py-6 relative"
         >
           <div v-if="plan.showTrafficLabel" class="absolute right-0 top-[-4px]">
-            <img src="../../assets/label-bg.webp" alt="label" />
+            <NuxtImg src="/label-bg.webp" alt="label" loading="lazy" />
             <span class="absolute top-1 left-7 label-text">{{
               t('pricing.tag.trafficPackage')
             }}</span>

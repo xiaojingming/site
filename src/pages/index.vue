@@ -39,8 +39,18 @@
         },
       }"
     />
-    <img :src="leftPortImg" class="absolute left-0 top-[1538px]" alt="left port" />
-    <img :src="rightPortImg" class="absolute right-0 top-[1347px]" alt="right port" />
+    <NuxtImg
+      :src="leftPortImg"
+      class="absolute left-0 top-[1538px]"
+      alt="left port"
+      loading="eager"
+    />
+    <NuxtImg
+      :src="rightPortImg"
+      class="absolute right-0 top-[1347px]"
+      alt="right port"
+      loading="eager"
+    />
     <div class="absolute left-0 top-0 h-80 sm:h-112 md:h-120 lg:h-124 w-full top-bg"></div>
   </div>
 </template>
@@ -48,8 +58,9 @@
 import { defineAsyncComponent } from 'vue'
 import SloganSection from './home/SloganSection.vue'
 import StructuredData from '@/components/StructuredData.vue'
-import leftPortImg from '@/assets/home/left_port.webp'
-import rightPortImg from '@/assets/home/right_port.webp'
+
+const leftPortImg = '/home/left_port.webp'
+const rightPortImg = '/home/right_port.webp'
 
 const StrictMode = defineAsyncComponent(() => import('./home/StrictMode.vue'))
 const CodeReview = defineAsyncComponent(() => import('./home/CodeReview.vue'))

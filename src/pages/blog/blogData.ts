@@ -25,16 +25,11 @@ export const tagClassMap: Record<string, string> = {
   oss: 'tag-oss',
 }
 
-import deepCover from '@/assets/blog/cover/deep_dive.webp'
-import caseCover from '@/assets/blog/cover/parctical_case.webp'
-import techCover from '@/assets/blog/cover/tech_progress.webp'
-import ossCover from '@/assets/blog/cover/open_source.webp'
-
 export const coverImageMap: Record<string, string> = {
-  deep: deepCover,
-  case: caseCover,
-  tech: techCover,
-  oss: ossCover,
+  deep: '/blog/cover/deep_dive.webp',
+  case: '/blog/cover/parctical_case.webp',
+  tech: '/blog/cover/tech_progress.webp',
+  oss: '/blog/cover/open_source.webp',
 }
 
 const blogImageModules = import.meta.glob('@/assets/blog/**/*.webp', {

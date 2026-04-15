@@ -2,8 +2,8 @@
   <div class="w-full flex flex-col items-center" :class="marginTopClass">
     <div class="flex flex-col items-center">
       <div class="feature-section__title" :class="{ 'feature-section__title-en': !isZh }">
-        <img v-if="isZh" :src="zhTitle" :alt="altText" />
-        <img v-else :src="enTitle" :alt="altText" />
+        <NuxtImg v-if="isZh" :src="zhTitle" :alt="altText" loading="lazy" />
+        <NuxtImg v-else :src="enTitle" :alt="altText" loading="lazy" />
       </div>
       <span class="feature-section__desc">{{ subTitle }}</span>
     </div>
