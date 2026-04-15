@@ -198,7 +198,13 @@ const handleCopyCommand = async (cmd: string, index: number) => {
           </div>
           <div v-if="step.tips" class="step-tips">{{ step.tips }}</div>
         </div>
-        <img v-if="step.imgUrl" :src="step.imgUrl" alt="CoStrict Download" class="step-image" />
+        <NuxtImg
+          v-if="step.imgUrl"
+          :src="step.imgUrl"
+          alt="CoStrict Download"
+          class="step-image"
+          loading="lazy"
+        />
         <!-- CLI 安装命令块放在图片下方 -->
         <div
           v-if="

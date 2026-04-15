@@ -10,7 +10,13 @@
         v-for="item in programLanguage"
         class="flex items-center justify-center lang-container"
       >
-        <img v-if="item.icon" :src="item.icon" class="w-6 h-6 mr-2" :alt="item.type" />
+        <NuxtImg
+          v-if="item.icon"
+          :src="item.icon"
+          class="w-6 h-6 mr-2"
+          :alt="item.type"
+          loading="lazy"
+        />
         <span class="text-white leading-6 text-sm xl:text-base whitespace-nowrap">{{
           item.type
         }}</span>
@@ -18,11 +24,11 @@
     </div>
     <div class="grid grid-cols-1 sm:grid-cols-2 gap-8 mt-10 xl:mt-20">
       <div class="vscode-container flex items-center justify-center">
-        <img :src="vscodeIcon" alt="vscode" />
+        <NuxtImg :src="vscodeIcon" alt="vscode" loading="lazy" />
         <span class="text-white ml-3">{{ t('home.ideSupport.SupportedInVSCode') }}</span>
       </div>
       <div class="vscode-container flex items-center justify-center">
-        <img :src="jetbrainsIcon" alt="jetbrains" />
+        <NuxtImg :src="jetbrainsIcon" alt="jetbrains" loading="lazy" />
         <span class="text-white ml-3">{{ t('home.ideSupport.SupportedInJetBrains') }}</span>
       </div>
     </div>
@@ -31,46 +37,20 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 import PageTitle from '@/components/PageTitle.vue'
-// 导入静态资源
-import pyIcon from '@/assets/supportLang/py.webp'
-import goIcon from '@/assets/supportLang/go.webp'
-import javaIcon from '@/assets/supportLang/java.webp'
-import jsIcon from '@/assets/supportLang/js.webp'
-import tsIcon from '@/assets/supportLang/ts.webp'
-import cIcon from '@/assets/supportLang/c.webp'
-import vscodeIcon from '@/assets/supportLang/vscode.webp'
-import jetbrainsIcon from '@/assets/supportLang/jetbrains.webp'
 
 const { t } = useI18n()
 
+const vscodeIcon = '/supportLang/vscode.webp'
+const jetbrainsIcon = '/supportLang/jetbrains.webp'
+
 const programLanguage = computed(() => [
-  {
-    type: 'Python',
-    icon: pyIcon,
-  },
-  {
-    type: 'Go',
-    icon: goIcon,
-  },
-  {
-    type: 'Java',
-    icon: javaIcon,
-  },
-  {
-    type: 'JavaScript',
-    icon: jsIcon,
-  },
-  {
-    type: 'TypeScript',
-    icon: tsIcon,
-  },
-  {
-    type: 'C/C++',
-    icon: cIcon,
-  },
-  {
-    type: `... ${t('home.ideSupport.allLanguages')}`,
-  },
+  { type: 'Python', icon: '/supportLang/py.webp' },
+  { type: 'Go', icon: '/supportLang/go.webp' },
+  { type: 'Java', icon: '/supportLang/java.webp' },
+  { type: 'JavaScript', icon: '/supportLang/js.webp' },
+  { type: 'TypeScript', icon: '/supportLang/ts.webp' },
+  { type: 'C/C++', icon: '/supportLang/c.webp' },
+  { type: `... ${t('home.ideSupport.allLanguages')}` },
 ])
 </script>
 <style lang="less" scoped>

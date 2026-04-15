@@ -12,10 +12,18 @@ export default defineNuxtConfig({
   },
   ssr: true,
 
-  modules: ['@nuxtjs/i18n'],
+  modules: ['@nuxtjs/i18n', '@nuxt/image'],
+
+  image: {
+    provider: 'ipx',
+    quality: 85,
+    dir: 'assets',
+    ipx: {
+      baseURL: '/_ipx',
+    },
+  },
 
   i18n: {
-    // ...保持你原有的配置不变...
     locales: [
       { code: 'zh', language: 'zh-CN', name: '中文', file: 'zh.json' },
       { code: 'en', language: 'en-US', name: 'English', file: 'en.json' },
@@ -31,7 +39,6 @@ export default defineNuxtConfig({
   },
 
   hooks: {
-    // ...保持你原有的配置不变...
     'pages:extend'(pages) {
       const validPages = pages.filter((page) => page.file?.endsWith('.vue'))
       pages.splice(0, pages.length, ...validPages)
@@ -50,7 +57,6 @@ export default defineNuxtConfig({
       ],
     },
     ssr: {
-      // 🌟 修改点 1：在这里加入 'vueuc' 🌟
       noExternal: ['naive-ui', 'vueuc', '@css-render/vue3-ssr', 'css-render'],
     },
   },
@@ -58,14 +64,13 @@ export default defineNuxtConfig({
   css: ['~/styles/tokens.css', '~/index.css'],
 
   build: {
-    // 🌟 修改点 2：在这里加入 'vueuc' (推荐同时加入 '@juggle/resize-observer') 🌟
     transpile: [
       'naive-ui',
       'vueuc',
       'vicons',
       '@css-render/vue3-ssr',
       'css-render',
-      '@juggle/resize-observer', // 保险起见加进来
+      '@juggle/resize-observer',
     ],
   },
 

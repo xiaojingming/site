@@ -26,11 +26,12 @@ const handleClick = (): void => {
 <template>
   <article class="blog-card" @click="handleClick">
     <div class="card-cover" :class="article.cover">
-      <img
+      <NuxtImg
         v-if="coverImageMap[article.cover]"
         :src="coverImageMap[article.cover]"
         :alt="article.title"
         class="cover-img"
+        loading="lazy"
       />
     </div>
     <div class="card-body">

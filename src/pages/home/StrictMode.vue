@@ -15,38 +15,35 @@ import { computed } from 'vue'
 import FeatureSection from '@/components/FeatureSection.vue'
 import StrictModeZhVideo from '@/assets/video/strict_mode_zh.mp4'
 import StrictModeEnVideo from '@/assets/video/strict_mode_en.mp4'
-import StrictModeZhPoster from '@/assets/strictMode/strict_mode_zh_buffer.webp'
-import StrictModeEnPoster from '@/assets/strictMode/strict_mode_en_buffer.webp'
-import ZhStrictModeFeature1 from '@/assets/strictMode/zh/strictMode_feature01.webp'
-import ZhStrictModeFeature2 from '@/assets/strictMode/zh/strictMode_feature02.webp'
-import ZhStrictModeFeature3 from '@/assets/strictMode/zh/strictMode_feature03.webp'
-import ZhStrictModeFeature4 from '@/assets/strictMode/zh/strictMode_feature04.webp'
-import EnStrictModeFeature1 from '@/assets/strictMode/en/strictMode_feature01.webp'
-import EnStrictModeFeature2 from '@/assets/strictMode/en/strictMode_feature02.webp'
-import EnStrictModeFeature3 from '@/assets/strictMode/en/strictMode_feature03.webp'
-import EnStrictModeFeature4 from '@/assets/strictMode/en/strictMode_feature04.webp'
-import EnStrictModeTitle from '@/assets/strictMode/en/strictMode_title.webp'
-import ZhStrictModeTitle from '@/assets/strictMode/zh/strictMode_title.webp'
 
 const { t, locale } = useI18n()
 
-// 资源映射表 - 更清晰、易维护
 const resources = {
   zh: {
-    title: ZhStrictModeTitle,
+    title: '/strictMode/zh/strictMode_title.webp',
     video: StrictModeZhVideo,
-    poster: StrictModeZhPoster,
+    poster: '/strictMode/strict_mode_zh_buffer.webp',
   },
   en: {
-    title: EnStrictModeTitle,
+    title: '/strictMode/en/strictMode_title.webp',
     video: StrictModeEnVideo,
-    poster: StrictModeEnPoster,
+    poster: '/strictMode/strict_mode_en_buffer.webp',
   },
 }
 
 const featureImages = {
-  zh: [ZhStrictModeFeature1, ZhStrictModeFeature2, ZhStrictModeFeature3, ZhStrictModeFeature4],
-  en: [EnStrictModeFeature1, EnStrictModeFeature2, EnStrictModeFeature3, EnStrictModeFeature4],
+  zh: [
+    '/strictMode/zh/strictMode_feature01.webp',
+    '/strictMode/zh/strictMode_feature02.webp',
+    '/strictMode/zh/strictMode_feature03.webp',
+    '/strictMode/zh/strictMode_feature04.webp',
+  ],
+  en: [
+    '/strictMode/en/strictMode_feature01.webp',
+    '/strictMode/en/strictMode_feature02.webp',
+    '/strictMode/en/strictMode_feature03.webp',
+    '/strictMode/en/strictMode_feature04.webp',
+  ],
 }
 
 const currentResources = computed(() => resources[locale.value as 'zh' | 'en'])

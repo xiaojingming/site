@@ -21,7 +21,7 @@
         v-for="item in featureList"
         :key="item.title"
       >
-        <img :src="item.img" class="w-17.5 h-17.5" alt="CoStrict Feature" />
+        <NuxtImg :src="item.img" class="w-17.5 h-17.5" alt="CoStrict Feature" loading="lazy" />
         <span
           class="text-white mt-6 text-2xl deployment-card__title"
           :class="isZh ? '' : 'text-center'"
@@ -40,10 +40,6 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 import PageTitle from '@/components/PageTitle.vue'
-import enterpriseFeature1 from '@/assets/enterprise/enterprise_feature01.webp'
-import enterpriseFeature2 from '@/assets/enterprise/enterprise_feature02.webp'
-import enterpriseFeature3 from '@/assets/enterprise/enterprise_feature03.webp'
-import enterpriseFeature4 from '@/assets/enterprise/enterprise_feature04.webp'
 import { useAnimation } from '@/composables/use_animation'
 
 const { t, locale } = useI18n()
@@ -56,22 +52,22 @@ const featureList = computed(() => [
   {
     content: t('home.enterprise.feature01Content'),
     title: t('home.enterprise.feature01Title'),
-    img: enterpriseFeature1,
+    img: '/enterprise/enterprise_feature01.webp',
   },
   {
     content: t('home.enterprise.feature02Content'),
     title: t('home.enterprise.feature02Title'),
-    img: enterpriseFeature2,
+    img: '/enterprise/enterprise_feature02.webp',
   },
   {
     content: t('home.enterprise.feature03Content'),
     title: t('home.enterprise.feature03Title'),
-    img: enterpriseFeature3,
+    img: '/enterprise/enterprise_feature03.webp',
   },
   {
     content: t('home.enterprise.feature04Content'),
     title: t('home.enterprise.feature04Title'),
-    img: enterpriseFeature4,
+    img: '/enterprise/enterprise_feature04.webp',
   },
 ])
 

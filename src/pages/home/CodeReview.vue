@@ -17,34 +17,33 @@ import FeatureSection from '@/components/FeatureSection.vue'
 import CodeReviewZhVideo from '@/assets/video/code_review_zh.mp4'
 import CodeReviewEnVideo from '@/assets/video/code_review_en.mp4'
 import CodeReviewPoster from '@/assets/codeReview/codereview_buffer.webp'
-import ZhCodeReviewFeature1 from '@/assets/codeReview/zh/codereview_feature01.webp'
-import ZhCodeReviewFeature2 from '@/assets/codeReview/zh/codereview_feature02.webp'
-import ZhCodeReviewFeature3 from '@/assets/codeReview/zh/codereview_feature03.webp'
-import ZhCodeReviewFeature4 from '@/assets/codeReview/zh/codereview_feature04.webp'
-import EnCodeReviewFeature1 from '@/assets/codeReview/en/codereview_feature01.webp'
-import EnCodeReviewFeature2 from '@/assets/codeReview/en/codereview_feature02.webp'
-import EnCodeReviewFeature3 from '@/assets/codeReview/en/codereview_feature03.webp'
-import EnCodeReviewFeature4 from '@/assets/codeReview/en/codereview_feature04.webp'
-import EnCodeReviewTitle from '@/assets/codeReview/en/codereview_title.webp'
-import ZhCodeReviewTitle from '@/assets/codeReview/zh/codereview_title.webp'
 
 const { t, locale } = useI18n()
 
-// 资源映射表
 const resources = {
   zh: {
-    title: ZhCodeReviewTitle,
+    title: '/codeReview/zh/codereview_title.webp',
     video: CodeReviewZhVideo,
   },
   en: {
-    title: EnCodeReviewTitle,
+    title: '/codeReview/en/codereview_title.webp',
     video: CodeReviewEnVideo,
   },
 }
 
 const featureImages = {
-  zh: [ZhCodeReviewFeature1, ZhCodeReviewFeature2, ZhCodeReviewFeature3, ZhCodeReviewFeature4],
-  en: [EnCodeReviewFeature1, EnCodeReviewFeature2, EnCodeReviewFeature3, EnCodeReviewFeature4],
+  zh: [
+    '/codeReview/zh/codereview_feature01.webp',
+    '/codeReview/zh/codereview_feature02.webp',
+    '/codeReview/zh/codereview_feature03.webp',
+    '/codeReview/zh/codereview_feature04.webp',
+  ],
+  en: [
+    '/codeReview/en/codereview_feature01.webp',
+    '/codeReview/en/codereview_feature02.webp',
+    '/codeReview/en/codereview_feature03.webp',
+    '/codeReview/en/codereview_feature04.webp',
+  ],
 }
 
 const currentResources = computed(() => resources[locale.value as 'zh' | 'en'])

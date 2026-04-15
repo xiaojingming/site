@@ -1,6 +1,6 @@
 <template>
   <div class="navbar-logo cursor-pointer" @click="toHome">
-    <img class="logo-img" src="@/assets/logo.webp" alt="CoStrict Logo" />
+    <NuxtImg class="logo-img" src="/logo.webp" alt="CoStrict Logo" loading="eager" />
     <div class="app-name">{{ t('header.appName') }}</div>
   </div>
 </template>

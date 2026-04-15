@@ -41,10 +41,11 @@
             <div class="contact-card-title">{{ t('footer.officialAccount') }}</div>
             <div class="contact-card-desc">{{ t('footer.officialAccountDesc') }}</div>
             <div class="qrcode-wrap">
-              <img
+              <NuxtImg
                 class="qrcode-img"
-                src="../../assets/qrcode/official_account.webp"
+                src="/qrcode/official_account.webp"
                 alt="CoStrict Official Account"
+                loading="lazy"
               />
               <span class="qrcode-label">CoStrict {{ t('footer.officialAccountLabel') }}</span>
             </div>
@@ -69,10 +70,11 @@
             <div class="contact-card-title">{{ t('footer.joinGroup') }}</div>
             <div class="contact-card-desc">{{ t('footer.joinGroupDesc') }}</div>
             <div class="qrcode-wrap">
-              <img
+              <NuxtImg
                 class="qrcode-img"
-                src="../../assets/qrcode/communication_group.webp"
+                src="/qrcode/communication_group.webp"
                 alt="CoStrict Communication Group"
+                loading="lazy"
               />
               <span class="qrcode-label">CoStrict {{ t('footer.joinGroupLabel') }}</span>
             </div>

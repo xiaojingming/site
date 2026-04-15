@@ -33,7 +33,7 @@ const handleTabClick = (tabKey: TabType) => {
       :class="{ active: activeTab === tab.key }"
       @click="handleTabClick(tab.key)"
     >
-      <img :src="tab.imgUrl" :alt="tab.key" />
+      <NuxtImg :src="tab.imgUrl" :alt="tab.key" loading="lazy" />
     </div>
   </div>
 </template>
