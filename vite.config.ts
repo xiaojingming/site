@@ -26,7 +26,6 @@ export default defineConfig({
     include: ['naive-ui'],
   },
   build: {
-    minify: false,
     assetsDir: 'assets',
     rollupOptions: {
       output: {
