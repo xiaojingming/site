@@ -3,6 +3,7 @@ name: Blog Content Rebuild
 on:
   repository_dispatch:
     types: [blog-content-updated]
+  workflow_dispatch:
 
 jobs:
   rebuild:
