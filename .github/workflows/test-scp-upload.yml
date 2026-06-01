@@ -3,6 +3,9 @@ name: Test Deploy
 on:
   workflow_dispatch:
 
+permissions:
+  contents: write
+
 jobs:
   test-upload:
     runs-on: ubuntu-latest
