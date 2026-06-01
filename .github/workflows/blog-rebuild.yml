@@ -34,44 +34,27 @@ jobs:
       - name: Build
         run: pnpm build
 
-      - name: Compress dist
-        run: tar -czvf dist.tar.gz -C dist .
+      - name: Deploy to remote server
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.SSH_KEY }}" > ~/.ssh/deploy_key
+          chmod 600 ~/.ssh/deploy_key
 
-      - name: Upload to server
-        uses: appleboy/scp-action@v0.1.7
-        with:
-          host: ${{ secrets.REMOTE_HOST }}
-          username: ${{ secrets.REMOTE_USER }}
-          password: ${{ secrets.REMOTE_PASSWORD }}
-          source: dist.tar.gz
-          target: /tmp/
+          REMOTE_DIST="${{ secrets.REMOTE_PATH }}"
+          REMOTE_BAK="${REMOTE_DIST}_bak"
+          SSH_CMD="ssh -i ~/.ssh/deploy_key -p ${{ secrets.SSH_PORT }} -o StrictHostKeyChecking=accept-new"
 
-      - name: Deploy on server
-        uses: appleboy/ssh-action@v1.0.0
-        with:
-          host: ${{ secrets.REMOTE_HOST }}
-          username: ${{ secrets.REMOTE_USER }}
-          password: ${{ secrets.REMOTE_PASSWORD }}
-          script: |
-            set -e
-            REMOTE_DIST="/home/zhuge/zhuge_web/dist"
-            REMOTE_BAK="/home/zhuge/zhuge_web/dist_bak"
+          # 1. 备份旧版本
+          $SSH_CMD ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} "rm -rf $REMOTE_BAK && cp -r $REMOTE_DIST $REMOTE_BAK"
 
-            # 1. 备份旧版本（复制内容，不是移动！）
-            rm -rf "$REMOTE_BAK"
-            cp -r "$REMOTE_DIST" "$REMOTE_BAK"
+          # 2. rsync 推送新版本
+          rsync -avz --delete \
+            -e "ssh -i ~/.ssh/deploy_key -p ${{ secrets.SSH_PORT }} -o StrictHostKeyChecking=accept-new" \
+            dist/ ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:$REMOTE_DIST
 
-            # 2. 清空旧 dist 内容（★ 保留 dist 目录本身的 inode！)
-            rm -rf "$REMOTE_DIST"/*
+          # 3. 修复权限并通知 Nginx 重载
+          $SSH_CMD ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} "chmod -R 755 $REMOTE_DIST && docker exec costrict-ai nginx -s reload || true"
 
-            # 3. 直接解压到现有 dist 目录内
-            tar -xzvf /tmp/dist.tar.gz -C "$REMOTE_DIST"
-            rm -f /tmp/dist.tar.gz
-
-            # 4. 修复权限（★ 关键！确保 Nginx 可读）
-            chmod -R 755 "$REMOTE_DIST"
-
-            # 5. 通知 Nginx 重载（清除文件缓存）
-            docker exec costrict-ai nginx -s reload || true
-
-            echo "Blog rebuild deployed successfully!"
+      - name: Cleanup SSH key
+        if: always()
+        run: rm -f ~/.ssh/deploy_key
