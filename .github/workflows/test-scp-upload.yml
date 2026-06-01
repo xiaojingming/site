@@ -3,65 +3,23 @@ name: Test Deploy
 on:
   workflow_dispatch:
 
-permissions:
-  contents: write
-
 jobs:
   test-upload:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: Setup pnpm
-        uses: pnpm/action-setup@v2
-        with:
-          version: 10
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: 22
-          cache: 'pnpm'
-
-      - name: Install dependencies
-        run: pnpm install --frozen-lockfile
-
-      - name: Fetch blog content
-        run: node scripts/fetch-blog-data.js
-        env:
-          BLOG_CONTENT_REPO_URL: https://github.com/xiaojingming/costrict-blog-content.git
-
-      - name: Build
-        run: pnpm build
-
-      - name: Archive dist
+      - name: Create test file
         run: |
-          cd dist
-          zip -r ../dist.zip .
-          tar -czf ../dist.tar.gz .
-
-      - name: Upload to GitHub Release
-        uses: softprops/action-gh-release@v2
-        with:
-          tag_name: test-${{ github.run_id }}
-          draft: true
-          files: |
-            dist.zip
-            dist.tar.gz
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          echo "SSH deploy test — $(date -u)" > deploy-test.txt
 
       - name: Deploy to remote server
-        if: success()
         run: |
           mkdir -p ~/.ssh
           echo "${{ secrets.SSH_KEY }}" > ~/.ssh/deploy_key
           chmod 600 ~/.ssh/deploy_key
 
-          rsync -avz --delete \
+          rsync -avz \
             -e "ssh -i ~/.ssh/deploy_key -p ${{ secrets.SSH_PORT }} -o StrictHostKeyChecking=accept-new" \
-            dist/ ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:${{ secrets.REMOTE_PATH }}
+            deploy-test.txt ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:${{ secrets.REMOTE_PATH }}
 
       - name: Cleanup SSH key
         if: always()
