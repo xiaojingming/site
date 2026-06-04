@@ -1,9 +1,8 @@
 <template>
-  <div class="w-full relative z-50">
-    <div class="slogan-container flex w-full h-72 sm:h-92 md:h-102 xl:h-108 justify-center">
-      <div class="w-full flex flex-col items-center">
+  <div class="slogan-section w-full relative z-50">
+    <div class="hero-copy w-full flex flex-col items-center">
         <div
-          class="mt-48 xl:mt-68 lg:mt-68 md:mt-68 sm:mt-62 text-xl sm:text-2xl"
+          class="text-xl sm:text-2xl"
           :class="[
             'oss-btn',
             `oss-btn-${locale}`,
@@ -26,9 +25,7 @@
             {{ t('home.slogan.title') }}
           </div>
         </div>
-      </div>
-    </div>
-    <div class="flex flex-col items-center pb-7.5 sm:pb-10 md:pb-12 lg:pb-16 xl:pb-37.5">
+      <div class="flex flex-col items-center">
       <div
         class="text-xl lg:text-6xl md:text-5xl sm:text-4xl"
         :class="['text-white', isEn ? 'max-w-[90%]' : 'slogan-subTitle']"
@@ -36,36 +33,44 @@
         {{ t('home.slogan.subTitle') }}
       </div>
       <div
-        class="description text-white/80 text-sm sm:text-base md:text-lg mt-2 sm:mt-4 text-center px-4"
+        class="description text-white/80 text-sm sm:text-base md:text-lg mt-3 sm:mt-4 text-center"
         :class="{ 'description-en': isEn }"
       >
         {{ t('home.slogan.description') }}
       </div>
       <div
-        class="button-group flex gap-4 mt-5 sm:mt-7.5 text-xs xl:text-2xl lg:text-xl md:text-base sm:text-sm text-white"
+        class="button-group flex gap-3 sm:gap-4 mt-5 sm:mt-7.5 text-sm xl:text-2xl lg:text-xl md:text-base sm:text-sm text-white"
         :class="{ 'button-group-en': isEn }"
       >
         <div
           v-for="(button, index) in buttons"
           :key="index"
-          class="flex items-center justify-center cursor-pointer h-8 md:h-10 lg:h-12 px-3"
+          class="hero-button flex items-center justify-center cursor-pointer px-5 sm:px-6"
           :class="button.specificClasses"
+          @mouseenter="scrambleButton(index)"
+          @focus="scrambleButton(index)"
           @click="button.action"
         >
-          {{ t(button.textKey) }}
+          <span>{{ scrambleLabels[index] || t(button.textKey) }}</span>
         </div>
       </div>
+      <button class="enterprise-link" type="button" @click="toDeployment">
+        {{ t('home.slogan.enterpriseButton') }}
+      </button>
+    </div>
     </div>
   </div>
 </template>
 
 <script lang="ts" setup>
 import { useI18n } from 'vue-i18n'
-import { computed } from 'vue'
+import { computed, onBeforeUnmount, ref, watch } from 'vue'
 import { useRouter } from 'vue-router'
 
 const { t, locale } = useI18n()
 const router = useRouter()
+const scrambleLabels = ref<string[]>([])
+const scrambleTimers: number[] = []
 
 const isEn = computed(() => locale.value === 'en')
 
@@ -75,16 +80,63 @@ const ossButtonWidth = computed(() => {
 
 const buttons = computed(() => [
   {
+    specificClasses: ['cloud-button', `cloud-button-${locale.value}`],
+    textKey: 'home.slogan.cloudButton',
+    action: toCloud,
+  },
+  {
     specificClasses: ['personal-button', `personal-button-${locale.value}`],
     textKey: 'home.slogan.personalButton',
     action: toDownload,
   },
-  {
-    specificClasses: ['enterprise-button', `enterprise-button-${locale.value}`],
-    textKey: 'home.slogan.enterpriseButton',
-    action: toDeployment,
-  },
 ])
+
+const syncButtonLabels = () => {
+  scrambleLabels.value = buttons.value.map((button) => t(button.textKey))
+}
+
+const canScramble = () => {
+  return window.matchMedia('(hover: hover) and (pointer: fine)').matches
+    && !window.matchMedia('(prefers-reduced-motion: reduce)').matches
+}
+
+const scrambleButton = (index: number) => {
+  if (!canScramble()) return
+
+  const button = buttons.value[index]
+  if (!button) return
+
+  const original = t(button.textKey)
+  const glyphs = 'AI<>/{}[]01+-'
+  const steps = 12
+  let frame = 0
+
+  window.clearInterval(scrambleTimers[index])
+  scrambleLabels.value[index] = original
+
+  scrambleTimers[index] = window.setInterval(() => {
+    frame += 1
+    const progress = frame / steps
+    const activeIndex = Math.min(original.length - 1, Math.floor(progress * original.length))
+    const settled = Math.max(0, activeIndex)
+
+    scrambleLabels.value[index] = original.split('').map((char, charIndex) => {
+      if (char.trim() === '') return char
+      if (charIndex < settled) return char
+      if (charIndex === activeIndex) return glyphs[Math.floor(Math.random() * glyphs.length)]
+      return ' '
+    }).join('')
+
+    if (frame >= steps) {
+      window.clearInterval(scrambleTimers[index])
+      scrambleLabels.value[index] = original
+    }
+  }, 48)
+}
+
+const toCloud = () => {
+  window.open('https://zgsm.sangfor.com/cloud')
+}
 
 const toDownload = () => {
   router.push('/download')
@@ -97,9 +149,35 @@ const toDeployment = () => {
 defineOptions({
   name: 'SloganSection',
 })
+
+watch(locale, syncButtonLabels, { immediate: true })
+
+onBeforeUnmount(() => {
+  scrambleTimers.forEach((timer) => window.clearInterval(timer))
+})
 </script>
 
 <style lang="less" scoped>
+:host,
+.w-full.relative {
+  position: relative;
+  z-index: 1;
+}
+
+.slogan-section {
+  display: flex;
+  box-sizing: border-box;
+  min-height: clamp(640px, 72vh, 760px);
+  padding: clamp(146px, 15vh, 180px) 16px 42px;
+  align-items: flex-start;
+  justify-content: center;
+}
+
+.hero-copy {
+  gap: 0;
+  text-align: center;
+}
+
 .oss-btn {
   box-sizing: border-box;
   text-align: center;
@@ -123,34 +201,125 @@ defineOptions({
     height: 40px;
   }
 
-  @media (max-width: 480px) {
-    margin-top: 152px;
-  }
-
-  @media (max-width: 375px) {
-    margin-top: 142px;
-  }
 }
 
-.enterprise-button {
-  background: url('@/assets/blue_button.svg') 50% 50%;
+.cloud-button {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid transparent;
+  background: transparent;
   border-radius: 6px;
+  box-shadow: 0 0 28px rgba(23, 123, 255, 0.16);
+  transition:
+    opacity 180ms ease,
+    box-shadow 260ms ease;
+
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    border-radius: inherit;
+    background: linear-gradient(99deg, #177bff 0%, #16dec2 100%);
+  }
 
   &-en {
-    background: url('@/assets/blue_button_en.svg') 50% 50%;
+    background: transparent;
   }
 
   &:hover {
-    opacity: 0.7;
+    opacity: 1;
+    box-shadow:
+      0 0 34px rgba(23, 123, 255, 0.22),
+      0 0 28px rgba(22, 222, 194, 0.16);
+  }
+
+}
+
+.hero-button {
+  position: relative;
+  z-index: 0;
+  flex: 1 1 0;
+  min-width: 128px;
+  box-sizing: border-box;
+  line-height: 1;
+  height: 48px;
+  isolation: isolate;
+  transition:
+    color 220ms ease,
+    border-color 220ms ease,
+    background 220ms ease,
+    box-shadow 260ms ease;
+
+  span {
+    position: relative;
+    z-index: 1;
+    min-width: 4em;
+    text-align: center;
+    font-variant-numeric: tabular-nums;
+  }
+
+  @media (min-width: 640px) {
+    min-width: 148px;
   }
 }
 
 .personal-button {
+  position: relative;
+  overflow: hidden;
   border: 1px solid rgba(255, 255, 255, 0.6);
   border-radius: 6px;
+  background: transparent;
+
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    padding: 1px;
+    border-radius: inherit;
+    background: linear-gradient(99deg, #177bff 0%, #16dec2 100%);
+    opacity: 0;
+    pointer-events: none;
+    -webkit-mask:
+      linear-gradient(#000 0 0) content-box,
+      linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    transition: opacity 220ms ease;
+  }
+
+  span {
+    color: #ffffff;
+    background: none;
+    background-clip: initial;
+    -webkit-background-clip: initial;
+  }
 
   &:hover {
-    opacity: 0.7;
+    opacity: 1;
+    border-color: transparent;
+    background: transparent;
+    box-shadow: 0 0 26px rgba(23, 123, 255, 0.14);
+
+    &::before {
+      opacity: 1;
+    }
+
+    span {
+      color: transparent;
+      background: linear-gradient(99deg, #177bff 0%, #16dec2 100%);
+      background-clip: text;
+      -webkit-background-clip: text;
+    }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cloud-button,
+  .hero-button,
+  .personal-button {
+    transition: none;
   }
 }
 
@@ -160,21 +329,75 @@ defineOptions({
   }
 }
 
+.button-group {
+  width: min(413px, calc(100vw - 76px));
+  align-items: stretch;
+}
+
+.enterprise-link {
+  margin-top: 28px;
+  color: rgba(255, 255, 255, 0.72);
+  font-size: 14px;
+  line-height: 20px;
+  background: transparent;
+  border: 0;
+  cursor: pointer;
+  transition: color 180ms ease;
+
+  &::after {
+    content: ' →';
+  }
+
+  &:hover {
+    color: #ffffff;
+  }
+}
+
+.description {
+  width: max-content;
+  max-width: 860px;
+  line-height: 1.65;
+}
+
+.description-en {
+  width: min(486px, calc(100vw - 76px));
+}
+
+.button-group-en {
+  width: min(486px, calc(100vw - 76px));
+}
+
+@media (max-width: 768px) {
+  .description,
+  .button-group {
+    width: min(486px, calc(100vw - 56px));
+    min-width: 0;
+  }
+}
+
 .slogan-title {
-  letter-spacing: 0.02em;
+  letter-spacing: 0;
 }
 
 .slogan-subTitle {
-  letter-spacing: 0.05em;
+  letter-spacing: 0;
+  margin-top: clamp(28px, 3.8vw, 52px);
 }
 
-.slogan-container {
-  @media (max-width: 480px) {
-    height: 258px;
+@media (max-width: 480px) {
+  .slogan-section {
+    min-height: 560px;
+    padding-top: 108px;
+    padding-bottom: 28px;
   }
 
-  @media (max-width: 375px) {
-    height: 238px;
+  .enterprise-link {
+    font-size: 12px;
+  }
+
+  .hero-button {
+    min-width: 116px;
+    height: 48px;
   }
 }
 </style>

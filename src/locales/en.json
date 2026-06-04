@@ -15,10 +15,12 @@
   "home": {
     "slogan": {
       "title": "CoStrict",
-      "subTitle": "An enterprise-grade AI agent with Enterprise-Grade Rigor",
-      "description": "From individual developers to enterprise R&D teams, a unified AI Coding workflow",
+      "subTitle": "An AI Coding Platform for Serious Development",
+      "description": "Start AI Coding your way with Cloud, plugins, and CLI",
       "enterpriseButton": "Enterprise Private Deployment",
-      "personalButton": "Free for Personal Use",
+      "personalButton": "Download Now",
+      "cloudButton": "Quick Start",
+      "supportNote": "Supports VS Code / JetBrains / CLI / Cloud, ready for multi-language projects",
       "ossButton": "Open Source & Free",
       "zhugeCode": "({iTag}Zhuge Shenma)",
       "original": "original"
@@ -84,6 +86,7 @@
       "SupportedInVSCode": "Visual Studio Code",
       "SupportedInJetBrains": "JetBrains IDEs",
       "SupportedInCLI": "CLI Command Line",
+      "SupportedInCloud": "Cloud Workspace",
       "allLanguages": ""
     }
   },

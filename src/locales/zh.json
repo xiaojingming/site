@@ -16,9 +16,11 @@
     "slogan": {
       "title": "CoStrict",
       "subTitle": "企业严肃开发的AI编程平台",
-      "description": "从个人开发者到企业研发团队，统一的 AI Coding 工作流",
+      "description": "面向真实项目开发，更高效的完成编码、理解与评审。",
       "enterpriseButton": "企业私有化部署",
       "personalButton": "立即下载",
+      "cloudButton": "在线使用",
+      "supportNote": "支持 VS Code / JetBrains / CLI / Cloud，多语言项目即开即用",
       "ossButton": "开源免费",
       "zhugeCode": "({iTag}诸葛神码)",
       "original": "原"
@@ -84,6 +86,7 @@
       "SupportedInVSCode": "Visual Studio Code 已支持",
       "SupportedInJetBrains": "JetBrains IDEs 已支持",
       "SupportedInCLI": "CLI 命令行 已支持",
+      "SupportedInCloud": "Cloud 工作台 已支持",
       "allLanguages": "全部开发语言"
     }
   },
