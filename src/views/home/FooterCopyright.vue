@@ -1,6 +1,6 @@
 <template>
   <div
-    class="footer-copyright w-full flex flex-col items-center mt-7.5 sm:mt-15 md:mt-22 lg:mt-30 xl:mt-37.5"
+    class="footer-copyright w-full flex flex-col items-center mt-7.5 sm:mt-15 md:mt-22 lg:mt-30 xl:mt-37.5 relative z-1"
     :class="{ 'has-bg': showBackground }"
   >
     <div class="footer-inner w-full">
