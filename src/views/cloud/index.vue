@@ -96,7 +96,7 @@ const currentHeroImage = computed(() => {
 const docsBaseUrl = computed(() => `https://docs.costrict.ai${locale.value === 'en' ? '/en' : ''}`)
 
 const openCloud = () => {
-  window.open('https://zgsm.sangfor.com/credit/manager/login', '_blank', 'noopener')
+  window.open('https://zgsm.sangfor.com/cloud', '_blank', 'noopener')
 }
 
 const openManual = () => {
