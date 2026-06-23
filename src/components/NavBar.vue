@@ -26,7 +26,8 @@
     <div v-if="!isMobile" class="flex items-center ml-auto">
       <GithubStars />
       <LanguageSwitcher
-        v-model:is-open="isPopoverOpen"
+        :is-open="isLanguageSwitcherOpen"
+        @update:is-open="handleLanguageSwitcherUpdate"
         :is-pricing-page="isPricingPage || isBlogPage"
         :is-ccf-competition-page="isCcfCompetitionPage"
       />
@@ -53,7 +54,7 @@ const router = useRouter()
 const { isMobile } = useResponsive()
 const { isMenuOpen, isLangMenuOpen, toggleMenu, closeMenu, toggleLangMenu } = useMobileMenu()
 
-const isPopoverOpen = ref(false)
+const isLanguageSwitcherOpen = ref(false)
 
 const notHomePage = computed(() => router.currentRoute.value.name !== 'home')
 const isPricingPage = computed(() => router.currentRoute.value.name === 'pricing')
@@ -61,6 +62,10 @@ const isBlogPage = computed(() =>
   ['blog', 'blogDetail'].includes(router.currentRoute.value.name as string),
 )
 const isCcfCompetitionPage = computed(() => router.currentRoute.value.name === 'ccfCompetition')
+
+const handleLanguageSwitcherUpdate = (value: boolean) => {
+  isLanguageSwitcherOpen.value = value
+}
 </script>
 
 <style lang="less" scoped>

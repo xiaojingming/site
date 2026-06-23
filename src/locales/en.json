@@ -10,7 +10,17 @@
     "operation": "Operational activities",
     "download": "Download",
     "pricing": "Pricing",
-    "blog": "Blog"
+    "blog": "Blog",
+    "product": "Product"
+  },
+  "productMenu": {
+    "cliTitle": "CoStrict CLI",
+    "cliDesc": "Collaborative Terminal Commands",
+    "ideTitle": "IDE Plugin",
+    "ideDesc": "VS Code & JetBrains Compatible",
+    "cloudTitle": "CoStrict Cloud",
+    "cloudDesc": "Online Coding Platform",
+    "new": "New"
   },
   "home": {
     "slogan": {
@@ -88,6 +98,70 @@
       "SupportedInCLI": "CLI Command Line",
       "SupportedInCloud": "Cloud Workspace",
       "allLanguages": ""
+    }
+  },
+  "cloud": {
+    "hero": {
+      "title": "AI-Powered Cloud Coding Workspace",
+      "subtitle": "Remotely connect to your local computer or private server, and complete AI coding, skill invocation, and project collaboration in the cloud.",
+      "primaryCta": "Enter CoStrict Cloud",
+      "secondaryCta": "View User Manual",
+      "imageAlt": "CoStrict Cloud coding workspace"
+    },
+    "section2": {
+      "title": "Connect local R&D environments to Cloud",
+      "subtitle": "Devices, project directories, AI conversations, and team skills all enter the browser, so developers can keep working remotely without migrating their environments.",
+      "imageAlt": "CoStrict Cloud local R&D environment access"
+    },
+    "section3": {
+      "title": "Cover key R&D collaboration scenarios",
+      "subtitle": "From remote access to local development environments and reuse of team R&D capabilities, to cross-device task progress tracking, Cloud provides one unified entry for daily R&D work.",
+      "imageAlt": "CoStrict Cloud key R&D collaboration scenarios"
+    },
+    "faq": {
+      "kicker": "FAQ",
+      "title": "Questions you may have before using CoStrict Cloud",
+      "lead": "Quickly understand device access, workspaces, team skills, task collaboration, and troubleshooting.",
+      "manualLink": "View user manual",
+      "diagnoseTitle": "Quick troubleshooting",
+      "diagnoseDesc": "If a Cloud workspace cannot connect, check the local service, network, and logs in this order.",
+      "logPathLabel": "Log path",
+      "items": [
+        {
+          "title": "Does Cloud upload local code to the cloud?",
+          "summary": "Cloud remotely connects to local computers or private servers, while code stays in your device environment.",
+          "answer": "Cloud lets you access registered local computers or private servers from the browser. Project directories, dependencies, and runtime context remain on the original device, while developers can continue viewing, editing, and running code in the browser."
+        },
+        {
+          "title": "How do I connect a new development device?",
+          "summary": "Install and sign in to CoStrict CLI, then register the device and select a project directory in Cloud.",
+          "answer": "Install CoStrict CLI on the target device, complete sign-in and device registration, and the device will appear in Cloud. After entering the device, select a project directory to create a workspace. Each project maps to an isolated workspace."
+        },
+        {
+          "title": "How are team Skills and commands used in Cloud?",
+          "summary": "Subscribe to team-built Skills, commands, and sub-agents from the Knowledge Hub, then invoke them in chat.",
+          "answer": "Teams can maintain shared R&D assets in the Knowledge Hub. After subscribing, developers can invoke team Skills, commands, and sub-agents inside project workspace AI chats through /hub and related commands, reducing repeated setup and knowledge gaps."
+        },
+        {
+          "title": "Can mobile continue tasks started on desktop?",
+          "summary": "Yes. You can check progress, add instructions, and follow up on results across devices.",
+          "answer": "AI coding tasks started on desktop can be checked from mobile, including progress and results. When more context or direction changes are needed, you can send follow-up instructions so tasks remain continuous across devices."
+        }
+      ],
+      "steps": [
+        {
+          "title": "Confirm device status",
+          "desc": "Check whether CoStrict CLI is still running on the local computer or private server, and confirm the device is online."
+        },
+        {
+          "title": "Check network access",
+          "desc": "Confirm the browser can access Cloud, the target device network is stable, and proxies or firewalls are not blocking the connection."
+        },
+        {
+          "title": "Inspect local logs",
+          "desc": "If the connection still fails, open local logs to locate sign-in, registration, network, or workspace startup errors."
+        }
+      ]
     }
   },
   "footer": {

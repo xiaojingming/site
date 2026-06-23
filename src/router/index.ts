@@ -4,6 +4,7 @@ import { createPrefetchableRoute, prefetchRoutes } from './prefetch'
 
 // 创建可预取的路由加载器
 const homeRoute = createPrefetchableRoute(() => import('@/views/home/index.vue'))
+const cloudRoute = createPrefetchableRoute(() => import('@/views/cloud/index.vue'))
 const downloadRoute = createPrefetchableRoute(() => import('@/views/download/index.vue'))
 const pricingRoute = createPrefetchableRoute(() => import('@/views/pricing/PricingPage.vue'))
 const operationRoute = createPrefetchableRoute(() => import('@/views/operation/OperationPage.vue'))
@@ -20,6 +21,11 @@ export const routes = [
     path: '/',
     name: 'home',
     component: homeRoute.load,
+  },
+  {
+    path: '/cloud',
+    name: 'cloud',
+    component: cloudRoute.load,
   },
   {
     path: '/download',
@@ -101,6 +107,7 @@ if (typeof window !== 'undefined') {
   router.isReady().then(() => {
     const currentLocale = i18n.global.locale.value
     const criticalRoutes = [
+      cloudRoute.prefetch,
       downloadRoute.prefetch,
       operationRoute.prefetch,
       // 仅在中文环境预加载价格页面、博客页面和CCF大赛页面

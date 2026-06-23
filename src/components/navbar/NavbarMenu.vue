@@ -1,16 +1,19 @@
 <template>
   <div class="navbar-menu">
-    <a
-      v-for="item in menuOptions"
-      :key="item.key"
-      class="menu-item"
-      :class="{ 'menu-active': isActive(item.key) }"
-      :href="getHref(item.key)"
-      :target="getTarget(item.key)"
-      @click="handleClick(item.key, $event)"
-    >
-      {{ item.label }}
-    </a>
+    <template v-for="item in menuOptions" :key="item.key">
+      <!-- 产品下拉菜单：插入在「首页」与「下载安装」之间 -->
+      <ProductMenu v-if="item.key === 'product'" />
+      <a
+        v-else
+        class="menu-item"
+        :class="{ 'menu-active': isActive(item.key) }"
+        :href="getHref(item.key)"
+        :target="getTarget(item.key)"
+        @click="handleClick(item.key, $event)"
+      >
+        {{ item.label }}
+      </a>
+    </template>
   </div>
 </template>
 
@@ -18,6 +21,7 @@
 import { computed } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { useRouter } from 'vue-router'
+import ProductMenu from './ProductMenu.vue'
 
 interface MenuOption {
   label: string
@@ -32,6 +36,7 @@ const currentRouteName = computed(() => router.currentRoute.value.name)
 
 const menuOptions = computed<MenuOption[]>(() => [
   { label: t('menu.home'), key: 'home' },
+  { label: t('menu.product'), key: 'product' },
   { label: t('menu.download'), key: 'download' },
   ...(isEn.value ? [] : [{ label: t('menu.pricing'), key: 'pricing' }]),
   // { label: t('menu.installGuide'), key: 'install' },

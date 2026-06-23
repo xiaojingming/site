@@ -10,7 +10,17 @@
     "operation": "运营活动",
     "download": "下载安装",
     "pricing": "价格",
-    "blog": "博客"
+    "blog": "博客",
+    "product": "产品"
+  },
+  "productMenu": {
+    "cliTitle": "CoStrict CLI",
+    "cliDesc": "终端命令协作。",
+    "ideTitle": "IDE 插件",
+    "ideDesc": "支持VS code、Jetbrains",
+    "cloudTitle": "Costrict Cloud",
+    "cloudDesc": "在线编码平台。",
+    "new": "New"
   },
   "home": {
     "slogan": {
@@ -88,6 +98,70 @@
       "SupportedInCLI": "CLI 命令行 已支持",
       "SupportedInCloud": "Cloud 工作台 已支持",
       "allLanguages": "全部开发语言"
+    }
+  },
+  "cloud": {
+    "hero": {
+      "title": "AI 驱动的云端编程工作空间",
+      "subtitle": "远程连接本地电脑或私有服务器，在云端完成 AI 编程、技能调用与项目协作。",
+      "primaryCta": "进入 CoStrict Cloud",
+      "secondaryCta": "查看使用手册",
+      "imageAlt": "CoStrict Cloud 云端编程工作空间"
+    },
+    "section2": {
+      "title": "将本地研发环境接入 Cloud",
+      "subtitle": "设备、项目目录、AI 对话与团队技能统一进入浏览器，开发者无需搬迁环境，也能远程继续开发。",
+      "imageAlt": "CoStrict Cloud 本地研发环境接入能力"
+    },
+    "section3": {
+      "title": "覆盖研发协作的关键场景",
+      "subtitle": "从远程访问本地开发环境、复用团队研发能力，到跨设备查看任务进展，Cloud 为日常研发提供统一入口。",
+      "imageAlt": "CoStrict Cloud 覆盖研发协作关键场景"
+    },
+    "faq": {
+      "kicker": "常见问题",
+      "title": "使用 CoStrict Cloud 前你可能关心的问题",
+      "lead": "围绕设备接入、工作空间、团队技能与任务协作，快速了解 Cloud 的使用边界与排查方式。",
+      "manualLink": "查看使用手册",
+      "diagnoseTitle": "快速排查",
+      "diagnoseDesc": "如果 Cloud 工作空间连接异常，可以按下面顺序确认本地服务、网络和日志状态。",
+      "logPathLabel": "日志路径",
+      "items": [
+        {
+          "title": "Cloud 会把本地代码上传到云端吗？",
+          "summary": "远程连接本地电脑或私有服务器，代码仍保留在你的设备环境中。",
+          "answer": "Cloud 通过浏览器远程访问已注册的本地电脑或私有服务器。项目目录、依赖环境和运行上下文仍在原设备侧，开发者可以在浏览器中继续查看、编辑和运行代码。"
+        },
+        {
+          "title": "如何接入一台新的开发设备？",
+          "summary": "安装并登录 CoStrict CLI 后，在 Cloud 中注册设备并选择项目目录。",
+          "answer": "在目标设备上安装 CoStrict CLI，完成登录和设备注册后，即可在 Cloud 中看到该设备。进入设备后选择项目目录创建工作空间，一个项目对应一个独立工作空间。"
+        },
+        {
+          "title": "团队 Skill 和命令如何在 Cloud 中使用？",
+          "summary": "从知识中心订阅团队沉淀的 Skill、命令与子智能体，在对话中直接调用。",
+          "answer": "团队可以在知识中心沉淀和维护研发资产。开发者订阅后，可在项目工作空间的 AI 对话中通过 /hub 等方式调用团队 Skill、命令和子智能体，减少重复配置和经验断层。"
+        },
+        {
+          "title": "手机端能继续处理电脑上发起的任务吗？",
+          "summary": "可以查看进度、补充指令并跟进结果，适合跨端持续推进。",
+          "answer": "电脑端发起的 AI 编程任务可以在移动端查看进度和结果。需要补充上下文或调整方向时，也可以继续发送指令，让任务在不同设备之间保持连续。"
+        }
+      ],
+      "steps": [
+        {
+          "title": "确认设备在线",
+          "desc": "检查本地电脑或私有服务器上的 CoStrict CLI 是否仍在运行，并确认设备状态为在线。"
+        },
+        {
+          "title": "检查网络连通",
+          "desc": "确认浏览器能访问 Cloud 页面，目标设备网络稳定，代理或防火墙没有阻断连接。"
+        },
+        {
+          "title": "查看本地日志",
+          "desc": "如果仍无法连接，打开本地日志定位登录、注册、网络或工作空间启动错误。"
+        }
+      ]
     }
   },
   "footer": {
