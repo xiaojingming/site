@@ -7,7 +7,12 @@
           <div class="kicker">{{ t('cloud.faq.kicker') }}</div>
           <h1 id="faq-title">{{ t('cloud.faq.title') }}</h1>
         </div>
-        <a class="manual-link" href="#" @click.prevent>
+        <a
+          class="manual-link"
+          href="https://docs.costrict.ai/cli/product-characteristics/cloud"
+          target="_blank"
+          rel="noopener"
+        >
           {{ t('cloud.faq.manualLink') }}
           <svg viewBox="0 0 24 24" aria-hidden="true">
             <path d="M5 12h14" />
