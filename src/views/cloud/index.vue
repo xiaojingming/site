@@ -269,7 +269,7 @@ useHead({
   display: block;
   pointer-events: none;
   overflow: hidden;
-  background-image: url('@/assets/home/binary-texture.png');
+  background-image: url('@/assets/home/binary-texture.webp');
   background-repeat: repeat;
   background-size: 430px 430px;
   mix-blend-mode: screen;
