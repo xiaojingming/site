@@ -3,18 +3,12 @@
     <button
       type="button"
       class="product-trigger"
-      :class="{ 'is-open': isOpen }"
+      :class="{ 'is-open': isOpen, 'is-active': isProductActive }"
       :aria-expanded="isOpen"
       @click="toggle"
     >
       <span class="trigger-text">{{ t('menu.product') }}</span>
-      <svg
-        class="trigger-arrow"
-        width="10"
-        height="10"
-        viewBox="0 0 10 10"
-        aria-hidden="true"
-      >
+      <svg class="trigger-arrow" width="10" height="10" viewBox="0 0 10 10" aria-hidden="true">
         <path
           d="M2 3.5L5 6.5L8 3.5"
           fill="none"
@@ -32,6 +26,7 @@
           v-for="item in items"
           :key="item.key"
           class="product-item"
+          :class="{ 'is-active': isItemActive(item) }"
           href="#"
           role="menuitem"
           @click="onSelect(item, $event)"
@@ -97,29 +92,36 @@ interface ProductItem {
   title: string
   desc: string
   badge?: string
-  route: { name: string; hash?: string }
+  route: { name: string; query?: Record<string, string>; hash?: string }
 }
 
 const router = useRouter()
 const { t } = useI18n()
 
 const isOpen = ref(false)
+const currentRouteName = computed(() => router.currentRoute.value.name)
+const currentProductKey = computed(() => router.currentRoute.value.query.product)
+const isProductActive = computed(() => {
+  return (
+    currentRouteName.value === 'cloud' || ['cli', 'ide'].includes(currentProductKey.value as string)
+  )
+})
 let closeTimer: ReturnType<typeof setTimeout> | undefined
 
 const items = computed<ProductItem[]>(() => [
-  {
-    key: 'cli',
-    iconKey: 'cli',
-    title: t('productMenu.cliTitle'),
-    desc: t('productMenu.cliDesc'),
-    route: { name: 'download' },
-  },
   {
     key: 'ide',
     iconKey: 'ide',
     title: t('productMenu.ideTitle'),
     desc: t('productMenu.ideDesc'),
-    route: { name: 'download' },
+    route: { name: 'download', query: { product: 'ide', tab: 'vscode' } },
+  },
+  {
+    key: 'cli',
+    iconKey: 'cli',
+    title: t('productMenu.cliTitle'),
+    desc: t('productMenu.cliDesc'),
+    route: { name: 'download', query: { product: 'cli', tab: 'cli' } },
   },
   {
     key: 'cloud',
@@ -160,6 +162,13 @@ const onSelect = (item: ProductItem, event: MouseEvent) => {
   router.push(item.route)
 }
 
+const isItemActive = (item: ProductItem) => {
+  if (item.key === 'cloud') {
+    return currentRouteName.value === item.route.name
+  }
+  return currentRouteName.value === 'download' && currentProductKey.value === item.key
+}
+
 onBeforeUnmount(() => {
   clearCloseTimer()
 })
@@ -186,7 +195,8 @@ onBeforeUnmount(() => {
   transition: color var(--transition-fast);
 
   &:hover,
-  &.is-open {
+  &.is-open,
+  &.is-active {
     color: var(--color-text-primary);
   }
 
@@ -278,7 +288,8 @@ onBeforeUnmount(() => {
 }
 
 /* hover：图标线框变暗蓝色 + 轻微发光 */
-.product-item:hover .icon-box {
+.product-item:hover .icon-box,
+.product-item.is-active .icon-box {
   color: #3d72ff;
   border-color: rgba(61, 114, 255, 0.65);
   box-shadow: 0 0 10px rgba(61, 114, 255, 0.45);
@@ -286,6 +297,10 @@ onBeforeUnmount(() => {
   .icon-glow {
     opacity: 1;
   }
+}
+
+.product-item.is-active {
+  background: rgba(255, 255, 255, 0.045);
 }
 
 .item-text {

@@ -27,13 +27,20 @@
         </div>
 
         <!-- 语言切换选项 -->
-        <div v-if="!isPricingPage && !isCcfCompetitionPage" class="mobile-menu-item lang-item" @click="toggleLangMenu">
+        <div
+          v-if="!isPricingPage && !isCcfCompetitionPage"
+          class="mobile-menu-item lang-item"
+          @click="toggleLangMenu"
+        >
           {{ currentLangLabel }}
           <span class="lang-arrow" :class="{ 'lang-arrow-up': isLangMenuOpen }">▼</span>
         </div>
 
         <!-- 语言切换子菜单 -->
-        <div v-if="isLangMenuOpen && !isPricingPage && !isCcfCompetitionPage" class="mobile-lang-submenu">
+        <div
+          v-if="isLangMenuOpen && !isPricingPage && !isCcfCompetitionPage"
+          class="mobile-lang-submenu"
+        >
           <div
             v-for="option in languageOptions"
             :key="option.key"
@@ -130,6 +137,8 @@ const handleMenuClick = (key: string) => {
   } else if (key === 'install') {
     const url = `https://docs.costrict.ai${isEn.value ? '/en' : ''}/deployment/introduction/`
     window.open(url)
+  } else if (key === 'download') {
+    router.push({ name: key, query: { tab: 'vscode' } })
   } else {
     router.push({ name: key })
   }

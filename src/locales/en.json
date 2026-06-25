@@ -110,13 +110,48 @@
     },
     "section2": {
       "title": "Connect local R&D environments to Cloud",
-      "subtitle": "Devices, project directories, AI conversations, and team skills all enter the browser, so developers can keep working remotely without migrating their environments.",
-      "imageAlt": "CoStrict Cloud local R&D environment access"
+      "subtitle": "For office, overseas, and AI-native development teams, collaborate from any device while keeping the local secure development model.",
+      "imageAlt": "CoStrict Cloud local R&D environment access",
+      "cards": {
+        "login": {
+          "title": "Sign in to local devices",
+          "desc": "Use CoStrict CLI to sign in on a local computer or private server. Cloud only establishes a secure connection without migrating the environment."
+        },
+        "workspace": {
+          "title": "Device workspaces",
+          "desc": "Open project directories under a device and keep managing code, terminals, dependencies, and task context by workspace."
+        },
+        "chat": {
+          "title": "AI chat collaboration",
+          "desc": "Continue requirements, code changes, and runtime checks in the browser so the AI coding process stays traceable."
+        },
+        "mobile": {
+          "title": "Remote mobile access",
+          "desc": "Check task progress from desktop, tablet, or phone, and add instructions even after leaving the workstation."
+        }
+      }
     },
     "section3": {
       "title": "Cover key R&D collaboration scenarios",
-      "subtitle": "From remote access to local development environments and reuse of team R&D capabilities, to cross-device task progress tracking, Cloud provides one unified entry for daily R&D work.",
-      "imageAlt": "CoStrict Cloud key R&D collaboration scenarios"
+      "subtitle": "From mobile task handoff and team capability reuse to cross-device progress tracking, Cloud supports key collaboration entry points.",
+      "imageAlt": "CoStrict Cloud key R&D collaboration scenarios",
+      "cards": {
+        "handoff": {
+          "tag": "Task handoff",
+          "title": "Hand off development tasks to mobile",
+          "desc": "Continue a development task from desktop to mobile, with context, progress, and latest results available."
+        },
+        "assets": {
+          "tag": "Team reuse",
+          "title": "Reuse team-published capabilities",
+          "desc": "Team-maintained Skills, commands, and sub-agents can be invoked directly inside Cloud workspaces."
+        },
+        "progress": {
+          "tag": "Multi-device sync",
+          "title": "View task progress across devices",
+          "desc": "Sync task status, execution logs, and results across desktop and mobile so collaboration stays continuous."
+        }
+      }
     },
     "faq": {
       "kicker": "FAQ",
