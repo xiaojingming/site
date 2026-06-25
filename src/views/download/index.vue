@@ -2,6 +2,7 @@
 import { ref, watch } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { useHead } from '@unhead/vue'
+import { useRoute, useRouter } from 'vue-router'
 import TabList from './components/TabList.vue'
 import DownloadContent from './components/DownloadContent.vue'
 import { useDownloadData } from './useDownloadData'
@@ -38,14 +39,28 @@ useHead({
 })
 
 const { t } = useI18n()
+const route = useRoute()
+const router = useRouter()
 const activeTab = ref<TabType>('vscode')
 const installMethod = ref<InstallMethod>('bash')
 const activePlatform = ref<Platform>('macos')
+const downloadTabs: TabType[] = ['vscode', 'jetbrains', 'cli']
 
 const { detectedPlatform } = useDetectPlatform()
 watch(detectedPlatform, (val) => {
   activePlatform.value = val
 })
+
+watch(
+  () => route.query.tab,
+  (tab) => {
+    const nextTab = Array.isArray(tab) ? tab[0] : tab
+    if (nextTab && downloadTabs.includes(nextTab as TabType)) {
+      activeTab.value = nextTab as TabType
+    }
+  },
+  { immediate: true },
+)
 
 const {
   tabList,
@@ -61,6 +76,14 @@ const { download, downloadJetbrainsPrimary, downloadJetbrainsSecondary, copyToCl
 
 const handleTabSelect = (tab: TabType) => {
   activeTab.value = tab
+  router.replace({
+    name: 'download',
+    query: {
+      ...route.query,
+      tab,
+      product: undefined,
+    },
+  })
 }
 
 const handlePlatformChange = (platform: Platform) => {

@@ -22,11 +22,7 @@
             </button>
           </div>
         </div>
-      <img
-        class="cloud-hero__image"
-          :src="currentHeroImage"
-          :alt="t('cloud.hero.imageAlt')"
-      />
+        <img class="cloud-hero__image" :src="currentHeroImage" :alt="t('cloud.hero.imageAlt')" />
       </div>
     </section>
 
@@ -36,11 +32,21 @@
         <h2>{{ t('cloud.section2.title') }}</h2>
         <p>{{ t('cloud.section2.subtitle') }}</p>
       </div>
-      <img
-        class="cloud-section__image cloud-section__image--local-env"
-        :src="currentSection2Image"
-        :alt="t('cloud.section2.imageAlt')"
-      />
+      <div class="cloud-local-grid" :aria-label="t('cloud.section2.imageAlt')">
+        <article v-for="item in localEnvCards" :key="item.key" class="cloud-local-card"
+          :class="`cloud-local-card--${item.key}`">
+          <div class="cloud-local-card__heading">
+            <span class="cloud-local-card__icon" aria-hidden="true">
+              <img :src="item.iconSrc" :alt="t(`cloud.section2.cards.${item.key}.title`)" />
+            </span>
+            <h3>{{ t(`cloud.section2.cards.${item.key}.title`) }}</h3>
+          </div>
+          <p>{{ t(`cloud.section2.cards.${item.key}.desc`) }}</p>
+          <div class="cloud-local-card__visual" aria-hidden="true">
+            <img :src="item.imageSrc" :alt="t(`cloud.section2.cards.${item.key}.title`)" />
+          </div>
+        </article>
+      </div>
     </section>
     <!-- 第三屏：覆盖研发协作关键场景 -->
     <section class="cloud-section cloud-section--scenarios">
@@ -48,18 +54,27 @@
         <h2>{{ t('cloud.section3.title') }}</h2>
         <p>{{ t('cloud.section3.subtitle') }}</p>
       </div>
-      <img
-        class="cloud-section__image cloud-section__image--scenarios"
-        :src="currentSection3Image"
-        :alt="t('cloud.section3.imageAlt')"
-      />
+      <div class="cloud-scenarios" :aria-label="t('cloud.section3.imageAlt')">
+        <article v-for="item in scenarioCards" :key="item.key" class="cloud-scenario-card"
+          :class="`cloud-scenario-card--${item.key}`">
+          <div class="cloud-scenarios__media" aria-hidden="true">
+            <span class="cloud-scenario-card__tag">{{
+              t(`cloud.section3.cards.${item.key}.tag`)
+              }}</span>
+            <img :src="item.imageSrc" :alt="t(`cloud.section3.cards.${item.key}.title`)" />
+          </div>
+          <div class="cloud-scenarios__copy">
+            <h3>{{ t(`cloud.section3.cards.${item.key}.title`) }}</h3>
+            <p>{{ t(`cloud.section3.cards.${item.key}.desc`) }}</p>
+          </div>
+        </article>
+      </div>
     </section>
 
     <!-- 第四屏：FAQ / 快速排查，与前屏等宽 -->
     <section class="cloud-section">
       <CloudFAQ class="cloud-section__faq" />
     </section>
-
   </div>
 </template>
 
@@ -69,11 +84,31 @@ import { useHead } from '@unhead/vue'
 import { useI18n } from 'vue-i18n'
 import CloudHeroZhImage from '@/assets/cloud/section-ch-en/section1-ch.png'
 import CloudHeroEnImage from '@/assets/cloud/section-ch-en/section1-en.png'
-import Section2ZhImage from '@/assets/cloud/section-ch-en/section2-ch.png'
-import Section2EnImage from '@/assets/cloud/section-ch-en/section2-en.png'
-import Section3ZhImage from '@/assets/cloud/section-ch-en/section3-ch.png'
-import Section3EnImage from '@/assets/cloud/section-ch-en/section3-en.png'
+import AiChatCodeZhImage from '@/assets/section2/ai-chat-code-zh.webp'
+import AiChatCodeEnImage from '@/assets/section2/ai-chat-code-en.webp'
+import AiChatIconImage from '@/assets/section2/ai-chat-icon.webp'
+import DeviceAccessDiagramEnImage from '@/assets/section2/device-access-diagram-en.webp'
+import DeviceAccessDiagramZhImage from '@/assets/section2/device-access-diagram-zh.webp'
+import DeviceListEnImage from '@/assets/section2/device-list-en.webp'
+import DeviceListZhImage from '@/assets/section2/device-list-zh.webp'
+import KnowledgeHubEnImage from '@/assets/section2/knowledge-hub-en.webp'
+import KnowledgeHubZhImage from '@/assets/section2/knowledge-hub-zh.webp'
+import LocalDeviceIconImage from '@/assets/section2/local-device-icon.webp'
+import MobileTaskEnImage from '@/assets/section2/mobile-task-en.webp'
+import MobileTaskZhImage from '@/assets/section2/mobile-task-zh.webp'
+import TaskListEnImage from '@/assets/section2/task-list-en.webp'
+import TaskListZhImage from '@/assets/section2/task-list-zh.webp'
+import TeamAssetsIconImage from '@/assets/section2/team-assets-icon.webp'
+import WorkspaceFolderIconImage from '@/assets/section2/workspace-folder-icon.webp'
+import WorkspaceListEnImage from '@/assets/section2/workspace-list-en.webp'
+import WorkspaceListZhImage from '@/assets/section2/workspace-list-zh.webp'
 import CloudFAQ from './components/CloudFAQ.vue'
+
+interface CloudFeatureItem {
+  key: string
+  iconSrc: string
+  imageSrc: string
+}
 
 const { t, locale } = useI18n()
 
@@ -81,19 +116,54 @@ defineOptions({
   name: 'CloudIndex',
 })
 
-const currentSection3Image = computed(() => {
-  return locale.value === 'en' ? Section3EnImage : Section3ZhImage
-})
+const isEnglishLocale = computed(() => locale.value === 'en')
 
-const currentSection2Image = computed(() => {
-  return locale.value === 'en' ? Section2EnImage : Section2ZhImage
-})
+const localEnvCards = computed<CloudFeatureItem[]>(() => [
+  {
+    key: 'login',
+    iconSrc: LocalDeviceIconImage,
+    imageSrc: isEnglishLocale.value ? DeviceListEnImage : DeviceListZhImage,
+  },
+  {
+    key: 'workspace',
+    iconSrc: WorkspaceFolderIconImage,
+    imageSrc: isEnglishLocale.value ? WorkspaceListEnImage : WorkspaceListZhImage,
+  },
+  {
+    key: 'chat',
+    iconSrc: AiChatIconImage,
+    imageSrc: isEnglishLocale.value ? AiChatCodeEnImage : AiChatCodeZhImage,
+  },
+  {
+    key: 'mobile',
+    iconSrc: TeamAssetsIconImage,
+    imageSrc: isEnglishLocale.value ? TaskListEnImage : TaskListZhImage,
+  },
+])
+
+const scenarioCards = computed<CloudFeatureItem[]>(() => [
+  {
+    key: 'handoff',
+    iconSrc: '',
+    imageSrc: isEnglishLocale.value ? DeviceAccessDiagramEnImage : DeviceAccessDiagramZhImage,
+  },
+  {
+    key: 'assets',
+    iconSrc: '',
+    imageSrc: isEnglishLocale.value ? KnowledgeHubEnImage : KnowledgeHubZhImage,
+  },
+  {
+    key: 'progress',
+    iconSrc: '',
+    imageSrc: isEnglishLocale.value ? MobileTaskEnImage : MobileTaskZhImage,
+  },
+])
 
 const currentHeroImage = computed(() => {
-  return locale.value === 'en' ? CloudHeroEnImage : CloudHeroZhImage
+  return isEnglishLocale.value ? CloudHeroEnImage : CloudHeroZhImage
 })
 
-const docsBaseUrl = computed(() => `https://docs.costrict.ai${locale.value === 'en' ? '/en' : ''}`)
+const docsBaseUrl = computed(() => `https://docs.costrict.ai${isEnglishLocale.value ? '/en' : ''}`)
 
 const openCloud = () => {
   window.open('https://zgsm.sangfor.com/cloud', '_blank', 'noopener')
@@ -155,8 +225,10 @@ useHead({
     left: 82%;
     width: min(560px, 46vw);
     height: min(370px, 31vw);
-    background:
-      radial-gradient(circle at 48% 48%, rgba(29, 123, 255, 0.66), rgba(0, 102, 255, 0.24) 38%, transparent 72%);
+    background: radial-gradient(circle at 48% 48%,
+        rgba(29, 123, 255, 0.66),
+        rgba(0, 102, 255, 0.24) 38%,
+        transparent 72%);
     animation: hero-blue-breathe 6.6s ease-in-out infinite;
   }
 
@@ -165,8 +237,10 @@ useHead({
     left: 4%;
     width: min(420px, 34vw);
     height: min(300px, 26vw);
-    background:
-      radial-gradient(circle at 45% 50%, rgba(37, 232, 196, 0.78), rgba(0, 209, 150, 0.28) 42%, transparent 74%);
+    background: radial-gradient(circle at 45% 50%,
+        rgba(37, 232, 196, 0.78),
+        rgba(0, 209, 150, 0.28) 42%,
+        transparent 74%);
     animation: hero-green-breathe 8.5s ease-in-out infinite;
   }
 
@@ -202,7 +276,10 @@ useHead({
   opacity: 0.08;
   filter: invert(1) hue-rotate(174deg) saturate(1.8) blur(0.15px);
   mask-image: radial-gradient(ellipse at center, #000 0%, rgba(0, 0, 0, 0.9) 38%, transparent 76%);
-  -webkit-mask-image: radial-gradient(ellipse at center, #000 0%, rgba(0, 0, 0, 0.9) 38%, transparent 76%);
+  -webkit-mask-image: radial-gradient(ellipse at center,
+      #000 0%,
+      rgba(0, 0, 0, 0.9) 38%,
+      transparent 76%);
   will-change: background-position;
 
   &::before,
@@ -216,16 +293,14 @@ useHead({
 
   &::before {
     inset: -18%;
-    background: linear-gradient(
-      112deg,
-      transparent 0%,
-      transparent 37%,
-      rgba(178, 224, 255, 0.05) 45%,
-      rgba(255, 255, 255, 0.2) 50%,
-      rgba(80, 232, 210, 0.08) 56%,
-      transparent 65%,
-      transparent 100%
-    );
+    background: linear-gradient(112deg,
+        transparent 0%,
+        transparent 37%,
+        rgba(178, 224, 255, 0.05) 45%,
+        rgba(255, 255, 255, 0.2) 50%,
+        rgba(80, 232, 210, 0.08) 56%,
+        transparent 65%,
+        transparent 100%);
     opacity: 0.7;
     transform: translate3d(-78%, -22%, 0) rotate(-3deg);
     animation: binary-sheen 7.8s cubic-bezier(0.45, 0, 0.2, 1) infinite;
@@ -376,14 +451,6 @@ useHead({
   padding: clamp(80px, 8vw, 120px) var(--space-8) clamp(16px, 3vh, 32px);
 }
 
-.cloud-section__image {
-  display: block;
-  width: var(--cloud-actual-w);
-  max-width: 100%;
-  height: auto;
-  user-select: none;
-}
-
 .cloud-section--local-env,
 .cloud-section--scenarios {
   flex-direction: column;
@@ -418,10 +485,6 @@ useHead({
   }
 }
 
-.cloud-section__image--scenarios {
-  object-fit: contain;
-}
-
 .cloud-section__header--local-env {
   margin-bottom: 52px;
 
@@ -431,8 +494,138 @@ useHead({
   }
 }
 
-.cloud-section__image--local-env {
-  object-fit: contain;
+.cloud-local-grid,
+.cloud-scenarios {
+  width: var(--cloud-actual-w);
+  max-width: 100%;
+}
+
+.cloud-local-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.cloud-local-card,
+.cloud-scenario-card {
+  border: 1px solid rgba(69, 111, 177, 0.34);
+  border-radius: 8px;
+  background: linear-gradient(180deg, rgba(9, 20, 38, 0.92), rgba(4, 10, 19, 0.96));
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+
+.cloud-local-card {
+  min-height: 314px;
+  padding: 20px 20px 24px;
+  overflow: hidden;
+}
+
+.cloud-local-card__heading {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  min-height: 34px;
+}
+
+.cloud-local-card__icon {
+  img {
+    display: block;
+    width: 54px;
+    height: 54px;
+    object-fit: contain;
+  }
+}
+
+.cloud-local-card {
+  display: flex;
+  flex-direction: column;
+  min-height: 410px;
+}
+
+.cloud-local-card,
+.cloud-scenarios__copy {
+  h3 {
+    margin: 0;
+    color: #fff;
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 1.35;
+    letter-spacing: 0;
+  }
+
+  p {
+    margin: 16px 0 0;
+    color: rgba(255, 255, 255, 0.68);
+    font-size: 13px;
+    font-weight: 400;
+    line-height: 1.62;
+    letter-spacing: 0;
+  }
+}
+
+.cloud-local-card__visual {
+  align-items: flex-end;
+  margin-top: auto;
+}
+
+.cloud-scenarios {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 20px;
+}
+
+.cloud-scenario-card {
+  min-height: 304px;
+  overflow: hidden;
+}
+
+.cloud-scenarios__media {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 174px;
+  padding: 22px;
+
+  img {
+    display: block;
+    width: 100%;
+    max-height: 132px;
+    object-fit: contain;
+    margin-top: 30px;
+  }
+}
+
+.cloud-scenario-card__tag {
+  position: absolute;
+  top: 18px;
+  left: 22px;
+  display: inline-flex;
+  align-items: center;
+  height: 22px;
+  padding: 0 12px;
+  border-radius: 999px;
+  color: #8ff7e9;
+  font-size: 11px;
+  font-weight: 700;
+  background: rgba(26, 117, 116, 0.36);
+  border: 1px solid rgba(92, 232, 209, 0.24);
+}
+
+.cloud-scenario-card--assets .cloud-scenario-card__tag {
+  color: #8db6ff;
+  background: rgba(45, 80, 210, 0.28);
+  border-color: rgba(86, 131, 255, 0.26);
+}
+
+.cloud-scenario-card--progress .cloud-scenario-card__tag {
+  color: #c79cff;
+  background: rgba(116, 70, 208, 0.3);
+  border-color: rgba(180, 124, 255, 0.28);
+}
+
+.cloud-scenarios__copy {
+  padding: 24px;
 }
 
 .cloud-section__faq {
@@ -494,6 +687,27 @@ useHead({
 
   .cloud-section__header--local-env p {
     white-space: normal;
+  }
+
+  .cloud-local-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .cloud-local-card,
+  .cloud-scenario-card {
+    min-height: auto;
+  }
+
+  .cloud-scenarios {
+    grid-template-columns: 1fr;
+  }
+
+  .cloud-local-card__visual {
+    min-height: 96px;
+  }
+
+  .cloud-scenarios__media {
+    min-height: 150px;
   }
 }
 
@@ -565,6 +779,7 @@ useHead({
 }
 
 @keyframes binary-sheen {
+
   0%,
   28% {
     transform: translate3d(-82%, -24%, 0) rotate(-3deg);
@@ -587,6 +802,7 @@ useHead({
 }
 
 @media (prefers-reduced-motion: reduce) {
+
   .top-bg::before,
   .top-bg::after,
   .binary-texture {

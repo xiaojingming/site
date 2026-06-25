@@ -79,48 +79,48 @@
 </template>
 
 <script setup lang="ts">
-  import { computed, ref } from 'vue'
-  import { useI18n } from 'vue-i18n'
+import { computed, ref } from 'vue'
+import { useI18n } from 'vue-i18n'
 
-  defineOptions({
-    name: 'CloudFAQ',
-  })
+defineOptions({
+  name: 'CloudFAQ',
+})
 
-  const { t } = useI18n()
+const { t } = useI18n()
 
-  /** FAQ 图标 SVG（语言无关，无需 i18n） */
-  const faqIcons: string[] = [
-    '<svg viewBox="0 0 24 24"><rect x="4" y="5" width="16" height="11" rx="1.5" /><path d="M8 20h8" /><path d="M12 16v4" /></svg>',
-    '<svg viewBox="0 0 24 24"><path d="M12 3v10" /><path d="m8 9 4 4 4-4" /><path d="M5 17v2a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-2" /></svg>',
-    '<svg viewBox="0 0 24 24"><path d="M9 7h6" /><path d="M7 12h10" /><path d="M9 17h6" /><rect x="4" y="4" width="16" height="16" rx="3" /></svg>',
-    '<svg viewBox="0 0 24 24"><path d="M7 8h10" /><path d="M7 12h6" /><path d="M7 16h8" /><path d="M5 3h10l4 4v14H5z" /><path d="M15 3v4h4" /></svg>',
-  ]
+/** FAQ 图标 SVG（语言无关，无需 i18n） */
+const faqIcons: string[] = [
+  '<svg viewBox="0 0 24 24"><rect x="4" y="5" width="16" height="11" rx="1.5" /><path d="M8 20h8" /><path d="M12 16v4" /></svg>',
+  '<svg viewBox="0 0 24 24"><path d="M12 3v10" /><path d="m8 9 4 4 4-4" /><path d="M5 17v2a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-2" /></svg>',
+  '<svg viewBox="0 0 24 24"><path d="M9 7h6" /><path d="M7 12h10" /><path d="M9 17h6" /><rect x="4" y="4" width="16" height="16" rx="3" /></svg>',
+  '<svg viewBox="0 0 24 24"><path d="M7 8h10" /><path d="M7 12h6" /><path d="M7 16h8" /><path d="M5 3h10l4 4v14H5z" /><path d="M15 3v4h4" /></svg>',
+]
 
-  /** FAQ 条目：标题/摘要/答案从 i18n 取，icon 用静态数组 */
-  const faqItems = computed(() =>
-    faqIcons.map((icon, i) => ({
-      icon,
-      title: t(`cloud.faq.items.${i}.title`),
-      summary: t(`cloud.faq.items.${i}.summary`),
-      answer: t(`cloud.faq.items.${i}.answer`),
-    })),
-  )
+/** FAQ 条目：标题/摘要/答案从 i18n 取，icon 用静态数组 */
+const faqItems = computed(() =>
+  faqIcons.map((icon, i) => ({
+    icon,
+    title: t(`cloud.faq.items.${i}.title`),
+    summary: t(`cloud.faq.items.${i}.summary`),
+    answer: t(`cloud.faq.items.${i}.answer`),
+  })),
+)
 
-  /** 快速排查步骤：编号 + i18n 标题/描述 */
-  const diagnoseSteps = computed(() =>
-    [0, 1, 2].map((i) => ({
-      num: String(i + 1).padStart(2, '0'),
-      title: t(`cloud.faq.steps.${i}.title`),
-      desc: t(`cloud.faq.steps.${i}.desc`),
-    })),
-  )
+/** 快速排查步骤：编号 + i18n 标题/描述 */
+const diagnoseSteps = computed(() =>
+  [0, 1, 2].map((i) => ({
+    num: String(i + 1).padStart(2, '0'),
+    title: t(`cloud.faq.steps.${i}.title`),
+    desc: t(`cloud.faq.steps.${i}.desc`),
+  })),
+)
 
-  /** 当前展开的 FAQ 索引，-1 表示全部收起；默认展开第一项 */
-  const openIndex = ref(0)
+/** 当前展开的 FAQ 索引，-1 表示全部收起；默认展开第一项 */
+const openIndex = ref(0)
 
-  const toggle = (idx: number) => {
-    openIndex.value = openIndex.value === idx ? -1 : idx
-  }
+const toggle = (idx: number) => {
+  openIndex.value = openIndex.value === idx ? -1 : idx
+}
 </script>
 
 <style scoped lang="less">
@@ -221,7 +221,9 @@
   font-size: 14px;
   cursor: pointer;
   transform: translateY(21px);
-  transition: border-color 0.2s ease, background 0.2s ease;
+  transition:
+    border-color 0.2s ease,
+    background 0.2s ease;
 
   &:hover {
     border-color: rgba(45, 140, 255, 0.44);
@@ -259,7 +261,9 @@
   border-radius: var(--faq-radius);
   background: rgba(15, 28, 42, 0.72);
   overflow: hidden;
-  transition: border-color 0.2s ease, background 0.2s ease;
+  transition:
+    border-color 0.2s ease,
+    background 0.2s ease;
 
   &.open {
     border-color: rgba(45, 140, 255, 0.44);
@@ -326,7 +330,10 @@
   border: 1px solid rgba(144, 169, 203, 0.25);
   color: #a9b9ce;
   flex-shrink: 0;
-  transition: transform 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+  transition:
+    transform 0.2s ease,
+    border-color 0.2s ease,
+    color 0.2s ease;
 
   /* 用伪元素绘制十字，避免文字 + 的基线偏移导致视觉不居中 */
   &::before,
@@ -382,8 +389,7 @@
   border: 1px solid var(--faq-line-strong);
   border-radius: 14px;
   background:
-    linear-gradient(180deg, rgba(45, 140, 255, 0.18), rgba(13, 24, 37, 0.88)),
-    var(--faq-panel);
+    linear-gradient(180deg, rgba(45, 140, 255, 0.18), rgba(13, 24, 37, 0.88)), var(--faq-panel);
   min-height: 100%;
   padding: 28px;
   position: relative;
@@ -539,20 +545,63 @@
     font-size: 24px;
   }
 
+  .faq-list {
+    gap: 10px;
+    padding: 8px;
+    border-radius: 12px;
+  }
+
   .faq-q {
-    grid-template-columns: 28px 1fr 22px;
+    grid-template-columns: minmax(0, 1fr) 22px;
     gap: 10px;
     padding: 14px;
   }
 
   .faq-icon {
-    width: 28px;
-    height: 28px;
+    display: none;
   }
 
   .faq-a {
-    padding-left: 52px;
+    padding-left: 14px;
     padding-right: 14px;
+    padding-bottom: 18px;
+  }
+
+  .diagnose {
+    padding: 18px;
+    border-radius: 12px;
+
+    &::after {
+      display: none;
+    }
+  }
+
+  .diagnose-top {
+    margin-bottom: 10px;
+  }
+
+  .num {
+    display: none;
+  }
+
+  .step {
+    grid-template-columns: 1fr;
+    padding: 14px;
+  }
+
+  .cloud-faq .diagnose h2 {
+    font-size: 20px;
+  }
+
+  .log-card {
+    margin-top: 16px;
+    padding: 14px;
+
+    code {
+      display: block;
+      white-space: normal;
+      overflow-wrap: anywhere;
+    }
   }
 }
 </style>

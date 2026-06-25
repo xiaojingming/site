@@ -33,6 +33,7 @@ const router = useRouter()
 
 const isEn = computed(() => locale.value === 'en')
 const currentRouteName = computed(() => router.currentRoute.value.name)
+const currentProductKey = computed(() => router.currentRoute.value.query.product)
 
 const menuOptions = computed<MenuOption[]>(() => [
   { label: t('menu.home'), key: 'home' },
@@ -46,6 +47,9 @@ const menuOptions = computed<MenuOption[]>(() => [
 ])
 
 const isActive = (key: string) => {
+  if (key === 'download') {
+    return currentRouteName.value === 'download' && !currentProductKey.value
+  }
   if (key === 'blog') {
     return currentRouteName.value === 'blog' || currentRouteName.value === 'blogDetail'
   }
@@ -76,6 +80,10 @@ const handleClick = (key: string, event: MouseEvent) => {
     return
   }
   event.preventDefault()
+  if (key === 'download') {
+    router.push({ name: key, query: { tab: 'vscode' } })
+    return
+  }
   router.push({ name: key })
 }
 </script>
