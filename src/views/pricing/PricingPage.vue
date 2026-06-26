@@ -7,26 +7,26 @@
     <img src="../../assets/price/bg_4.png" alt="background" class="absolute left-233.5 top-104 w-55 pricing-page__bg" />
     <img src="../../assets/price/bg_5.png" alt="background" class="absolute left-265 top-81 w-28.5 pricing-page__bg" />
     <div
-      class="fixed left-0 right-0 top-20 flex min-h-[78px] items-center justify-center rounded-[2px] bg-[linear-gradient(90.2deg,#0c0f15_46.43%,#0a101a_51%,#090c12_69.27%)] text-[15px] leading-normal text-white/70 max-md:static max-md:mb-[22px] max-md:flex-wrap max-md:gap-x-3 max-md:gap-y-2 max-md:px-3.5 max-md:py-3">
-      <img src="../../assets/price/gift.svg" alt="gift">
-      <span class="shrink-0 whitespace-nowrap text-[19px] font-semibold max-md:text-base">
+      class="fixed left-0 right-0 top-20 flex min-h-16 items-center justify-center rounded-[2px] bg-[linear-gradient(90.2deg,#0c0f15_46.43%,#0a101a_51%,#090c12_69.27%)] px-4 text-[15px] leading-normal text-white/70 max-[960px]:static max-[960px]:mb-[22px] max-[960px]:min-h-14 max-[960px]:flex-wrap max-[960px]:justify-start max-[960px]:gap-x-3 max-[960px]:gap-y-2 max-[960px]:px-3.5 max-[960px]:py-3">
+      <img class="shrink-0 max-[960px]:size-5" src="../../assets/price/gift.svg" alt="gift">
+      <span class="shrink-0 whitespace-nowrap text-[19px] font-semibold max-[960px]:whitespace-normal max-[960px]:text-base">
         {{ t('pricing.survey.prefix') }}
         <span class="text-[#00ffb7]">{{ t('pricing.survey.credits') }}</span>
       </span>
       <span
-        class="ml-[26px] whitespace-nowrap text-[15px] text-white/65 max-md:ml-0 max-md:whitespace-normal max-md:text-[13px]">{{
+        class="ml-[26px] min-w-0 whitespace-nowrap text-[15px] text-white/65 max-[960px]:ml-0 max-[960px]:text-[13px]">{{
           t('pricing.survey.extra') }}</span>
-      <span class="ml-3 h-[19px] w-px bg-white/45 max-md:hidden" aria-hidden="true"></span>
+      <span class="ml-3 h-[19px] w-px bg-white/45 max-[960px]:hidden" aria-hidden="true"></span>
       <span
-        class="ml-[26px] whitespace-nowrap text-[15px] text-white/65 max-md:ml-0 max-md:whitespace-normal max-md:text-[13px]">{{
+        class="ml-[26px] min-w-0 whitespace-nowrap text-[15px] text-white/65 max-[960px]:ml-0 max-[960px]:text-[13px]">{{
           t('pricing.survey.deadline') }}</span>
       <button
-        class="ml-14 h-[37px] min-w-[139px] cursor-pointer rounded-[2px] border-0 bg-[linear-gradient(90deg,#2a7fff_0%,#00d8b7_100%)] text-sm font-semibold text-white max-md:ml-0 max-md:min-w-[120px]"
+        class="ml-14 h-[37px] min-w-[139px] cursor-pointer rounded-[2px] border-0 bg-[linear-gradient(90deg,#2a7fff_0%,#00d8b7_100%)] text-sm font-semibold text-white max-[960px]:ml-0 max-[960px]:min-w-[120px]"
         type="button" @click="toSurvey">
         {{ t('pricing.survey.feedbackButton') }}
       </button>
       <button
-        class="ml-7 inline-flex cursor-pointer items-center gap-1.5 whitespace-nowrap border-0 bg-transparent text-sm font-semibold text-[#2a7fff] max-md:ml-0"
+        class="ml-7 inline-flex cursor-pointer items-center gap-1.5 whitespace-nowrap border-0 bg-transparent text-sm font-semibold text-[#2a7fff] max-[960px]:ml-0"
         type="button" @click="toSurveyDetail">
         {{ t('pricing.survey.detailLink') }}
         <span aria-hidden="true">›</span>
@@ -165,7 +165,7 @@ const toSurveyDetail = () => {
     width: 90%;
   }
 
-  @media (max-width: 768px) {
+  @media (max-width: 960px) {
     padding-top: 90px;
     padding-bottom: 40px;
   }

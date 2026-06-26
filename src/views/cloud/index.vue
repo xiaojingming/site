@@ -1,5 +1,5 @@
 <template>
-  <div class="cloud-page w-full bg-black overflow-x-hidden">
+  <div class="cloud-page relative isolate w-full overflow-x-hidden bg-black">
     <!-- 背景层：与首页保持一致 -->
     <div class="top-bg">
       <span class="binary-texture binary-texture-blue" aria-hidden="true"></span>
@@ -7,73 +7,168 @@
     </div>
 
     <!-- 第一屏：云端编程工作空间主视觉 -->
-    <section class="cloud-hero">
-      <div class="cloud-hero__content">
-        <div class="cloud-hero__copy">
-          <h1>{{ t('cloud.hero.title') }}</h1>
-          <p>{{ t('cloud.hero.subtitle') }}</p>
-          <div class="cloud-hero__actions" aria-label="CoStrict Cloud actions">
-            <button class="cloud-hero__button cloud-hero__button--primary" type="button" @click="openCloud">
+    <section
+      class="relative z-[1] flex w-full items-start justify-center px-8 pt-[132px] pb-[104px] max-md:px-5 max-md:pt-[72px] max-md:pb-14 max-[480px]:pt-14 max-[360px]:pt-12"
+    >
+      <div class="w-[var(--cloud-actual-w)] max-w-full">
+        <div class="text-left">
+          <h1 class="m-0 text-2xl leading-[1.2] font-bold tracking-normal text-white">
+            {{ t('cloud.hero.title') }}
+          </h1>
+          <p
+            class="mt-2 mb-0 text-base leading-[1.45] font-normal tracking-normal text-white/[0.82]"
+          >
+            {{ t('cloud.hero.subtitle') }}
+          </p>
+          <div
+            class="mt-4 mb-6 flex gap-[17px] max-md:flex-col max-md:gap-2"
+            aria-label="CoStrict Cloud actions"
+          >
+            <button
+              class="inline-flex h-[34px] w-36 cursor-pointer items-center justify-center rounded border-0 bg-gradient-to-r from-[#177aff] to-[#5ce8d1] text-[10px] leading-none font-bold tracking-normal text-white transition-[transform,border-color,background,box-shadow] duration-[180ms] ease-in-out hover:-translate-y-px max-md:w-full max-md:max-w-36"
+              type="button"
+              @click="openCloud"
+            >
               {{ t('cloud.hero.primaryCta') }}
             </button>
-            <button class="cloud-hero__button cloud-hero__button--secondary" type="button" @click="openManual">
+            <button
+              class="inline-flex h-[34px] w-36 cursor-pointer items-center justify-center gap-1.5 rounded border border-[#2a61e4] bg-[#0d1f3b] text-[10px] leading-none font-bold tracking-normal text-white transition-[transform,border-color,background,box-shadow] duration-[180ms] ease-in-out hover:-translate-y-px hover:border-[#5ce8d1] max-md:w-full max-md:max-w-36"
+              type="button"
+              @click="openManual"
+            >
               {{ t('cloud.hero.secondaryCta') }}
               <span aria-hidden="true">›</span>
             </button>
           </div>
         </div>
-        <img class="cloud-hero__image" :src="currentHeroImage" :alt="t('cloud.hero.imageAlt')" />
+        <img
+          class="block h-auto w-full select-none object-contain object-left-top"
+          :src="currentHeroImage"
+          :alt="t('cloud.hero.imageAlt')"
+        />
       </div>
     </section>
 
     <!-- 第二屏：将本地研发环境接入 Cloud -->
-    <section class="cloud-section cloud-section--local-env">
-      <div class="cloud-section__header cloud-section__header--local-env">
-        <h2>{{ t('cloud.section2.title') }}</h2>
-        <p>{{ t('cloud.section2.subtitle') }}</p>
+    <section
+      class="relative z-[1] flex w-full flex-col items-center justify-center px-8 pt-0 pb-[112px] max-md:px-5 max-md:pb-16"
+    >
+      <div class="mb-[52px] w-[var(--cloud-actual-w)] max-w-full text-center max-md:mb-8">
+        <h2
+          class="m-0 text-[38px] leading-[1.2] font-bold tracking-normal text-white max-[480px]:text-[22px] max-[360px]:text-[19px]"
+        >
+          {{ t('cloud.section2.title') }}
+        </h2>
+        <p
+          class="mx-auto mt-2 mb-0 max-w-[940px] whitespace-normal text-base leading-[1.6] font-normal tracking-normal text-white/[0.72] max-md:leading-[1.55]"
+        >
+          {{ t('cloud.section2.subtitle') }}
+        </p>
       </div>
-      <div class="cloud-local-grid" :aria-label="t('cloud.section2.imageAlt')">
-        <article v-for="item in localEnvCards" :key="item.key" class="cloud-local-card"
-          :class="`cloud-local-card--${item.key}`">
-          <div class="cloud-local-card__heading">
-            <span class="cloud-local-card__icon" aria-hidden="true">
-              <img :src="item.iconSrc" :alt="t(`cloud.section2.cards.${item.key}.title`)" />
+      <div
+        class="grid w-[var(--cloud-actual-w)] max-w-full grid-cols-4 gap-4 max-[1320px]:grid-cols-2 max-md:grid-cols-1"
+        :aria-label="t('cloud.section2.imageAlt')"
+      >
+        <article
+          v-for="item in localEnvCards"
+          :key="item.key"
+          class="flex min-h-[410px] flex-col overflow-hidden rounded-lg border border-[rgba(69,111,177,0.34)] bg-gradient-to-b from-[rgba(9,20,38,0.92)] to-[rgba(4,10,19,0.96)] p-[20px_20px_24px] shadow-[inset_0_1px_0_rgba(255,255,255,0.05)] max-[1320px]:min-h-[360px] max-md:min-h-[auto] max-md:p-[18px_18px_22px]"
+        >
+          <div class="flex min-h-[34px] items-center gap-2.5 max-md:gap-2">
+            <span aria-hidden="true">
+              <img
+                class="block h-[54px] w-[54px] object-contain max-md:h-10 max-md:w-10 max-[360px]:h-[34px] max-[360px]:w-[34px]"
+                :src="item.iconSrc"
+                :alt="t(`cloud.section2.cards.${item.key}.title`)"
+              />
             </span>
-            <h3>{{ t(`cloud.section2.cards.${item.key}.title`) }}</h3>
+            <h3
+              class="m-0 text-base leading-[1.35] font-bold tracking-normal text-white max-md:text-[15px] max-md:leading-[1.3]"
+            >
+              {{ t(`cloud.section2.cards.${item.key}.title`) }}
+            </h3>
           </div>
-          <p>{{ t(`cloud.section2.cards.${item.key}.desc`) }}</p>
-          <div class="cloud-local-card__visual" aria-hidden="true">
-            <img :src="item.imageSrc" :alt="t(`cloud.section2.cards.${item.key}.title`)" />
+          <p
+            class="mt-4 mb-0 text-[13px] leading-[1.62] font-normal tracking-normal text-white/[0.68]"
+          >
+            {{ t(`cloud.section2.cards.${item.key}.desc`) }}
+          </p>
+          <div class="mt-auto items-end max-md:min-h-24" aria-hidden="true">
+            <img
+              class="mt-5"
+              :src="item.imageSrc"
+              :alt="t(`cloud.section2.cards.${item.key}.title`)"
+            />
           </div>
         </article>
       </div>
     </section>
     <!-- 第三屏：覆盖研发协作关键场景 -->
-    <section class="cloud-section cloud-section--scenarios">
-      <div class="cloud-section__header">
-        <h2>{{ t('cloud.section3.title') }}</h2>
-        <p>{{ t('cloud.section3.subtitle') }}</p>
+    <section
+      class="relative z-[1] flex w-full flex-col items-center justify-center px-8 pt-0 pb-[104px] max-md:px-5 max-md:pb-14"
+    >
+      <div class="mb-14 w-[var(--cloud-actual-w)] max-w-full text-center max-md:mb-8">
+        <h2 class="m-0 text-[38px] leading-[1.2] font-bold tracking-normal text-white">
+          {{ t('cloud.section3.title') }}
+        </h2>
+        <p
+          class="mx-auto mt-2 mb-0 max-w-[940px] text-base leading-[1.6] font-normal tracking-normal text-white/[0.72] max-md:leading-[1.55]"
+        >
+          {{ t('cloud.section3.subtitle') }}
+        </p>
       </div>
-      <div class="cloud-scenarios" :aria-label="t('cloud.section3.imageAlt')">
-        <article v-for="item in scenarioCards" :key="item.key" class="cloud-scenario-card"
-          :class="`cloud-scenario-card--${item.key}`">
-          <div class="cloud-scenarios__media" aria-hidden="true">
-            <span class="cloud-scenario-card__tag">{{
-              t(`cloud.section3.cards.${item.key}.tag`)
-              }}</span>
-            <img :src="item.imageSrc" :alt="t(`cloud.section3.cards.${item.key}.title`)" />
+      <div
+        class="grid w-[var(--cloud-actual-w)] max-w-full grid-cols-3 gap-5 max-md:grid-cols-1"
+        :aria-label="t('cloud.section3.imageAlt')"
+      >
+        <article
+          v-for="item in scenarioCards"
+          :key="item.key"
+          class="flex min-h-[304px] flex-col overflow-hidden rounded-lg border border-[rgba(69,111,177,0.34)] bg-gradient-to-b from-[rgba(9,20,38,0.92)] to-[rgba(4,10,19,0.96)] shadow-[inset_0_1px_0_rgba(255,255,255,0.05)] max-md:min-h-[auto]"
+        >
+          <div
+            class="relative flex h-[220px] items-center justify-center p-[22px] max-md:min-h-[150px]"
+            aria-hidden="true"
+          >
+            <span
+              class="absolute top-[18px] left-[22px] inline-flex h-[22px] items-center rounded-full border px-3 text-[11px] font-bold"
+              :class="{
+                'border-[rgba(86,131,255,0.26)] bg-[rgba(45,80,210,0.28)] text-[#8db6ff]':
+                  item.key === 'assets',
+                'border-[rgba(180,124,255,0.28)] bg-[rgba(116,70,208,0.3)] text-[#c79cff]':
+                  item.key === 'progress',
+                'border-[rgba(92,232,209,0.24)] bg-[rgba(26,117,116,0.36)] text-[#8ff7e9]':
+                  item.key === 'handoff',
+              }"
+              >{{ t(`cloud.section3.cards.${item.key}.tag`) }}</span
+            >
+            <img
+              class="mt-[30px] block w-full max-h-[132px] object-contain"
+              :src="item.imageSrc"
+              :alt="t(`cloud.section3.cards.${item.key}.title`)"
+            />
           </div>
-          <div class="cloud-scenarios__copy">
-            <h3>{{ t(`cloud.section3.cards.${item.key}.title`) }}</h3>
-            <p>{{ t(`cloud.section3.cards.${item.key}.desc`) }}</p>
+          <div class="mt-auto p-6">
+            <h3 class="m-0 text-base leading-[1.35] font-bold tracking-normal text-white">
+              {{ t(`cloud.section3.cards.${item.key}.title`) }}
+            </h3>
+            <p
+              class="mt-4 mb-0 text-[13px] leading-[1.62] font-normal tracking-normal text-white/[0.68]"
+            >
+              {{ t(`cloud.section3.cards.${item.key}.desc`) }}
+            </p>
           </div>
         </article>
       </div>
     </section>
 
     <!-- 第四屏：FAQ / 快速排查，与前屏等宽 -->
-    <section class="cloud-section">
-      <CloudFAQ class="cloud-section__faq" />
+    <section
+      class="relative z-[1] flex w-full justify-center px-8 pt-0 pb-24 max-md:px-5 max-md:pb-10"
+    >
+      <div class="w-[var(--cloud-actual-w)] max-w-full">
+        <CloudFAQ />
+      </div>
     </section>
   </div>
 </template>
@@ -186,8 +281,6 @@ useHead({
 
 <style scoped lang="less">
 .cloud-page {
-  position: relative;
-  isolation: isolate;
   /* 宽度上限：视口允许的最大内容宽度 */
   --cloud-w: min(76vw, 1280px);
   /* 各屏实际宽度：保持统一左右留白 */
@@ -225,10 +318,12 @@ useHead({
     left: 82%;
     width: min(560px, 46vw);
     height: min(370px, 31vw);
-    background: radial-gradient(circle at 48% 48%,
-        rgba(29, 123, 255, 0.66),
-        rgba(0, 102, 255, 0.24) 38%,
-        transparent 72%);
+    background: radial-gradient(
+      circle at 48% 48%,
+      rgba(29, 123, 255, 0.66),
+      rgba(0, 102, 255, 0.24) 38%,
+      transparent 72%
+    );
     animation: hero-blue-breathe 6.6s ease-in-out infinite;
   }
 
@@ -237,10 +332,12 @@ useHead({
     left: 4%;
     width: min(420px, 34vw);
     height: min(300px, 26vw);
-    background: radial-gradient(circle at 45% 50%,
-        rgba(37, 232, 196, 0.78),
-        rgba(0, 209, 150, 0.28) 42%,
-        transparent 74%);
+    background: radial-gradient(
+      circle at 45% 50%,
+      rgba(37, 232, 196, 0.78),
+      rgba(0, 209, 150, 0.28) 42%,
+      transparent 74%
+    );
     animation: hero-green-breathe 8.5s ease-in-out infinite;
   }
 
@@ -276,10 +373,12 @@ useHead({
   opacity: 0.08;
   filter: invert(1) hue-rotate(174deg) saturate(1.8) blur(0.15px);
   mask-image: radial-gradient(ellipse at center, #000 0%, rgba(0, 0, 0, 0.9) 38%, transparent 76%);
-  -webkit-mask-image: radial-gradient(ellipse at center,
-      #000 0%,
-      rgba(0, 0, 0, 0.9) 38%,
-      transparent 76%);
+  -webkit-mask-image: radial-gradient(
+    ellipse at center,
+    #000 0%,
+    rgba(0, 0, 0, 0.9) 38%,
+    transparent 76%
+  );
   will-change: background-position;
 
   &::before,
@@ -293,14 +392,16 @@ useHead({
 
   &::before {
     inset: -18%;
-    background: linear-gradient(112deg,
-        transparent 0%,
-        transparent 37%,
-        rgba(178, 224, 255, 0.05) 45%,
-        rgba(255, 255, 255, 0.2) 50%,
-        rgba(80, 232, 210, 0.08) 56%,
-        transparent 65%,
-        transparent 100%);
+    background: linear-gradient(
+      112deg,
+      transparent 0%,
+      transparent 37%,
+      rgba(178, 224, 255, 0.05) 45%,
+      rgba(255, 255, 255, 0.2) 50%,
+      rgba(80, 232, 210, 0.08) 56%,
+      transparent 65%,
+      transparent 100%
+    );
     opacity: 0.7;
     transform: translate3d(-78%, -22%, 0) rotate(-3deg);
     animation: binary-sheen 7.8s cubic-bezier(0.45, 0, 0.2, 1) infinite;
@@ -344,370 +445,11 @@ useHead({
   }
 }
 
-/* ============ 第一屏：云端编程工作空间主视觉 ============ */
-.cloud-hero {
-  position: relative;
-  z-index: 1;
-  display: flex;
-  align-items: flex-start;
-  justify-content: center;
-  width: 100%;
-  min-height: 100vh;
-  padding: clamp(120px, 13vh, 150px) var(--space-8) clamp(16px, 3vh, 28px);
-}
-
-.cloud-hero__content {
-  width: var(--cloud-actual-w);
-  max-width: 100%;
-}
-
-.cloud-hero__copy {
-  text-align: left;
-
-  h1 {
-    margin: 0;
-    color: #fff;
-    font-family: 'PingFang SC', 'PingFang TC', 'Microsoft YaHei', sans-serif;
-    font-size: 24px;
-    font-weight: 700;
-    line-height: 1.2;
-    letter-spacing: 0;
-  }
-
-  p {
-    margin: 8px 0 0;
-    color: rgba(255, 255, 255, 0.82);
-    font-family: 'PingFang SC', 'PingFang TC', 'Microsoft YaHei', sans-serif;
-    font-size: 16px;
-    font-weight: 400;
-    line-height: 1.45;
-    letter-spacing: 0;
-  }
-}
-
-.cloud-hero__actions {
-  display: flex;
-  gap: 17px;
-  margin-top: 16px;
-  margin-bottom: 24px;
-}
-
-.cloud-hero__button {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 144px;
-  height: 34px;
-  border-radius: 4px;
-  color: #fff;
-  font-size: 10px;
-  font-weight: 700;
-  line-height: 1;
-  letter-spacing: 0;
-  cursor: pointer;
-  transition:
-    transform 180ms ease,
-    border-color 180ms ease,
-    background 180ms ease,
-    box-shadow 180ms ease;
-
-  &:hover {
-    transform: translateY(-1px);
-  }
-}
-
-.cloud-hero__button--primary {
-  border: 0;
-  background: linear-gradient(90deg, #177aff 0%, #5ce8d1 100%);
-}
-
-.cloud-hero__button--secondary {
-  gap: 6px;
-  border: 1px solid #2a61e4;
-  background: #0d1f3b;
-
-  &:hover {
-    border-color: #5ce8d1;
-  }
-}
-
-.cloud-hero__image {
-  display: block;
-  width: 100%;
-  height: auto;
-  object-fit: contain;
-  object-position: left top;
-  user-select: none;
-}
-
-/* ============ 第二屏及后续 section：与第一屏等宽 ============ */
-.cloud-section {
-  position: relative;
-  z-index: 1;
-  display: flex;
-  justify-content: center;
-  width: 100%;
-  /* 底部留白与首屏对齐，使 section2→section3 间距 = 首屏→section2 间距 */
-  padding: clamp(80px, 8vw, 120px) var(--space-8) clamp(16px, 3vh, 32px);
-}
-
-.cloud-section--local-env,
-.cloud-section--scenarios {
-  flex-direction: column;
-  align-items: center;
-}
-
-.cloud-section__header {
-  width: var(--cloud-actual-w);
-  max-width: 100%;
-  margin-bottom: 56px;
-  text-align: center;
-
-  h2 {
-    margin: 0;
-    color: #fff;
-    font-family: 'PingFang SC', 'PingFang TC', 'Microsoft YaHei', sans-serif;
-    font-size: 38px;
-    font-weight: 700;
-    line-height: 1.2;
-    letter-spacing: 0;
-  }
-
-  p {
-    margin: 8px auto 0;
-    max-width: 940px;
-    color: rgba(255, 255, 255, 0.72);
-    font-family: 'PingFang SC', 'PingFang TC', 'Microsoft YaHei', sans-serif;
-    font-size: 16px;
-    font-weight: 400;
-    line-height: 1.6;
-    letter-spacing: 0;
-  }
-}
-
-.cloud-section__header--local-env {
-  margin-bottom: 52px;
-
-  p {
-    max-width: 940px;
-    white-space: normal;
-  }
-}
-
-.cloud-local-grid,
-.cloud-scenarios {
-  width: var(--cloud-actual-w);
-  max-width: 100%;
-}
-
-.cloud-local-grid {
-  display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 16px;
-}
-
-.cloud-local-card,
-.cloud-scenario-card {
-  border: 1px solid rgba(69, 111, 177, 0.34);
-  border-radius: 8px;
-  background: linear-gradient(180deg, rgba(9, 20, 38, 0.92), rgba(4, 10, 19, 0.96));
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05);
-}
-
-.cloud-local-card {
-  min-height: 314px;
-  padding: 20px 20px 24px;
-  overflow: hidden;
-}
-
-.cloud-local-card__heading {
-  display: flex;
-  gap: 10px;
-  align-items: center;
-  min-height: 34px;
-}
-
-.cloud-local-card__icon {
-  img {
-    display: block;
-    width: 54px;
-    height: 54px;
-    object-fit: contain;
-  }
-}
-
-.cloud-local-card {
-  display: flex;
-  flex-direction: column;
-  min-height: 410px;
-}
-
-.cloud-local-card,
-.cloud-scenarios__copy {
-  h3 {
-    margin: 0;
-    color: #fff;
-    font-size: 16px;
-    font-weight: 700;
-    line-height: 1.35;
-    letter-spacing: 0;
-  }
-
-  p {
-    margin: 16px 0 0;
-    color: rgba(255, 255, 255, 0.68);
-    font-size: 13px;
-    font-weight: 400;
-    line-height: 1.62;
-    letter-spacing: 0;
-  }
-}
-
-.cloud-local-card__visual {
-  align-items: flex-end;
-  margin-top: auto;
-}
-
-.cloud-scenarios {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 20px;
-}
-
-.cloud-scenario-card {
-  min-height: 304px;
-  overflow: hidden;
-}
-
-.cloud-scenarios__media {
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 174px;
-  padding: 22px;
-
-  img {
-    display: block;
-    width: 100%;
-    max-height: 132px;
-    object-fit: contain;
-    margin-top: 30px;
-  }
-}
-
-.cloud-scenario-card__tag {
-  position: absolute;
-  top: 18px;
-  left: 22px;
-  display: inline-flex;
-  align-items: center;
-  height: 22px;
-  padding: 0 12px;
-  border-radius: 999px;
-  color: #8ff7e9;
-  font-size: 11px;
-  font-weight: 700;
-  background: rgba(26, 117, 116, 0.36);
-  border: 1px solid rgba(92, 232, 209, 0.24);
-}
-
-.cloud-scenario-card--assets .cloud-scenario-card__tag {
-  color: #8db6ff;
-  background: rgba(45, 80, 210, 0.28);
-  border-color: rgba(86, 131, 255, 0.26);
-}
-
-.cloud-scenario-card--progress .cloud-scenario-card__tag {
-  color: #c79cff;
-  background: rgba(116, 70, 208, 0.3);
-  border-color: rgba(180, 124, 255, 0.28);
-}
-
-.cloud-scenarios__copy {
-  padding: 24px;
-}
-
-.cloud-section__faq {
-  width: var(--cloud-actual-w);
-  max-width: 100%;
-}
-
 @media (max-width: 768px) {
   .cloud-page {
     --cloud-w: 74vw;
     /* 移动端宽度优先，不按高度反算 */
     --cloud-actual-w: var(--cloud-w);
-  }
-
-  .cloud-hero {
-    min-height: calc(100vh - var(--space-16));
-    padding: calc(var(--space-16) + 36px) var(--space-5) 0;
-  }
-
-  .cloud-hero__copy {
-    h1 {
-      font-size: 24px;
-    }
-
-    p {
-      font-size: 16px;
-    }
-  }
-
-  .cloud-hero__actions {
-    flex-direction: column;
-    gap: 8px;
-    margin-top: 16px;
-    margin-bottom: 24px;
-  }
-
-  .cloud-hero__button {
-    width: 100%;
-    max-width: 144px;
-    font-size: 10px;
-  }
-
-  .cloud-section {
-    padding: clamp(56px, 12vw, 88px) var(--space-5) 0;
-  }
-
-  .cloud-section__header {
-    margin-bottom: 32px;
-
-    h2 {
-      font-size: 38px;
-    }
-
-    p {
-      font-size: 16px;
-      line-height: 1.55;
-    }
-  }
-
-  .cloud-section__header--local-env p {
-    white-space: normal;
-  }
-
-  .cloud-local-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .cloud-local-card,
-  .cloud-scenario-card {
-    min-height: auto;
-  }
-
-  .cloud-scenarios {
-    grid-template-columns: 1fr;
-  }
-
-  .cloud-local-card__visual {
-    min-height: 96px;
-  }
-
-  .cloud-scenarios__media {
-    min-height: 150px;
   }
 }
 
@@ -779,7 +521,6 @@ useHead({
 }
 
 @keyframes binary-sheen {
-
   0%,
   28% {
     transform: translate3d(-82%, -24%, 0) rotate(-3deg);
@@ -802,7 +543,6 @@ useHead({
 }
 
 @media (prefers-reduced-motion: reduce) {
-
   .top-bg::before,
   .top-bg::after,
   .binary-texture {

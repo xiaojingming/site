@@ -100,11 +100,12 @@ const { t } = useI18n()
 
 const isOpen = ref(false)
 const currentRouteName = computed(() => router.currentRoute.value.name)
-const currentProductKey = computed(() => router.currentRoute.value.query.product)
+const currentProductKey = computed(() => {
+  const productKey = router.currentRoute.value.query.product
+  return typeof productKey === 'string' ? productKey : ''
+})
 const isProductActive = computed(() => {
-  return (
-    currentRouteName.value === 'cloud' || ['cli', 'ide'].includes(currentProductKey.value as string)
-  )
+  return currentRouteName.value === 'cloud' || ['cli', 'ide'].includes(currentProductKey.value)
 })
 let closeTimer: ReturnType<typeof setTimeout> | undefined
 

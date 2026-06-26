@@ -15,7 +15,7 @@
       :is-mobile="isMobile"
       :is-menu-open="isMenuOpen"
       :is-lang-menu-open="isLangMenuOpen"
-      :is-pricing-page="isPricingPage || isBlogPage"
+      :is-zh-only-page="isPricingPage || isBlogPage"
       :is-ccf-competition-page="isCcfCompetitionPage"
       @toggle-menu="toggleMenu"
       @close-menu="closeMenu"
@@ -51,7 +51,7 @@ defineOptions({
 })
 
 const router = useRouter()
-const { isMobile } = useResponsive()
+const { isMobile } = useResponsive(959)
 const { isMenuOpen, isLangMenuOpen, toggleMenu, closeMenu, toggleLangMenu } = useMobileMenu()
 
 const isLanguageSwitcherOpen = ref(false)
@@ -80,7 +80,7 @@ const handleLanguageSwitcherUpdate = (value: boolean) => {
   background: var(--color-bg-primary);
 }
 
-@media (max-width: 967px) {
+@media (max-width: 959px) {
   .navbar {
     padding-left: var(--space-5);
     padding-right: var(--space-5);
