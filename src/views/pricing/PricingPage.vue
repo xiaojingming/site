@@ -1,31 +1,38 @@
 <template>
   <div class="pricing-page pt-39.5 pb-23 relative">
-    <img
-      src="../../assets/price/bg_1.png"
-      alt="background"
-      class="absolute left-[-10px] top-85 w-55 h-58 priceing-page__bg"
-    />
-    <img
-      src="../../assets/price/bg_2.png"
-      alt="background"
-      class="absolute left-124 top-104 w-55 pricing-page__bg"
-    />
-    <img
-      src="../../assets/price/bg_3.png"
-      alt="background"
-      class="absolute left-155 top-81 w-28.5 pricing-page__bg"
-    />
-    <img
-      src="../../assets/price/bg_4.png"
-      alt="background"
-      class="absolute left-233.5 top-104 w-55 pricing-page__bg"
-    />
-    <img
-      src="../../assets/price/bg_5.png"
-      alt="background"
-      class="absolute left-265 top-81 w-28.5 pricing-page__bg"
-    />
-    <div class="pricing-page__title text-3xl text-center">{{ t('pricing.title') }}</div>
+    <img src="../../assets/price/bg_1.png" alt="background"
+      class="absolute left-[-10px] top-85 w-55 h-58 priceing-page__bg" />
+    <img src="../../assets/price/bg_2.png" alt="background" class="absolute left-124 top-104 w-55 pricing-page__bg" />
+    <img src="../../assets/price/bg_3.png" alt="background" class="absolute left-155 top-81 w-28.5 pricing-page__bg" />
+    <img src="../../assets/price/bg_4.png" alt="background" class="absolute left-233.5 top-104 w-55 pricing-page__bg" />
+    <img src="../../assets/price/bg_5.png" alt="background" class="absolute left-265 top-81 w-28.5 pricing-page__bg" />
+    <div
+      class="fixed left-0 right-0 top-20 flex min-h-[78px] items-center justify-center rounded-[2px] bg-[linear-gradient(90.2deg,#0c0f15_46.43%,#0a101a_51%,#090c12_69.27%)] text-[15px] leading-normal text-white/70 max-md:static max-md:mb-[22px] max-md:flex-wrap max-md:gap-x-3 max-md:gap-y-2 max-md:px-3.5 max-md:py-3">
+      <img src="../../assets/price/gift.svg" alt="gift">
+      <span class="shrink-0 whitespace-nowrap text-[19px] font-semibold max-md:text-base">
+        {{ t('pricing.survey.prefix') }}
+        <span class="text-[#00ffb7]">{{ t('pricing.survey.credits') }}</span>
+      </span>
+      <span
+        class="ml-[26px] whitespace-nowrap text-[15px] text-white/65 max-md:ml-0 max-md:whitespace-normal max-md:text-[13px]">{{
+          t('pricing.survey.extra') }}</span>
+      <span class="ml-3 h-[19px] w-px bg-white/45 max-md:hidden" aria-hidden="true"></span>
+      <span
+        class="ml-[26px] whitespace-nowrap text-[15px] text-white/65 max-md:ml-0 max-md:whitespace-normal max-md:text-[13px]">{{
+          t('pricing.survey.deadline') }}</span>
+      <button
+        class="ml-14 h-[37px] min-w-[139px] cursor-pointer rounded-[2px] border-0 bg-[linear-gradient(90deg,#2a7fff_0%,#00d8b7_100%)] text-sm font-semibold text-white max-md:ml-0 max-md:min-w-[120px]"
+        type="button" @click="toSurvey">
+        {{ t('pricing.survey.feedbackButton') }}
+      </button>
+      <button
+        class="ml-7 inline-flex cursor-pointer items-center gap-1.5 whitespace-nowrap border-0 bg-transparent text-sm font-semibold text-[#2a7fff] max-md:ml-0"
+        type="button" @click="toSurveyDetail">
+        {{ t('pricing.survey.detailLink') }}
+        <span aria-hidden="true">›</span>
+      </button>
+    </div>
+    <div class="pricing-page__title text-3xl text-center mt-20">{{ t('pricing.title') }}</div>
     <div class="pricing-page__subTitle text-center mt-7.5 opacity-70 text-base">
       {{ t('pricing.subtitle') }}
     </div>
@@ -34,16 +41,12 @@
     </div>
     <div class="pricing-page__content mt-7">
       <div class="content-version grid grid-cols-4 gap-5">
-        <div
-          v-for="(plan, index) in pricingPlans"
-          :key="index"
-          class="content-version__item min-88 px-5 py-6 relative"
-        >
+        <div v-for="(plan, index) in pricingPlans" :key="index" class="content-version__item min-88 px-5 py-6 relative">
           <div v-if="plan.showTrafficLabel" class="absolute right-0 top-[-4px]">
             <img src="../../assets/label-bg.webp" alt="label" />
             <span class="absolute top-1 left-7 label-text">{{
               t('pricing.tag.trafficPackage')
-            }}</span>
+              }}</span>
           </div>
           <div class="content-version__item-title text-base font-semibold">{{ plan.title }}</div>
           <div class="content-version__item-price flex items-center text-3xl mt-3">
@@ -51,50 +54,33 @@
             <span class="price">{{ plan.price }}</span>
             <span v-if="index === 1" class="text-xs ml-2 mt-2 original-price__tips">{{
               t('pricing.firstRechargeDiscount')
-            }}</span>
-            <span
-              v-if="plan.originalPrice"
-              class="original-price text-line-through text-base mt-2"
-              :class="index === 1 ? 'ml-1' : 'ml-2.5'"
-            >
+              }}</span>
+            <span v-if="plan.originalPrice" class="original-price text-line-through text-base mt-2"
+              :class="index === 1 ? 'ml-1' : 'ml-2.5'">
               ￥{{ plan.originalPrice }}
             </span>
-            <span v-if="plan.totalQuota" class="quota-value ml-auto text-base font-medium self-end mb-1">{{ plan.totalQuota }}</span>
+            <span v-if="plan.totalQuota" class="quota-value ml-auto text-base font-medium self-end mb-1">{{
+              plan.totalQuota }}</span>
           </div>
           <div class="content-version__item-desc mt-2.5 text-sm text-[#EFEFEF]">
             {{ plan.description }}
           </div>
-          <div
-            class="content-version__item-btn h-10 text-center leading-10 mt-5 rounded-sm"
-            :class="{
-              'btn-purchase': plan.buttonType === 'purchase',
-              'btn-download': plan.buttonType !== 'purchase',
-            }"
-            @click="plan.clickEvent"
-          >
+          <div class="content-version__item-btn h-10 text-center leading-10 mt-5 rounded-sm" :class="{
+            'btn-purchase': plan.buttonType === 'purchase',
+            'btn-download': plan.buttonType !== 'purchase',
+          }" @click="plan.clickEvent">
             {{ plan.buttonText }}
           </div>
           <ul class="content-version__item-features text-xs mt-5">
-            <li
-              v-for="(feature, featureIndex) in plan.features"
-              :key="featureIndex"
-              class="flex items-start mb-4 last-of-type:mb-0"
-            >
-              <img
-                class="mt-0.5"
-                v-if="feature.available"
-                src="../../assets/y.svg"
-                alt="available"
-              />
+            <li v-for="(feature, featureIndex) in plan.features" :key="featureIndex"
+              class="flex items-start mb-4 last-of-type:mb-0">
+              <img class="mt-0.5" v-if="feature.available" src="../../assets/y.svg" alt="available" />
               <img v-else src="../../assets/x.svg" alt="unavailable" />
               <p class="ml-2">{{ feature.text }}</p>
             </li>
           </ul>
           <div v-if="index === 0" class="content-version__item-activity mt-4">
-            <span
-              class="text-xs text-[#2A7FFF] cursor-pointer hover:underline"
-              @click="toOperation"
-            >
+            <span class="text-xs text-[#2A7FFF] cursor-pointer hover:underline" @click="toOperation">
               {{ t('pricing.activityLink') }}
             </span>
           </div>
@@ -103,9 +89,7 @@
     </div>
     <div class="mt-5 flex item-center">
       {{ t('pricing.learnMore') }}
-      <span class="ml-2 text-[#2A7FFF] cursor-pointer" @click="toDetail"
-        >{{ t('pricing.billingDescription') }} >></span
-      >
+      <span class="ml-2 text-[#2A7FFF] cursor-pointer" @click="toDetail">{{ t('pricing.billingDescription') }} >></span>
     </div>
   </div>
 </template>
@@ -122,6 +106,9 @@ const router = useRouter()
 
 // 使用国际化函数创建价格套餐和指南步骤
 const pricingPlans = computed(() => createPricingPlans(t))
+
+const SURVEY_URL = 'https://v.wjx.cn/vm/t7BdP0M.aspx'
+const SURVEY_DETAIL_URL = 'https://mp.weixin.qq.com/s/kX8zt50Yu01a4NB6zwbn-g'
 
 defineOptions({
   name: 'PricingPage',
@@ -157,6 +144,14 @@ const toDetail = () => {
 
 const toOperation = () => {
   router.push('/operation')
+}
+
+const toSurvey = () => {
+  window.open(SURVEY_URL)
+}
+
+const toSurveyDetail = () => {
+  window.open(SURVEY_DETAIL_URL)
 }
 </script>
 
@@ -227,14 +222,11 @@ const toOperation = () => {
 
           &.btn-download {
             border: 1px solid;
-            border-image: linear-gradient(
-                107deg,
+            border-image: linear-gradient(107deg,
                 #0066ff 38%,
                 #00ffb7 52%,
                 rgba(247, 255, 253, 0.51) 88%,
-                rgba(0, 94, 255, 0.09) 100%
-              )
-              1;
+                rgba(0, 94, 255, 0.09) 100%) 1;
             background: rgba(255, 255, 255, 0.2);
           }
         }
@@ -271,14 +263,12 @@ const toOperation = () => {
         inset: 0;
         padding: 1px;
         border-radius: 10px;
-        background: linear-gradient(
-          176deg,
-          #0066ff -7%,
-          #00ffb7 16%,
-          rgba(247, 255, 253, 0.51) 51%,
-          rgba(0, 94, 255, 0.3) 85%,
-          rgba(0, 94, 255, 0.6) 100%
-        );
+        background: linear-gradient(176deg,
+            #0066ff -7%,
+            #00ffb7 16%,
+            rgba(247, 255, 253, 0.51) 51%,
+            rgba(0, 94, 255, 0.3) 85%,
+            rgba(0, 94, 255, 0.6) 100%);
         -webkit-mask:
           linear-gradient(#fff 0 0) content-box,
           linear-gradient(#fff 0 0);

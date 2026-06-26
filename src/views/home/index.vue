@@ -9,6 +9,9 @@
       <LanguageSupport />
     </div>
     <FooterCopyright />
+    <SurveyGiftEntry
+      class="fixed right-[30px] top-[18vh] z-[1000] max-md:right-4 max-md:top-20"
+    />
     <StructuredData
       schemaType="Organization"
       :data="{
@@ -71,6 +74,7 @@ import MoreTool from './MoreTool.vue'
 import EnterpriseDeployment from './EnterpriseDeployment.vue'
 import LanguageSupport from './LanguageSupport.vue'
 import FooterCopyright from './FooterCopyright.vue'
+import SurveyGiftEntry from './components/SurveyGiftEntry.vue'
 import StructuredData from '@/components/StructuredData.vue'
 
 // 组件名称通过文件名定义为 HomeIndex
@@ -140,8 +144,12 @@ useHead({
     left: 82%;
     width: min(560px, 46vw);
     height: min(370px, 31vw);
-    background:
-      radial-gradient(circle at 48% 48%, rgba(29, 123, 255, 0.66), rgba(0, 102, 255, 0.24) 38%, transparent 72%);
+    background: radial-gradient(
+      circle at 48% 48%,
+      rgba(29, 123, 255, 0.66),
+      rgba(0, 102, 255, 0.24) 38%,
+      transparent 72%
+    );
     animation: hero-blue-breathe 6.6s ease-in-out infinite;
   }
 
@@ -150,8 +158,12 @@ useHead({
     left: 4%;
     width: min(420px, 34vw);
     height: min(300px, 26vw);
-    background:
-      radial-gradient(circle at 45% 50%, rgba(37, 232, 196, 0.78), rgba(0, 209, 150, 0.28) 42%, transparent 74%);
+    background: radial-gradient(
+      circle at 45% 50%,
+      rgba(37, 232, 196, 0.78),
+      rgba(0, 209, 150, 0.28) 42%,
+      transparent 74%
+    );
     animation: hero-green-breathe 8.5s ease-in-out infinite;
   }
 
@@ -187,7 +199,12 @@ useHead({
   opacity: 0.08;
   filter: invert(1) hue-rotate(174deg) saturate(1.8) blur(0.15px);
   mask-image: radial-gradient(ellipse at center, #000 0%, rgba(0, 0, 0, 0.9) 38%, transparent 76%);
-  -webkit-mask-image: radial-gradient(ellipse at center, #000 0%, rgba(0, 0, 0, 0.9) 38%, transparent 76%);
+  -webkit-mask-image: radial-gradient(
+    ellipse at center,
+    #000 0%,
+    rgba(0, 0, 0, 0.9) 38%,
+    transparent 76%
+  );
   will-change: background-position;
 
   &::before,

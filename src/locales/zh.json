@@ -98,6 +98,9 @@
       "SupportedInCLI": "CLI 命令行 已支持",
       "SupportedInCloud": "Cloud 工作台 已支持",
       "allLanguages": "全部开发语言"
+    },
+    "surveyGift": {
+      "label": "问卷有礼"
     }
   },
   "cloud": {
@@ -366,6 +369,14 @@
     "subtitle": "根据实际需求选择合适套餐方案",
     "operationGuide": "操作指引：",
     "tips": " 部分模型夜间（每日 20:00 - 次日 09:00）和周末全天半价，可以和auto模式九折叠加",
+    "survey": {
+      "prefix": "填写有效问卷，保底领",
+      "credits": "400 Credits",
+      "extra": "优质建议最高追加 1000 Credits",
+      "deadline": "截止至 2026.07.15",
+      "feedbackButton": "立即参与反馈",
+      "detailLink": "查看详情"
+    },
     "plans": {
       "free": {
         "title": "免费版",
