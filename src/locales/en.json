@@ -98,6 +98,9 @@
       "SupportedInCLI": "CLI Command Line",
       "SupportedInCloud": "Cloud Workspace",
       "allLanguages": ""
+    },
+    "surveyGift": {
+      "label": "Survey Bonus"
     }
   },
   "cloud": {
@@ -365,6 +368,14 @@
     "subtitle": "Choose the right package according to your actual needs",
     "operationGuide": "Operation Guide:",
     "tips": " Some models are half price at night (8:00 PM - 9:00 AM the next day) and all day on weekends, which can be combined with a 10% discount on auto mode.",
+    "survey": {
+      "prefix": "Complete a valid survey and get at least",
+      "credits": "400 Credits",
+      "extra": "High-quality feedback can earn up to 1000 extra Credits",
+      "deadline": "Ends on 2026.07.15",
+      "feedbackButton": "Give Feedback",
+      "detailLink": "Details"
+    },
     "plans": {
       "free": {
         "title": "Personal Free Edition",
