@@ -16,19 +16,38 @@
       </div>
 
       <div class="mobile-menu-items">
-        <div
-          v-for="item in menuOptions"
-          :key="item.key"
-          class="mobile-menu-item"
-          :class="{ 'menu-active': isActive(item.key) }"
-          @click="handleMenuClick(item.key)"
-        >
-          {{ item.label }}
-        </div>
+        <template v-for="item in menuOptions" :key="item.key">
+          <div
+            class="mobile-menu-item"
+            :class="{ 'menu-active': isActive(item.key) }"
+            @click="handleMenuClick(item.key)"
+          >
+            <span>{{ item.label }}</span>
+            <span
+              v-if="item.key === 'product'"
+              class="lang-arrow"
+              :class="{ 'lang-arrow-up': isProductMenuOpen }"
+            >
+              ▼
+            </span>
+          </div>
+
+          <div v-if="item.key === 'product' && isProductMenuOpen" class="mobile-product-submenu">
+            <div
+              v-for="product in productOptions"
+              :key="product.key"
+              class="mobile-product-subitem"
+              :class="{ 'product-active': isProductActive(product) }"
+              @click="handleProductSelect(product)"
+            >
+              {{ product.label }}
+            </div>
+          </div>
+        </template>
 
         <!-- 语言切换选项 -->
         <div
-          v-if="!isPricingPage && !isCcfCompetitionPage"
+          v-if="!isZhOnlyPage && !isCcfCompetitionPage"
           class="mobile-menu-item lang-item"
           @click="toggleLangMenu"
         >
@@ -38,7 +57,7 @@
 
         <!-- 语言切换子菜单 -->
         <div
-          v-if="isLangMenuOpen && !isPricingPage && !isCcfCompetitionPage"
+          v-if="isLangMenuOpen && !isZhOnlyPage && !isCcfCompetitionPage"
           class="mobile-lang-submenu"
         >
           <div
@@ -65,7 +84,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed } from 'vue'
+import { computed, ref } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { useRouter } from 'vue-router'
 import { setStoredLanguage } from '@/utils/language'
@@ -76,13 +95,23 @@ interface MenuOption {
   key: string
 }
 
+interface ProductMenuOption {
+  label: string
+  key: string
+  route: { name: string; query?: Record<string, string> }
+}
+
 interface Props {
   isMobile: boolean
   isMenuOpen: boolean
   isLangMenuOpen: boolean
-  isPricingPage: boolean
+  isZhOnlyPage: boolean
   isCcfCompetitionPage: boolean
 }
+
+defineOptions({
+  name: 'MobileMenu',
+})
 
 defineProps<Props>()
 const emit = defineEmits<{
@@ -96,6 +125,11 @@ const router = useRouter()
 
 const isEn = computed(() => locale.value === 'en')
 const currentRouteName = computed(() => router.currentRoute.value.name)
+const currentProductKey = computed(() => {
+  const productKey = router.currentRoute.value.query.product
+  return typeof productKey === 'string' ? productKey : ''
+})
+const isProductMenuOpen = ref(false)
 
 const languageOptions = [
   { label: '中文', key: 'zh' },
@@ -110,6 +144,7 @@ const currentLangLabel = computed(() => {
 
 const menuOptions = computed<MenuOption[]>(() => [
   { label: t('menu.home'), key: 'home' },
+  { label: t('menu.product'), key: 'product' },
   { label: t('menu.download'), key: 'download' },
   ...(isEn.value ? [] : [{ label: t('menu.pricing'), key: 'pricing' }]),
   // { label: t('menu.installGuide'), key: 'install' },
@@ -118,7 +153,31 @@ const menuOptions = computed<MenuOption[]>(() => [
   { label: t('menu.operation'), key: 'operation' },
 ])
 
+const productOptions = computed<ProductMenuOption[]>(() => [
+  {
+    label: t('productMenu.ideTitle'),
+    key: 'ide',
+    route: { name: 'download', query: { product: 'ide', tab: 'vscode' } },
+  },
+  {
+    label: t('productMenu.cliTitle'),
+    key: 'cli',
+    route: { name: 'download', query: { product: 'cli', tab: 'cli' } },
+  },
+  {
+    label: t('productMenu.cloudTitle'),
+    key: 'cloud',
+    route: { name: 'cloud' },
+  },
+])
+
 const isActive = (key: string) => {
+  if (key === 'product') {
+    return currentRouteName.value === 'cloud' || ['cli', 'ide'].includes(currentProductKey.value)
+  }
+  if (key === 'download') {
+    return currentRouteName.value === 'download' && !currentProductKey.value
+  }
   if (key === 'blog') {
     return currentRouteName.value === 'blog' || currentRouteName.value === 'blogDetail'
   }
@@ -129,6 +188,11 @@ const isActive = (key: string) => {
 }
 
 const handleMenuClick = (key: string) => {
+  if (key === 'product') {
+    isProductMenuOpen.value = !isProductMenuOpen.value
+    return
+  }
+
   if (key === 'oss') {
     window.open('https://github.com/zgsm-ai/costrict')
   } else if (key === 'docs') {
@@ -142,7 +206,19 @@ const handleMenuClick = (key: string) => {
   } else {
     router.push({ name: key })
   }
-  emit('closeMenu')
+  closeMenu()
+}
+
+const handleProductSelect = (item: ProductMenuOption) => {
+  router.push(item.route)
+  closeMenu()
+}
+
+const isProductActive = (item: ProductMenuOption) => {
+  if (item.key === 'cloud') {
+    return currentRouteName.value === item.route.name
+  }
+  return currentRouteName.value === 'download' && currentProductKey.value === item.key
 }
 
 const handleLangSelect = (key: string) => {
@@ -156,11 +232,14 @@ const handleLangSelect = (key: string) => {
 
 const openGithub = () => {
   window.open('https://github.com/zgsm-ai/costrict')
-  emit('closeMenu')
+  closeMenu()
 }
 
 const toggleMenu = () => emit('toggleMenu')
-const closeMenu = () => emit('closeMenu')
+const closeMenu = () => {
+  isProductMenuOpen.value = false
+  emit('closeMenu')
+}
 const toggleLangMenu = () => emit('toggleLangMenu')
 </script>
 
@@ -254,10 +333,22 @@ const toggleLangMenu = () => emit('toggleLangMenu')
     padding: var(--space-5) 0;
 
     .mobile-menu-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
       padding: var(--space-4) var(--space-5);
       color: var(--color-text-link);
       cursor: pointer;
       transition: all var(--transition-fast);
+
+      .lang-arrow {
+        font-size: var(--font-xs);
+        transition: transform var(--transition-fast);
+
+        &.lang-arrow-up {
+          transform: rotate(180deg);
+        }
+      }
 
       &:hover {
         color: var(--color-text-primary);
@@ -305,13 +396,15 @@ const toggleLangMenu = () => emit('toggleLangMenu')
   }
 }
 
-.mobile-lang-submenu {
+.mobile-lang-submenu,
+.mobile-product-submenu {
   background: rgba(0, 0, 0, 0.3);
   margin: 0 var(--space-5);
   border-radius: var(--radius-md);
   overflow: hidden;
 
-  .mobile-lang-subitem {
+  .mobile-lang-subitem,
+  .mobile-product-subitem {
     padding: var(--space-3) var(--space-4);
     color: var(--color-text-link);
     cursor: pointer;
@@ -330,7 +423,8 @@ const toggleLangMenu = () => emit('toggleLangMenu')
       border-radius: 0 0 var(--radius-md) var(--radius-md);
     }
 
-    &.lang-active {
+    &.lang-active,
+    &.product-active {
       color: var(--color-text-primary);
       background: rgba(25, 125, 255, 0.2);
     }

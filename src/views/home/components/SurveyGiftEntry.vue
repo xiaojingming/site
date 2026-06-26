@@ -1,12 +1,12 @@
 <template>
   <button
     type="button"
-    class="flex h-[54px] min-w-[150px] cursor-pointer items-center rounded-full border border-[#00e3b5] bg-[#031a24] py-0 pl-[22px] pr-[76px] text-[16px] font-semibold text-white shadow-[0_0_18px_rgba(0,227,181,0.32)] transition-transform duration-300 hover:-translate-y-1 max-md:h-12 max-md:min-w-[128px] max-md:pl-4 max-md:pr-[58px] max-md:text-sm"
+    class="flex h-10 min-w-20 cursor-pointer items-center rounded-full border border-[#00e3b5] bg-[#031a24] py-0 pl-[22px] pr-16 text-[16px] font-semibold text-white shadow-[0_0_18px_rgba(0,227,181,0.32)] transition-transform duration-300 hover:-translate-y-1 max-md:h-12 max-md:min-w-[128px] max-md:pl-4 max-md:pr-[58px] max-md:text-sm"
     @click="toSurvey"
   >
     <span class="whitespace-nowrap">{{ t('home.surveyGift.label') }}</span>
     <span
-      class="absolute -right-[6px] top-1/2 flex size-[68px] -translate-y-1/2 items-center justify-center rounded-full border border-[#00e3b5]/80 bg-[radial-gradient(circle_at_52%_48%,#07334a_0%,#051f34_58%,#03111f_100%)] shadow-[0_0_28px_rgba(0,127,255,0.58)] max-md:size-[56px]"
+      class="absolute -right-[6px] top-1/2 flex size-16 -translate-y-1/2 items-center justify-center rounded-full border border-[#00e3b5]/80 bg-[radial-gradient(circle_at_52%_48%,#07334a_0%,#051f34_58%,#03111f_100%)] shadow-[0_0_28px_rgba(0,127,255,0.58)] max-md:size-[56px]"
       aria-hidden="true"
     >
       <svg

@@ -1,7 +1,7 @@
 import { ref, computed, onMounted, onUnmounted } from 'vue'
 import { useI18n } from 'vue-i18n'
 
-export function useResponsive() {
+export function useResponsive(mobileMaxWidth = 768) {
   const { locale } = useI18n()
   const isMobile = ref(false)
   const isTablet = ref(false)
@@ -11,8 +11,8 @@ export function useResponsive() {
 
   const checkMobile = () => {
     const width = window.innerWidth
-    isMobile.value = width < 769
-    isTablet.value = width >= 769 && width <= 968
+    isMobile.value = width <= mobileMaxWidth
+    isTablet.value = width > mobileMaxWidth && width <= 968
   }
 
   const handleResize = () => {
