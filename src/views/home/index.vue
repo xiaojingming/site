@@ -9,9 +9,11 @@
       <LanguageSupport />
     </div>
     <FooterCopyright />
+    <!-- 问卷入口已屏蔽
     <SurveyGiftEntry
       class="fixed right-[30px] top-[18vh] z-[1000] max-md:right-4 max-md:top-20"
     />
+    -->
     <StructuredData
       schemaType="Organization"
       :data="{
@@ -74,7 +76,7 @@ import MoreTool from './MoreTool.vue'
 import EnterpriseDeployment from './EnterpriseDeployment.vue'
 import LanguageSupport from './LanguageSupport.vue'
 import FooterCopyright from './FooterCopyright.vue'
-import SurveyGiftEntry from './components/SurveyGiftEntry.vue'
+// 问卷入口已屏蔽：import SurveyGiftEntry from './components/SurveyGiftEntry.vue'
 import StructuredData from '@/components/StructuredData.vue'
 
 // 组件名称通过文件名定义为 HomeIndex
