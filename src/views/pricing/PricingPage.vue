@@ -6,6 +6,7 @@
     <img src="../../assets/price/bg_3.png" alt="background" class="absolute left-155 top-81 w-28.5 pricing-page__bg" />
     <img src="../../assets/price/bg_4.png" alt="background" class="absolute left-233.5 top-104 w-55 pricing-page__bg" />
     <img src="../../assets/price/bg_5.png" alt="background" class="absolute left-265 top-81 w-28.5 pricing-page__bg" />
+    <!-- 问卷 banner 已屏蔽
     <div
       class="fixed left-0 right-0 top-20 flex min-h-16 items-center justify-center rounded-[2px] bg-[linear-gradient(90.2deg,#0c0f15_46.43%,#0a101a_51%,#090c12_69.27%)] px-4 text-[15px] leading-normal text-white/70 max-[960px]:static max-[960px]:mb-[22px] max-[960px]:min-h-14 max-[960px]:flex-wrap max-[960px]:justify-start max-[960px]:gap-x-3 max-[960px]:gap-y-2 max-[960px]:px-3.5 max-[960px]:py-3">
       <img class="shrink-0 max-[960px]:size-5" src="../../assets/price/gift.svg" alt="gift">
@@ -32,7 +33,8 @@
         <span aria-hidden="true">›</span>
       </button>
     </div>
-    <div class="pricing-page__title text-3xl text-center mt-20">{{ t('pricing.title') }}</div>
+    -->
+    <div class="pricing-page__title text-3xl text-center">{{ t('pricing.title') }}</div>
     <div class="pricing-page__subTitle text-center mt-7.5 opacity-70 text-base">
       {{ t('pricing.subtitle') }}
     </div>
@@ -107,8 +109,9 @@ const router = useRouter()
 // 使用国际化函数创建价格套餐和指南步骤
 const pricingPlans = computed(() => createPricingPlans(t))
 
-const SURVEY_URL = 'https://v.wjx.cn/vm/t7BdP0M.aspx'
-const SURVEY_DETAIL_URL = 'https://mp.weixin.qq.com/s/kX8zt50Yu01a4NB6zwbn-g'
+// 问卷入口已屏蔽
+// const SURVEY_URL = 'https://v.wjx.cn/vm/t7BdP0M.aspx'
+// const SURVEY_DETAIL_URL = 'https://mp.weixin.qq.com/s/kX8zt50Yu01a4NB6zwbn-g'
 
 defineOptions({
   name: 'PricingPage',
@@ -146,13 +149,14 @@ const toOperation = () => {
   router.push('/operation')
 }
 
-const toSurvey = () => {
-  window.open(SURVEY_URL)
-}
-
-const toSurveyDetail = () => {
-  window.open(SURVEY_DETAIL_URL)
-}
+// 问卷入口已屏蔽
+// const toSurvey = () => {
+//   window.open(SURVEY_URL)
+// }
+//
+// const toSurveyDetail = () => {
+//   window.open(SURVEY_DETAIL_URL)
+// }
 </script>
 
 <style lang="less" scoped>
