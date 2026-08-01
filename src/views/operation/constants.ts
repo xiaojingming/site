@@ -13,6 +13,9 @@ export const HISTORY1_URL = 'https://competition.costrict.ai/'
 /** CCF × CoStrict AI 原生创新大赛：内部路由 */
 export const CCF_COMPETITION_PATH = '/operation/ccf-competition'
 
+/** CoStrict 8月开发者福利月：独立详情页 */
+export const AUGUST_DEVELOPER_MONTH_PATH = '/operation/august-developer-month'
+
 /** Card 2 引导步骤序号列表 */
 export const CARD2_HINT_STEPS = [1, 2, 3] as const
 

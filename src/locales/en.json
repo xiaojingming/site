@@ -23,6 +23,12 @@
     "new": "New"
   },
   "home": {
+    "augustBanner": {
+      "stage1Text": "CoStrict August Developer Month begins {'|'} User benefits upgrade is live",
+      "stage2Text": "CoStrict August Developer Month continues {'|'} Model ecosystem upgrade is live",
+      "stage3Text": "CoStrict August Developer Month {'|'} All three upgrades are now live",
+      "ariaLabel": "View CoStrict August Developer Month details"
+    },
     "slogan": {
       "title": "CoStrict",
       "subTitle": "An AI Coding Platform for Serious Development",
@@ -302,6 +308,131 @@
     "copyFailed": "Copy failed, please copy manually"
   },
   "operation": {
+    "august": {
+      "title": "CoStrict August Developer Month",
+      "summary": "Benefits, models, and product experience are rolling out throughout August.",
+      "entrySummary": "User benefits, model ecosystem, and product capabilities are now fully upgraded.",
+      "entryAction": "View details",
+      "heroEyebrow": "August chapter",
+      "heroHeadline": "CoStrict keeps evolving this August",
+      "heroLead": "A series of updates across user benefits, model capabilities, and the product experience unfolds throughout August.",
+      "overview": {
+        "ariaLabel": "Jump to benefit details",
+        "items": {
+          "rights": {
+            "label": "User benefits",
+            "title": "Credits benefits upgraded",
+            "description": "Validity extended to 12 months, plus a 20% bonus based on historical purchases"
+          },
+          "models": {
+            "label": "Model capabilities",
+            "title": "Five new models connected",
+            "description": "Coverage for daily coding, complex analysis, enterprise development, and image to code"
+          },
+          "product": {
+            "label": "Product upgrade",
+            "title": "End-to-end engineering capabilities",
+            "description": "From multiple access modes and knowledge reuse to metrics and human-agent collaboration"
+          }
+        }
+      },
+      "rights": {
+        "stageLabel": "User benefits upgrade",
+        "title": "A thank-you benefit for existing CoStrict users",
+        "originalValidity": "Previously valid for 1 month",
+        "extendTo": "Extended to",
+        "duration": "12 months",
+        "validityCaption": "Purchased and unused Credits are",
+        "validityEmphasis": "automatically extended",
+        "bonusCaption": "Bonus based on historical purchases",
+        "exampleTitle": "Example",
+        "purchaseLabel": "Historical purchase",
+        "purchaseAmount": "1,000 Credits",
+        "rewardLabel": "Extra reward",
+        "rewardAmount": "200 Credits",
+        "deliveryNote": "Bonus Credits are expected to be issued on August 7"
+      },
+      "models": {
+        "stageLabel": "Model ecosystem upgrade",
+        "title": "The CoStrict model ecosystem expands",
+        "lead": "Five new models for different engineering tasks.",
+        "ecosystemAria": "CoStrict model ecosystem",
+        "newThisMonth": "New this month",
+        "expansionTitle": "Expanded model capabilities",
+        "expansionCaption": "Coverage for different engineering tasks and scenarios",
+        "newLabel": "New",
+        "spectrum": { "daily": "Daily coding", "analysis": "Analysis", "enterprise": "Enterprise" },
+        "libraryAria": "Models already supported by CoStrict",
+        "libraryEyebrow": "More available models",
+        "libraryTitle": "CoStrict model ecosystem",
+        "guideEyebrow": "Model guide",
+        "guideTitle": "Choose one model or combine several for different tasks and scenarios",
+        "scenarios": [
+          { "title": "Daily coding", "description": "Faster responses for efficient development" },
+          {
+            "title": "Complex code analysis",
+            "description": "Stronger reasoning for demanding engineering problems"
+          },
+          { "title": "Enterprise development", "description": "Stable, secure, and controllable" },
+          { "title": "Image to code", "description": "Supports image input" }
+        ]
+      },
+      "product": {
+        "stageLabel": "Product capabilities upgrade",
+        "title": "From AI coding tool to enterprise engineering transformation partner",
+        "lead": "Bring AI into engineering workflows, team collaboration, and continuous delivery.",
+        "capabilityAria": "Four product capability upgrades",
+        "summaryKicker": "Product capability map",
+        "overview": {
+          "title": "End-to-end R&D capability upgrade",
+          "items": {
+            "enterprise": {
+              "title": "Enterprise R&D",
+              "description": "Multiple access modes and defense in depth"
+            },
+            "organization": {
+              "title": "Organization evolution",
+              "description": "Knowledge reuse and measurable efficiency"
+            },
+            "collaboration": {
+              "title": "Human-agent collaboration",
+              "description": "Agents embedded in delivery workflows"
+            }
+          }
+        },
+        "humanReview": "Human review",
+        "capabilities": {
+          "cloud": {
+            "label": "Enterprise development",
+            "title": "Closer to enterprise engineering",
+            "description": "Connect Cloud and remote CLI across requirements, coding, testing, and review, with defense in depth for core code.",
+            "tags": ["Cloud access", "Remote CLI", "Closed-loop workflow", "Defense in depth"]
+          },
+          "knowledge": {
+            "label": "Organizational knowledge",
+            "title": "Help engineering organizations evolve",
+            "description": "Build an enterprise knowledge base and share team skills so individual experience becomes reusable engineering knowledge.",
+            "tags": ["Knowledge base", "Skills marketplace", "Organization memory"]
+          },
+          "metrics": {
+            "label": "Efficiency measurement",
+            "title": "Multi-level AI Coding dashboards",
+            "description": "Measure AI activity, code acceptance, and generated-code share across company, department, team, and individual views.",
+            "tags": ["Company", "Department", "Team", "Individual"]
+          },
+          "collaboration": {
+            "label": "Collaboration model",
+            "title": "More efficient human-agent collaboration",
+            "description": "Embed agents into delivery workflows to handle repetitive tasks while people retain review of key decisions.",
+            "tags": ["Code", "Review", "Test", "Deploy"]
+          }
+        }
+      },
+      "closingTitle": "This August, go deeper with AI coding and build with greater confidence",
+      "closingLead": "Credits upgrades · New models · Fully evolved product capabilities — Sign in to CoStrict and experience it now.",
+      "closingAction": "Download the client"
+    },
+    "activeTitle": "Ongoing activities",
     "heroTag": "Hot Activities",
     "heroTitle": "Join Activities, Get Free Credits",
     "heroSubtitle": "Accelerate your AI coding experience, every participation makes CoStrict better",

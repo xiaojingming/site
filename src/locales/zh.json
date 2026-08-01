@@ -23,6 +23,12 @@
     "new": "New"
   },
   "home": {
+    "augustBanner": {
+      "stage1Text": "CoStrict 8月开发者福利月开启｜用户权益升级已上线",
+      "stage2Text": "CoStrict 8月开发者福利月进行中｜模型生态升级已上线",
+      "stage3Text": "CoStrict 8月开发者福利月｜三大升级现已全部上线",
+      "ariaLabel": "查看 CoStrict 8月开发者福利月详情"
+    },
     "slogan": {
       "title": "CoStrict",
       "subTitle": "企业严肃开发的AI编程平台",
@@ -303,6 +309,123 @@
     "copyFailed": "复制失败，请手动复制"
   },
   "operation": {
+    "august": {
+      "title": "CoStrict 8月开发者福利月",
+      "summary": "用户权益、模型能力、产品体验，8 月陆续升级。",
+      "entrySummary": "用户权益、模型生态与产品能力三大升级现已全部上线。",
+      "entryAction": "查看详情",
+      "heroEyebrow": "八月新章",
+      "heroHeadline": "这个八月，CoStrict 持续进化",
+      "heroLead": "围绕用户权益、模型能力与产品体验，一系列更新在八月逐步展开。",
+      "overview": {
+        "ariaLabel": "跳转到福利详情",
+        "items": {
+          "rights": {
+            "label": "用户权益",
+            "title": "Credits 权益升级",
+            "description": "有效期延长至 12 个月，历史购买额度额外赠送 20%"
+          },
+          "models": {
+            "label": "模型能力",
+            "title": "5 款新模型接入",
+            "description": "覆盖日常编码、复杂分析、企业开发与图片转代码"
+          },
+          "product": {
+            "label": "产品升级",
+            "title": "研发全链路能力升级",
+            "description": "从多形态接入、知识沉淀到效能衡量与人机协作"
+          }
+        }
+      },
+      "rights": {
+        "stageLabel": "用户权益升级",
+        "title": "CoStrict 请老用户收福利！",
+        "originalValidity": "原有效期 1个月",
+        "extendTo": "延长至",
+        "duration": "12个月",
+        "validityCaption": "已购买且未消耗 Credits 有效期",
+        "validityEmphasis": "自动延长",
+        "bonusCaption": "历史购买额度额外赠送",
+        "exampleTitle": "举个例子",
+        "purchaseLabel": "您曾购买",
+        "purchaseAmount": "1000 Credits",
+        "rewardLabel": "额外获得",
+        "rewardAmount": "200 Credits",
+        "deliveryNote": "赠送 Credits 预计将于8月7日发放"
+      },
+      "models": {
+        "stageLabel": "模型生态升级",
+        "title": "CoStrict 模型生态升级",
+        "lead": "5 款新模型，覆盖不同研发任务。",
+        "ecosystemAria": "CoStrict 模型生态",
+        "newThisMonth": "本月新接入",
+        "expansionTitle": "模型能力拓展",
+        "expansionCaption": "覆盖不同研发任务与使用场景",
+        "newLabel": "新增",
+        "spectrum": {
+          "daily": "日常编码",
+          "analysis": "复杂分析",
+          "enterprise": "企业开发"
+        },
+        "libraryAria": "CoStrict 已支持模型生态",
+        "libraryEyebrow": "更多可用模型",
+        "libraryTitle": "CoStrict 模型生态",
+        "guideEyebrow": "模型推荐",
+        "guideTitle": "根据不同任务、不同场景，选择一种或多种模型组合",
+        "scenarios": [
+          { "title": "日常编码", "description": "响应更快，提升开发效率" },
+          { "title": "复杂代码分析", "description": "更强推理，解决复杂研发问题" },
+          { "title": "企业级开发", "description": "更稳定、安全可控" },
+          { "title": "图片转代码", "description": "支持图片输入" }
+        ]
+      },
+      "product": {
+        "stageLabel": "产品能力升级",
+        "title": "从 AI 编程工具走向企业研发转型伙伴",
+        "lead": "让 AI 进入研发流程、组织协作与持续交付。",
+        "capabilityAria": "四项产品能力升级",
+        "summaryKicker": "产品能力版图",
+        "overview": {
+          "title": "研发全链路升级",
+          "items": {
+            "enterprise": { "title": "企业研发", "description": "多形态接入与纵深安全" },
+            "organization": { "title": "组织进化", "description": "知识沉淀与效能衡量" },
+            "collaboration": { "title": "人机协作", "description": "Agent 融入交付流程" }
+          }
+        },
+        "humanReview": "人工审核",
+        "capabilities": {
+          "cloud": {
+            "label": "企业级开发场景",
+            "title": "更贴近企业级开发",
+            "description": "连接 Cloud 与远程 CLI，串联需求、编码、测试和审查，以纵深安全守护核心代码。",
+            "tags": ["Cloud 云端", "远程 CLI", "全流程闭环", "纵深安全"]
+          },
+          "knowledge": {
+            "label": "组织知识",
+            "title": "助力研发组织持续进化",
+            "description": "沉淀企业知识库、共享团队技能，\n让个人经验成为组织可复用的研发资产。",
+            "tags": ["企业知识库", "技能市场", "组织沉淀"]
+          },
+          "metrics": {
+            "label": "效能衡量",
+            "title": "多层级 AI Coding 数据看板",
+            "description": "从公司、部门、团队到个人，统一衡量 AI 活跃度、代码采纳率与自动生成占比。",
+            "tags": ["公司", "部门", "团队", "个人"]
+          },
+          "collaboration": {
+            "label": "协作方式",
+            "title": "更高效的人机协作",
+            "description": "将 Agent 嵌入研发交付流程，自动承接重复任务，关键决策仍由人审核。",
+            "tags": ["编码", "评审", "测试", "发布"]
+          }
+        }
+      },
+      "closingTitle": "8 月，把 AI 编程用得更深、用得更稳",
+      "closingLead": "Credits 升级 · 新模型接入 · 产品能力全面进化 —— 立即登录 CoStrict 体验。",
+      "closingAction": "下载客户端"
+    },
+    "activeTitle": "长期活动",
     "heroTag": "热门活动",
     "heroTitle": "参与活动，免费领取 Credits",
     "heroSubtitle": "加速你的 AI 编程体验，每一次参与都让 CoStrict 变得更好",

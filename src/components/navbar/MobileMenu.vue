@@ -182,7 +182,11 @@ const isActive = (key: string) => {
     return currentRouteName.value === 'blog' || currentRouteName.value === 'blogDetail'
   }
   if (key === 'operation') {
-    return currentRouteName.value === 'operation' || currentRouteName.value === 'ccfCompetition'
+    return (
+      currentRouteName.value === 'operation' ||
+      currentRouteName.value === 'augustDeveloperMonth' ||
+      currentRouteName.value === 'ccfCompetition'
+    )
   }
   return currentRouteName.value === key
 }

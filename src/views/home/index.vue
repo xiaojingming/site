@@ -1,5 +1,6 @@
 <template>
   <div class="home-page w-full bg-black overflow-x-hidden">
+    <AugustDeveloperMonthBanner />
     <SloganSection />
     <div class="responsive-container mx-auto">
       <StrictMode />
@@ -69,6 +70,7 @@
 </template>
 <script lang="ts" setup>
 import { useHead } from '@unhead/vue'
+import AugustDeveloperMonthBanner from './components/AugustDeveloperMonthBanner.vue'
 import SloganSection from './SloganSection.vue'
 import StrictMode from './StrictMode.vue'
 import CodeReview from './CodeReview.vue'

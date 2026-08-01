@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import i18n from '@/locales'
 import { createPrefetchableRoute, prefetchRoutes } from './prefetch'
+import { scrollBehavior } from './scrollBehavior'
 
 // 创建可预取的路由加载器
 const homeRoute = createPrefetchableRoute(() => import('@/views/home/index.vue'))
@@ -8,6 +9,9 @@ const cloudRoute = createPrefetchableRoute(() => import('@/views/cloud/index.vue
 const downloadRoute = createPrefetchableRoute(() => import('@/views/download/index.vue'))
 const pricingRoute = createPrefetchableRoute(() => import('@/views/pricing/PricingPage.vue'))
 const operationRoute = createPrefetchableRoute(() => import('@/views/operation/OperationPage.vue'))
+const augustDeveloperMonthRoute = createPrefetchableRoute(
+  () => import('@/views/operation/AugustDeveloperMonthPage.vue'),
+)
 const ccfCompetitionRoute = createPrefetchableRoute(
   () => import('@/views/operation/CcfCompetition.vue'),
 )
@@ -52,6 +56,14 @@ export const routes = [
     component: operationRoute.load,
   },
   {
+    path: '/operation/august-developer-month',
+    name: 'augustDeveloperMonth',
+    component: augustDeveloperMonthRoute.load,
+    meta: {
+      hideNavbar: true,
+    },
+  },
+  {
     path: '/operation/ccf-competition',
     name: 'ccfCompetition',
     component: ccfCompetitionRoute.load,
@@ -85,9 +97,7 @@ export const routes = [
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes,
-  scrollBehavior() {
-    return { top: 0 }
-  },
+  scrollBehavior,
 })
 
 // 导航守卫：检查路由的语言可见性
@@ -110,6 +120,7 @@ if (typeof window !== 'undefined') {
       cloudRoute.prefetch,
       downloadRoute.prefetch,
       operationRoute.prefetch,
+      augustDeveloperMonthRoute.prefetch,
       // 仅在中文环境预加载价格页面、博客页面和CCF大赛页面
       ...(currentLocale === 'zh'
         ? [
