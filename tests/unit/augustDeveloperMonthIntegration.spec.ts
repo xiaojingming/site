@@ -34,7 +34,7 @@ describe('August Developer Month page integration', () => {
     window.history.replaceState({}, '', '/operation')
   })
 
-  it('renders the final activity banner before the homepage Hero', () => {
+  it('renders the scheduled activity banner before the homepage Hero', () => {
     const wrapper = shallowMount(HomeIndex, { global: { plugins: [i18n] } })
     const banner = wrapper.findComponent(AugustDeveloperMonthBanner)
     const hero = wrapper.findComponent({ name: 'SloganSection' })
@@ -119,7 +119,7 @@ describe('August Developer Month page integration', () => {
 
     expect(augustRoute).toBeDefined()
     expect(augustRoute?.name).toBe('augustDeveloperMonth')
-    expect(augustRoute?.meta.hideNavbar).toBe(true)
+    expect(augustRoute?.meta?.hideNavbar).not.toBe(true)
   })
 
   it('renders the complete standalone campaign without stage resolution or activity rows', async () => {
@@ -142,10 +142,13 @@ describe('August Developer Month page integration', () => {
     expect(wrapper.findAll('[data-activity-row]')).toHaveLength(0)
     expect(augustPageSource).not.toContain('resolveAugustDeveloperMonthStage')
     expect(augustPageSource).not.toContain('pt-16')
-    expect(augustPageSource).toContain('padding: 0')
+    expect(augustPageSource).toContain('padding-top: var(--space-16)')
   })
 
-  it('hides the global navigation on the standalone campaign route', () => {
+  it('shows the global navigation on the standalone campaign route', () => {
+    const augustRoute = routes.find((route) => route.path === '/operation/august-developer-month')
+
+    expect(augustRoute?.meta?.hideNavbar).not.toBe(true)
     expect(appSource).toContain('<navbar v-if="showNavbar" />')
     expect(appSource).toContain('route.meta.hideNavbar !== true')
   })

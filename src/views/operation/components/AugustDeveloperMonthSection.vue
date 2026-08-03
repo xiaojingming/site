@@ -444,7 +444,7 @@ const capabilities = computed(() =>
 .campaign-detail-field {
   position: absolute;
   z-index: -1;
-  top: calc(100svh - 96px);
+  top: calc(100svh - var(--space-16) - 96px);
   right: 50%;
   bottom: 0;
   width: 100vw;
@@ -501,8 +501,8 @@ const capabilities = computed(() =>
 .campaign-hero {
   position: relative;
   display: flex;
-  min-height: 100vh;
-  min-height: 100svh;
+  min-height: calc(100vh - var(--space-16));
+  min-height: calc(100svh - var(--space-16));
   align-items: center;
   justify-content: center;
   flex-direction: column;

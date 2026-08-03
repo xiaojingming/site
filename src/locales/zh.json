@@ -24,9 +24,10 @@
   },
   "home": {
     "augustBanner": {
-      "stage1Text": "CoStrict 8月开发者福利月开启｜用户权益升级已上线",
-      "stage2Text": "CoStrict 8月开发者福利月进行中｜模型生态升级已上线",
-      "stage3Text": "CoStrict 8月开发者福利月｜三大升级现已全部上线",
+      "campaignName": "CoStrict 8月开发者福利月",
+      "stage1Text": "老用户额外获赠20% Credits",
+      "stage2Text": "5大新模型已上线",
+      "stage3Text": "三大升级现已全部上线",
       "ariaLabel": "查看 CoStrict 8月开发者福利月详情"
     },
     "slogan": {

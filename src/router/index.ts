@@ -59,9 +59,6 @@ export const routes = [
     path: '/operation/august-developer-month',
     name: 'augustDeveloperMonth',
     component: augustDeveloperMonthRoute.load,
-    meta: {
-      hideNavbar: true,
-    },
   },
   {
     path: '/operation/ccf-competition',

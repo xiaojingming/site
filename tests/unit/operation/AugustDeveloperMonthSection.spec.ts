@@ -52,7 +52,7 @@ describe('AugustDeveloperMonthSection', () => {
     expect(monthStyles).toContain('width: 100%')
     expect(monthStyles).toContain('overflow-x: clip')
     expect(shellStyles).toContain('width: min(1120px, calc(100% - 48px))')
-    expect(heroStyles).toContain('min-height: 100svh')
+    expect(heroStyles).toContain('min-height: calc(100svh - var(--space-16))')
     expect(heroStyles).toContain('justify-content: center')
     expect(monthStyles).not.toContain('max-width: 960px')
     expect(benefitLayoutStyles).toContain(

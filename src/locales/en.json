@@ -24,9 +24,10 @@
   },
   "home": {
     "augustBanner": {
-      "stage1Text": "CoStrict August Developer Month begins {'|'} User benefits upgrade is live",
-      "stage2Text": "CoStrict August Developer Month continues {'|'} Model ecosystem upgrade is live",
-      "stage3Text": "CoStrict August Developer Month {'|'} All three upgrades are now live",
+      "campaignName": "CoStrict August Developer Month",
+      "stage1Text": "Existing users receive an extra 20% Credits",
+      "stage2Text": "5 new models are now live",
+      "stage3Text": "All three upgrades are now live",
       "ariaLabel": "View CoStrict August Developer Month details"
     },
     "slogan": {
