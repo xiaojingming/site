@@ -523,7 +523,7 @@
       },
       "package1": {
         "title": "Traffic Package 1",
-        "description": "Deduct Credits based on actual usage, valid for 1 month",
+        "description": "Deduct Credits based on actual usage, valid for 1 year",
         "buttonText": "Buy Now",
         "totalQuota": "1000 Credits",
         "features": {
@@ -535,7 +535,7 @@
       },
       "package2": {
         "title": "Traffic Package 2",
-        "description": "Deduct Credits based on actual usage, valid for 1 month",
+        "description": "Deduct Credits based on actual usage, valid for 1 year",
         "buttonText": "Buy Now",
         "totalQuota": "4200 Credits",
         "features": {
@@ -547,7 +547,7 @@
       },
       "package3": {
         "title": "Traffic Package 3",
-        "description": "Deduct Credits based on actual usage, valid for 1 month",
+        "description": "Deduct Credits based on actual usage, valid for 1 year",
         "buttonText": "Buy Now",
         "totalQuota": "10800 Credits",
         "features": {

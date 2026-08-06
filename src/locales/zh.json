@@ -516,7 +516,7 @@
       },
       "package1": {
         "title": "探索版",
-        "description": "按实际使用用量扣除 Credit，有效期1个月",
+        "description": "按实际使用用量扣除 Credit，有效期1年",
         "buttonText": "立即购买",
         "totalQuota": "1000 Credits",
         "features": {
@@ -528,7 +528,7 @@
       },
       "package2": {
         "title": "专业版",
-        "description": "按实际使用用量扣除 Credit，有效期1个月",
+        "description": "按实际使用用量扣除 Credit，有效期1年",
         "buttonText": "立即购买",
         "totalQuota": "4200 Credits",
         "features": {
@@ -540,7 +540,7 @@
       },
       "package3": {
         "title": "旗舰版",
-        "description": "按实际使用用量扣除 Credit，有效期1个月",
+        "description": "按实际使用用量扣除 Credit，有效期1年",
         "buttonText": "立即购买",
         "totalQuota": "10800 Credits",
         "features": {
